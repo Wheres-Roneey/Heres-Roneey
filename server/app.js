@@ -23,29 +23,35 @@ app.get("/messages/:id", (req, res) => {
 });
 
 app.post("/messages", (req, res) => {
-  let tagline = [];
-  let tags = req.body.tags.split(",");
-  for (tag of tags) {
-    let trimTag = tag.trim();
-    tagline.push(trimTag);
-  }
+  try {
+    if (req.body.body.length <= 200) {
+      let tagline = [];
+      let tags = req.body.tags.split(",");
+      for (tag of tags) {
+        let trimTag = tag.trim();
+        tagline.push(trimTag);
+      }
 
-  let newMessage = {
-    to: req.body.to,
-    body: req.body.body,
-    tags: tagline,
-  };
+      let newMessage = {
+        to: req.body.to,
+        body: req.body.body,
+        tags: tagline,
+      };
 
-  messages.push(newMessage);
-
-  fs.writeFile(fileName, JSON.stringify(messages), (err) => {
-    if (err) {
-      console.error(err);
-      return;
+      messages.push(newMessage);
+      fs.writeFile(fileName, JSON.stringify(messages), (err) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+      });
+      res.status(201).send("message added");
+    } else {
+      throw new Error("Confession must be less than 200 characters");
     }
-  });
-
-  res.send("message added");
+  } catch (error) {
+    return res.status(406).send(error.message);
+  }
 });
 
 module.exports = app;
