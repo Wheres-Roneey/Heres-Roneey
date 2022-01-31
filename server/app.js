@@ -8,6 +8,9 @@ const messages = require(fileName);
 app.use(express.json());
 app.use(cors());
 
+//Tell others to added
+app.use(cors());
+
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
