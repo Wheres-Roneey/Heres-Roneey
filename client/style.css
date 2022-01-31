@@ -8,13 +8,32 @@ body {
   padding: 0;
 }
 .wrapper {
+  width: fit-content;
+  margin: 0 auto;
   display: grid;
   --column_number: 4;
   grid-template-columns: repeat(var(--column_number), auto);
 }
+.card {
+  margin: 2em;
+  padding: 1em;
+  width: 300px;
+  border: 1px solid black;
+}
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 1500px) {
+  .wrapper {
+    --column_number: 3;
+  }
+}
+
+@media screen and (max-width: 1200px) {
   .wrapper {
     --column_number: 2;
+  }
+}
+@media screen and (max-width: 750px) {
+  .wrapper {
+    --column_number: 1;
   }
 }
