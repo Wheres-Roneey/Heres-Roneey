@@ -19,6 +19,10 @@ body {
   padding: 2em;
   width: 300px;
   border: 1px solid black;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .tag_elem {
   display: flex;
