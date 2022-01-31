@@ -23,12 +23,20 @@ app.get("/messages/:id", (req, res) => {
 });
 
 app.post("/messages", (req, res) => {
+  let tagline = [];
+  let tags = req.body.tags.split(",");
+  for (tag of tags) {
+    tagline.push(tag);
+  }
+
   let newMessage = {
     to: req.body.to,
     body: req.body.body,
-    tags: [req.body.tags],
+    tags: tagline,
   };
+
   messages.push(newMessage);
+
   fs.writeFile(fileName, JSON.stringify(messages), (err) => {
     if (err) {
       console.error(err);
