@@ -1,0 +1,33 @@
+{
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "editor": {
+    "formatOnPaste": true,
+    "formatOnSave": true
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "arrowParens": "always",
+    "bracketSameLine": false,
+    "bracketSpacing": true,
+    "embeddedLanguageFormatting": "auto",
+    "endOfLine": "lf",
+    "htmlWhitespaceSensitivity": "css",
+    "insertPragma": false,
+    "jsxBracketSameLine": false,
+    "jsxSingleQuote": false,
+    "printWidth": 80,
+    "proseWrap": "preserve",
+    "quoteProps": "as-needed",
+    "requirePragma": false,
+    "semi": true,
+    "singleQuote": false,
+    "useTabs": false,
+    "vueIndentScriptAndStyle": false
+  },
+  "devDependencies": {
+    "prettier": "2.5.1"
+  }
+}
