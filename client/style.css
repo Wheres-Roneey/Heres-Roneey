@@ -34,6 +34,9 @@ body {
   align-items: center;
   font-size: 16rem;
 }
+.hide {
+  display: none;
+}
 /* ! If change h2 elem, remember to change this */
 h2 {
   margin: 0;

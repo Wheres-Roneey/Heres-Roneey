@@ -44,7 +44,7 @@ const addCard = () => {
   let addDiv = document.createElement("div");
   addDiv.classList.add("add_div", "card");
   addDiv.innerText = "+";
-
+  addDiv.addEventListener("click", showForm);
   wrapper.prepend(addDiv);
 };
 
@@ -62,7 +62,7 @@ const generateTo = () => {
   toInput.type = "text";
   toInput.id = "to";
   toInput.name = "to";
-  toInput.maxlength = "3";
+  toInput.maxLength = "3";
   toInput.required = true;
   formDiv.appendChild(toInput);
 
@@ -80,7 +80,7 @@ const generateMessage = () => {
   const messageArea = document.createElement("textarea");
   messageArea.id = "message";
   messageArea.name = "message";
-  messageArea.maxlength = "200";
+  messageArea.maxLength = "200";
   messageArea.required = true;
   formDiv.appendChild(messageArea);
 
@@ -97,6 +97,7 @@ const generateSelect = (options) => {
     const optionElem = document.createElement("option");
     optionElem.value = option;
     optionElem.innerText = option;
+    optionElem.classList.add("tag_option");
     select.appendChild(optionElem);
   });
 
@@ -112,7 +113,14 @@ const generateTags = () => {
   tagsLabel.innerText = "Tags:";
   formDiv.appendChild(tagsLabel);
 
-  const tags = ["test tag", "tagwho", "tag you"];
+  const tags = [
+    "motivated",
+    "regrets",
+    "mentalhealth",
+    "vent",
+    "goodnews",
+    "COVID",
+  ];
   const select = generateSelect(tags);
   formDiv.appendChild(select);
 
@@ -128,6 +136,7 @@ const generateForm = () => {
   submit.type = "submit";
   submit.value = "Confess";
   submit.id = "confess_btn";
+  submit.addEventListener("click", handleConfess);
 
   form.appendChild(generateTo());
   form.appendChild(generateMessage());
@@ -135,6 +144,36 @@ const generateForm = () => {
   form.appendChild(submit);
 
   wrapper.prepend(form);
+};
+const showForm = () => {
+  generateForm();
+  document.querySelector(".add_div").classList.add("hide");
+};
+
+const handleConfess = async (e) => {
+  e.preventDefault();
+  // selecting user input
+  const to = document.querySelector("#to").value;
+  const message = document.querySelector("#message").value;
+  const select = document.querySelectorAll(".tag_option");
+  let tags = [];
+  select.forEach((option) => {
+    if (option.selected) tags.push(option.value);
+  });
+
+  // submitting post request
+  const postRequest = await fetch("http://localhost:3000/messages", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      to: to,
+      body: message,
+      tags: tags,
+    }),
+  });
 };
 
 const loadPage = async () => {
@@ -151,4 +190,3 @@ const loadPage = async () => {
 };
 
 loadPage();
-generateForm();
