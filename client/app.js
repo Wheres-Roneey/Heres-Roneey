@@ -38,6 +38,16 @@ const createCard = (to, body, tag) => {
   wrapper.prepend(card);
 };
 
+const addCard = () => {
+  let wrapper = document.querySelector(".wrapper");
+
+  let addDiv = document.createElement("div");
+  addDiv.classList.add("add_div", "card");
+  addDiv.innerText = "+";
+
+  wrapper.prepend(addDiv);
+};
+
 const loadPage = async () => {
   const response = await fetch("http://localhost:3000/messages");
   const data = await response.json();
@@ -48,6 +58,7 @@ const loadPage = async () => {
 
     createCard(to, message, tags);
   });
+  addCard();
 };
 
 loadPage();
