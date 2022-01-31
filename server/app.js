@@ -23,17 +23,10 @@ app.get("/messages/:id", (req, res) => {
 });
 
 app.post("/messages", (req, res) => {
-  let tagline = [];
-  let tags = req.body.tags.split(",");
-  for (tag of tags) {
-    let trimTag = tag.trim();
-    tagline.push(trimTag);
-  }
-
   let newMessage = {
     to: req.body.to,
     body: req.body.body,
-    tags: tagline,
+    tags: req.body.tags
   };
 
   messages.push(newMessage);
