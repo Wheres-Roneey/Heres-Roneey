@@ -8,9 +8,16 @@ const createTo = (to) => {
 };
 
 const createMessage = (body) => {
+  const badWords = ["jQuery"];
+
   let message = document.createElement("p");
   message.classList.add("message_elem", "card_child");
-  message.innerText = body;
+  let newBody = body;
+  badWords.forEach((word) => {
+    newBody = body.replace(word, "***");
+  });
+
+  message.innerText = newBody;
 
   return message;
 };
