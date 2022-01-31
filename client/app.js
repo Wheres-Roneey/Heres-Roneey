@@ -14,7 +14,9 @@ const createMessage = (body) => {
   message.classList.add("message_elem", "card_child");
   let newBody = body;
   badWords.forEach((word) => {
-    newBody = body.replace(word, "***");
+    let stars = "";
+    for (let i = 0; i < word.length; i++) stars += "*";
+    newBody = body.replace(word, stars);
   });
 
   message.innerText = newBody;
