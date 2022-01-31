@@ -4,6 +4,9 @@ const cors = require("cors");
 const messages = require("./messages.json");
 app.use(express.json());
 
+//Tell others to added
+app.use(cors());
+
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
