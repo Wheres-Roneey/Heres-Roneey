@@ -17,11 +17,11 @@ const createMessage = (body) => {
 
 const createTag = (tagArr) => {
   let tagElem = document.createElement("div");
-  tagElem.classList.add("tagElem_elem", "card_child");
+  tagElem.classList.add("tag_elem", "card_child");
   tagArr.forEach((tag) => {
     let span = document.createElement("span");
     span.classList.add("tag_span");
-    span.innerText = tag;
+    span.innerText = `#${tag}`;
     tagElem.appendChild(span);
   });
 

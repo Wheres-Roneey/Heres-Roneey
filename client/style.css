@@ -20,6 +20,10 @@ body {
   width: 300px;
   border: 1px solid black;
 }
+.tag_elem {
+  display: flex;
+  justify-content: space-between;
+}
 /* ! If change h2 elem, remember to change this */
 h2 {
   margin: 0;
