@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const fs = require("fs");
-const fileName = "./messages.json";
+const fileName = "../server/messages.json";
 const messages = require(fileName);
 
 app.use(express.json());
@@ -22,22 +22,33 @@ app.get("/messages/:id", (req, res) => {
   res.json(messages[index]);
 });
 
+app.get("/messages/tags/:tag", (req, res) => {
+  const tagName = req.params.tag;
+  const matchingMessages = [];
+  try {
+    messages.forEach(function (message, index) {
+      if (messages[index]["tags"].includes(tagName)) {
+        matchingMessages.push(messages[index]);
+      }
+    });
+    if (matchingMessages.length > 0) {
+      res.send(matchingMessages);
+    } else {
+      throw new Error("Could not find any confessions with that tag");
+    }
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+});
+
 app.post("/messages", (req, res) => {
   try {
     if (req.body.body.length <= 200) {
-      let tagline = [];
-      let tags = req.body.tags.split(",");
-      for (tag of tags) {
-        let trimTag = tag.trim();
-        tagline.push(trimTag);
-      }
-
       let newMessage = {
         to: req.body.to,
         body: req.body.body,
-        tags: tagline,
+        tags: req.body.tags,
       };
-
       messages.push(newMessage);
       fs.writeFile(fileName, JSON.stringify(messages), (err) => {
         if (err) {
