@@ -26,7 +26,8 @@ app.post("/messages", (req, res) => {
   let tagline = [];
   let tags = req.body.tags.split(",");
   for (tag of tags) {
-    tagline.push(tag);
+    let trimTag = tag.trim();
+    tagline.push(trimTag);
   }
 
   let newMessage = {

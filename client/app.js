@@ -15,10 +15,15 @@ const createMessage = (body) => {
   return message;
 };
 
-const createTag = (tag) => {
+const createTag = (tagArr) => {
   let tagElem = document.createElement("div");
-  tagElem.classList.add("tagElem_elem", "card_child");
-  tagElem.innerText = tag;
+  tagElem.classList.add("tag_elem", "card_child");
+  tagArr.forEach((tag) => {
+    let span = document.createElement("span");
+    span.classList.add("tag_span");
+    span.innerText = `#${tag}`;
+    tagElem.appendChild(span);
+  });
 
   return tagElem;
 };
@@ -38,7 +43,7 @@ const loadPage = async () => {
   const data = await response.json();
   data.forEach((card) => {
     let to = card["to"];
-    let message = card["message"];
+    let message = card["body"];
     let tags = card["tags"];
 
     createCard(to, message, tags);
