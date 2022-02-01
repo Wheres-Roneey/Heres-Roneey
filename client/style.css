@@ -23,7 +23,8 @@ body.light {
 }
 .light .add_div,
 .light .no_tag,
-.light .titleDiv {
+.light .titleDiv,
+.light .btn5 {
   --neutral: #1d3557;
   --navy: #f1faee;
 }
@@ -63,6 +64,7 @@ h1 {
 
 .btns {
   display: flex;
+  flex-wrap: wrap;
 }
 .btn {
   font-weight: bold;
@@ -104,7 +106,16 @@ h1 {
   background: #d62130;
   color: #1d3557;
 }
-
+.btn5 {
+  background-color: var(--neutral);
+  color: var(--navy);
+  opacity: 0.7;
+}
+.btn5:hover {
+  background-color: var(--neutral);
+  color: var(--navy);
+  opacity: 0.9;
+}
 .wrapper {
   width: fit-content;
   margin: 0 auto;
@@ -267,14 +278,17 @@ h2 {
     --column_number: 2;
   }
 }
-@media screen and (max-width: 750px) {
-  .wrapper {
-    --column_number: 1;
-  }
+@media screen and (max-width: 920px) {
   .btns {
     flex-direction: column;
   }
   .btns > .btn {
     margin: 0.5em;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .wrapper {
+    --column_number: 1;
   }
 }
