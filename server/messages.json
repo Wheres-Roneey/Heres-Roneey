@@ -1,1 +1,20 @@
-[{"to":"ew","body":"dsafds","tags":["regrets"]},{"to":"TES","body":"THis is a test","tags":["vent"]},{"to":"sdf","body":"sdfds","tags":[]},{"to":"EW","body":"dsafdsaf","tags":["mentalhealth"]},{"to":"sda","body":"asdfads","tags":["motivated"]},{"to":"EW","body":"This is a test for all the charecter limits so i am just going to keep typing until i run out of room to keep on typing i am yet to rn out of dsafjlhdslkjfhdslkajhf dkslajhfldkjsah dfkljsh afkljhds kl","tags":["regrets"]}]
+[
+  {
+    "to": "title",
+    "body": "body",
+    "tags": ["tag1", "tag2", "tag3"],
+    "replies": []
+  },
+  {
+    "to": "ron",
+    "body": "you're cute",
+    "tags": ["motivated"],
+    "replies": ["kwl"]
+  },
+  {
+    "to": "ron",
+    "body": "werwrwerwrwe",
+    "tags": ["motivated"],
+    "replies": ["kwler", "hi hi hi h  ih hi "]
+  }
+]
