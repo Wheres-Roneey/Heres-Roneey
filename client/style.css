@@ -6,7 +6,86 @@
 body {
   margin: 0;
   padding: 0;
+  background-color: #1d3557;
 }
+/* make the letter to sentence text reaveal */
+.titleDiv {
+  margin: 0 auto;
+  max-width: 900px;
+  height: 150px;
+  font-size: 40px;
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  color: #f1faee;
+  margin-top: 15%;
+}
+
+/* design idea - making the button have a hover effect */
+
+.btns {
+  margin: 0 auto;
+  margin-top: -45px;
+  max-width: 550px;
+  height: 100px;
+  font-size: 10px;
+  border-radius: 8px;
+  font-family: "Roboto", sans-serif;
+}
+
+.btn1 {
+  background-color: #efc7c2;
+  color: #1d3557;
+  font-weight: bold;
+  padding: 7px;
+  padding-left: 15px;
+  padding-right: 20px;
+  border-radius: 20px;
+  border: 0;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.btn2 {
+  background-color: #457b9d;
+  color: #f1faee;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 7px;
+  padding-left: 15px;
+  padding-right: 20px;
+  border-radius: 20px;
+  border: 0;
+  cursor: pointer;
+  margin: 15px;
+}
+.btn3 {
+  background-color: #a8dadc;
+  color: #1d3557;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 7px;
+  padding-left: 15px;
+  padding-right: 20px;
+  border-radius: 20px;
+  border: 0;
+  cursor: pointer;
+  margin: 15px;
+}
+
+.btn4 {
+  background-color: #e63946;
+  color: #f1faee;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 7px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 20px;
+  border: 0;
+  cursor: pointer;
+  margin: 15px;
+}
+
 .wrapper {
   width: fit-content;
   margin: 0 auto;
