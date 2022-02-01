@@ -112,43 +112,16 @@ const handleConfess = async (e) => {
   }
 };
 
-document.querySelector(".sub-comment").addEventListener("click", function () {
-  document.querySelector(".comment").classList.add("commentClicked");
+document.querySelector(".sub-comment").addEventListener("click", () => {
+  let commentBox = document.querySelector(".comment");
+  commentBox.classList.add("commentClicked");
+  const textbox = document.querySelector(".input");
+  const anotherOne = document.createElement("p");
+  anotherOne.classList.add("comments");
+  anotherOne.innerText = textbox.value;
+  commentBox.appendChild(anotherOne);
+  textbox.value = "";
 });
-// document
-//   .querySelector(".textarea")
-//   .addEventListener("keyup.enter", function () {
-
-//     document.querySelector(".comment").classList.add("commentClicked");
-//   });
-document.querySelector(".input").addEventListener("keypress", function (e) {
-  if (e.key === "Enter") {
-    document.querySelector(".comment").classList.add("commentClicked");
-
-    // code for enter
-  }
-});
-new Vue({
-  el: "#app",
-  data: {
-    title: "Write a comment",
-    newItem: "",
-    item: [],
-  },
-  methods: {
-    addItem() {
-      this.item.push(this.newItem);
-      this.newItem = "";
-    },
-  },
-});
-
-// window.postComment = function () {
-//   var div = document.getElementById("comments");
-
-//   div.innerHTML =
-//     div.innerHTML + "<br>" + document.getElementById("comment").value;
-// };
 
 module.exports = { handleConfess };
 
@@ -324,3 +297,22 @@ const loadPage = async () => {
 
 loadPage();
 
+const btns = document.querySelectorAll(".btns");
+btns.forEach((btn) => {
+  btn.addEventListener("click", async (e) => {
+    const tagTarget = e.target.innerText.slice(1);
+    if (tagTarget.slice(-3) === "all") {
+      loadPage();
+    } else {
+      const response = await fetch(
+        `http://localhost:3000/messages/tags/${tagTarget}`
+      );
+      const data = await response.json();
+      generateConfessions(data);
+      location.hash = "";
+    }
+    location.hash = "#wrapper";
+  });
+});
+
+},{"./cards":1,"./giphyapi":4,"./lightMode":5}]},{},[6]);

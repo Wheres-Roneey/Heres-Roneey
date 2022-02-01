@@ -224,6 +224,7 @@ h2 {
 .comment {
   display: block;
   transition: all 1s;
+  min-height: fit-content;
 }
 .commentClicked {
   /* min-height: 0px; */
