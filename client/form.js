@@ -15,7 +15,7 @@ const generateTo = () => {
   toInput.id = "to";
   toInput.name = "to";
   toInput.maxLength = "3";
-  toInput.required = "true";
+  toInput.required = true;
   toInput.placeholder = "initials";
   formDiv.appendChild(toInput);
 
