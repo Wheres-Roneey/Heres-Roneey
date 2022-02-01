@@ -38,6 +38,7 @@ body.light {
   margin-left: 2em;
   font-size: 1.25rem;
   margin-left: 1em;
+  color: var(--navy);
 }
 h1 {
   margin: 0;
