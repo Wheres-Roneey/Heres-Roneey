@@ -23,7 +23,8 @@ body.light {
 }
 .light .add_div,
 .light .no_tag,
-.light .titleDiv {
+.light .titleDiv,
+.light .btn5 {
   --neutral: #1d3557;
   --navy: #f1faee;
 }
@@ -102,6 +103,15 @@ h1 {
 .btn4:hover {
   background: #d62130;
   color: #1d3557;
+}
+.btn5 {
+  background-color: var(--neutral);
+  color: var(--navy);
+}
+.btn5:hover {
+  background-color: var(--neutral);
+  color: var(--navy);
+  opacity: 0.9;
 }
 .wrapper {
   width: fit-content;
