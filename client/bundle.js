@@ -39,11 +39,12 @@ const createTag = (tagArr) => {
   return tagElem;
 };
 
-const createCard = (to, body, tag) => {
+const createCard = (index, to, body, tag) => {
   let wrapper = document.querySelector(".wrapper");
 
   let card = document.createElement("div");
   card.classList.add("card");
+  card.id = index;
   card.append(createTo(to), createMessage(body), createTag(tag));
   if (!card.querySelector(".tag_span")) {
     card.classList.add("no_tag");
@@ -226,19 +227,35 @@ module.exports = { lightDark };
 const { addCard, createCard } = require("./cards");
 const { lightDark } = require("./lightMode");
 
-const loadPage = async () => {
-  const response = await fetch("http://localhost:3000/messages");
-  const data = await response.json();
-  data.forEach((card) => {
+const generateConfessions = (data) => {
+  document.querySelector(".wrapper").innerHTML = "";
+  data.forEach((card, index) => {
     let to = card["to"];
     let message = card["body"];
     let tags = card["tags"];
 
-    createCard(to, message, tags);
+    createCard(index, to, message, tags);
   });
   addCard();
 };
+const loadPage = async () => {
+  const response = await fetch("http://localhost:3000/messages");
+  const data = await response.json();
+  generateConfessions(data);
+};
 
 loadPage();
+
+const btns = document.querySelectorAll(".btns");
+btns.forEach((btn) => {
+  btn.addEventListener("click", async (e) => {
+    const tagTarget = e.target.innerText.slice(1);
+    const response = await fetch(
+      `http://localhost:3000/messages/tags/${tagTarget}`
+    );
+    const data = await response.json();
+    generateConfessions(data);
+  });
+});
 
 },{"./cards":1,"./lightMode":4}]},{},[5]);
