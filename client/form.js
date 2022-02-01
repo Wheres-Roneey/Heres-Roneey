@@ -1,52 +1,4 @@
-const createTo = (to) => {
-  // TODO: check that there is no other h2s, if is change this to a h3
-  let toElem = document.createElement("h2");
-  toElem.classList.add("toElem", "card_child");
-  toElem.innerText = `TO: ${to}`;
-
-  return toElem;
-};
-
-const createMessage = (body) => {
-  let message = document.createElement("p");
-  message.classList.add("message_elem", "card_child");
-  message.innerText = body;
-
-  return message;
-};
-
-const createTag = (tagArr) => {
-  let tagElem = document.createElement("div");
-  tagElem.classList.add("tag_elem", "card_child");
-  tagArr.forEach((tag) => {
-    let span = document.createElement("span");
-    span.classList.add("tag_span");
-    span.innerText = `#${tag}`;
-    tagElem.appendChild(span);
-  });
-
-  return tagElem;
-};
-
-const createCard = (to, body, tag) => {
-  let wrapper = document.querySelector(".wrapper");
-
-  let card = document.createElement("div");
-  card.classList.add("card");
-  card.append(createTo(to), createMessage(body), createTag(tag));
-
-  wrapper.prepend(card);
-};
-
-const addCard = () => {
-  let wrapper = document.querySelector(".wrapper");
-
-  let addDiv = document.createElement("div");
-  addDiv.classList.add("add_div", "card");
-  addDiv.innerText = "+";
-  addDiv.addEventListener("click", showForm);
-  wrapper.prepend(addDiv);
-};
+const { handleConfess } = require("./client_helpers");
 
 // Create form elements:
 const generateTo = () => {
@@ -113,14 +65,7 @@ const generateTags = () => {
   tagsLabel.innerText = "Tags:";
   formDiv.appendChild(tagsLabel);
 
-  const tags = [
-    "motivated",
-    "regrets",
-    "mentalhealth",
-    "vent",
-    "goodnews",
-    "COVID",
-  ];
+  const tags = ["motivated", "regrets", "mentalhealth", "vent"];
   const select = generateSelect(tags);
   formDiv.appendChild(select);
 
@@ -150,43 +95,4 @@ const showForm = () => {
   document.querySelector(".add_div").classList.add("hide");
 };
 
-const handleConfess = async (e) => {
-  e.preventDefault();
-  // selecting user input
-  const to = document.querySelector("#to").value;
-  const message = document.querySelector("#message").value;
-  const select = document.querySelectorAll(".tag_option");
-  let tags = [];
-  select.forEach((option) => {
-    if (option.selected) tags.push(option.value);
-  });
-
-  // submitting post request
-  const postRequest = await fetch("http://localhost:3000/messages", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      to: to,
-      body: message,
-      tags: tags,
-    }),
-  });
-};
-
-const loadPage = async () => {
-  const response = await fetch("http://localhost:3000/messages");
-  const data = await response.json();
-  data.forEach((card) => {
-    let to = card["to"];
-    let message = card["body"];
-    let tags = card["tags"];
-
-    createCard(to, message, tags);
-  });
-  addCard();
-};
-
-loadPage();
+module.exports = { generateForm, showForm };
