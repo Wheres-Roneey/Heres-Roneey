@@ -75,7 +75,7 @@ const generateTags = () => {
 const generateForm = () => {
   let wrapper = document.querySelector(".wrapper");
   const form = document.createElement("form");
-  form.classList.add("card");
+  form.classList.add("card", "no_tag");
 
   const submit = document.createElement("input");
   submit.type = "submit";
