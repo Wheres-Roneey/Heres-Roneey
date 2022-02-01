@@ -122,14 +122,7 @@ const generateTags = () => {
   tagsLabel.innerText = "Tags:";
   formDiv.appendChild(tagsLabel);
 
-  const tags = [
-    "motivated",
-    "regrets",
-    "mentalhealth",
-    "vent",
-    "goodnews",
-    "COVID",
-  ];
+  const tags = ["motivated", "regrets", "mentalhealth", "vent"];
   const select = generateSelect(tags);
   formDiv.appendChild(select);
 
