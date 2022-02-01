@@ -38,11 +38,12 @@ const createTag = (tagArr) => {
   return tagElem;
 };
 
-const createCard = (to, body, tag) => {
+const createCard = (index, to, body, tag) => {
   let wrapper = document.querySelector(".wrapper");
 
   let card = document.createElement("div");
   card.classList.add("card");
+  card.id = index;
   card.append(createTo(to), createMessage(body), createTag(tag));
   if (!card.querySelector(".tag_span")) {
     card.classList.add("no_tag");

@@ -1,12 +1,17 @@
 [
   { "to": "EJW", "body": "Hello", "tags": ["motivated"], "replies": [] },
   { "to": "EW", "body": "Hoi", "tags": [], "replies": [] },
-  { "to": "EW", "body": "fds", "tags": ["motivated"], "replies": [] },
+  {
+    "to": "EW",
+    "body": "fds",
+    "tags": ["motivated"],
+    "replies": ["hi hi hi h  ih hi "]
+  },
   {
     "to": "ew",
     "body": "This is a test",
     "tags": ["mentalhealth"],
-    "replies": []
+    "replies": ["hi hi hi h  ih hi ", "hi hi hi h  ih hi "]
   },
   { "to": "EW", "body": "This is my message", "tags": [], "replies": [] },
   {
