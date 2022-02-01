@@ -1,9 +1,8 @@
 const { addCard, createCard } = require("./cards");
 const { lightDark } = require("./lightMode");
 
-const loadPage = async () => {
-  const response = await fetch("http://localhost:3000/messages");
-  const data = await response.json();
+const generateConfessions = (data) => {
+  document.querySelector(".wrapper").innerHTML = "";
   data.forEach((card, index) => {
     let to = card["to"];
     let message = card["body"];
@@ -12,6 +11,11 @@ const loadPage = async () => {
     createCard(index, to, message, tags);
   });
   addCard();
+};
+const loadPage = async () => {
+  const response = await fetch("http://localhost:3000/messages");
+  const data = await response.json();
+  generateConfessions(data);
 };
 
 loadPage();
@@ -24,13 +28,6 @@ btns.forEach((btn) => {
       `http://localhost:3000/messages/tags/${tagTarget}`
     );
     const data = await response.json();
-    data.forEach((card, index) => {
-      let to = card["to"];
-      let message = card["body"];
-      let tags = card["tags"];
-
-      createCard(index, to, message, tags);
-    });
-    addCard();
+    generateConfessions(data);
   });
 });
