@@ -62,7 +62,6 @@ h1 {
 }
 .btns {
   display: flex;
-  flex-wrap: wrap;
 }
 .btn {
   font-weight: bold;
