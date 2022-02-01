@@ -8,8 +8,6 @@
       src="https://kit.fontawesome.com/6ac9ad1595.js"
       crossorigin="anonymous"
     ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
     <title>Tl;dr</title>
     <link rel="stylesheet" href="./style.css" />
   </head>
@@ -41,32 +39,27 @@
     <div class="wrapper"></div>
 
     <div class="wrapper" id="wrapper">
+      
       <section id="app">
         <div class="comment-sect">
           <div class="row">
             <div class="col-6">
               <div class="comment">
-                <p v-for="items in item" v-text="items"></p>
+                <p class = "comments"></p>
               </div>
             </div>
           </div>
-          <!-- <form> -->
+
           <div class="row">
             <div class="col-6">
-              <textarea
-                type="text"
-                class="input"
-                placeholder="Write a comment"
-                v-model="newItem"
-                @keyup.enter="addItem()"
-              ></textarea>
-              <!-- </form> -->
-              <button v-on:click="addItem()" class="sub-comment" type="submit"> respond</button>
+              <textarea type="text" class="input" placeholder="Write a comment"></textarea>
+              <button class="sub-comment" type="submit"> respond</button>
               </button>
             </div>
           </div>
-        </div>
+        </div>  
       </section>
+
     </div>
 
     <script defer src="./bundle.js"></script>
