@@ -13,8 +13,10 @@ function switchMode(e) {
   e.target.checked ? lightMode() : darkMode();
 }
 
-function init() {
+function lightDark() {
   const modeCheck = document.getElementById("light-mode");
   modeCheck.addEventListener("click", switchMode);
 }
-init();
+lightDark();
+
+module.exports = { lightDark };

@@ -1,4 +1,5 @@
 const { addCard, createCard } = require("./cards");
+const { lightDark } = require("./lightMode");
 
 const loadPage = async () => {
   const response = await fetch("http://localhost:3000/messages");
