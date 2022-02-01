@@ -23,19 +23,34 @@
         <h1>Too long; didn't&nbsp;read</h1>
       </div>
       <div class="btns">
-        <input type="button" class="btn1" id="first_tag" value="#motivated" />
-        <input type="button" class="btn2" id="second_tag" value="#regrets" />
-        <input
-          type="button"
-          class="btn3"
-          id="third_tag"
-          value="#mentalhealth"
-        />
-        <input type="button" class="btn4" id="fourth_tag" value="#vent" />
+        <button class="btn1 btn" id="first_tag">#motivated</button>
+        <button class="btn2 btn" id="first_tag">#regrets</button>
+        <button class="btn3 btn" id="first_tag">#mentalhealth</button>
+        <button class="btn4 btn" id="first_tag">#vent</button>
       </div>
     </div>
 
-    <div class="wrapper"></div>
+    <div class="wrapper">
+      <section id="app">
+        <div class="comment-section">
+          <div class="col-6">
+            <div class="comment">
+              <p v-for="items in item" v-text="items"></p>
+            </div>
+          </div>
+          <form>
+            <textarea
+              type="text"
+              class="input"
+              placeholder="Write a comment"
+              v-model="newItem"
+              @keyup.enter="addItem()"
+            ></textarea>
+          </form>
+          <button type="submit" v-on:click="addItem()">Click</button>
+        </div>
+      </section>
+    </div>
 
     <script defer src="./bundle.js"></script>
   </body>

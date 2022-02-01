@@ -68,29 +68,31 @@ module.exports = { addCard, createCard };
 
 },{"./form":3}],2:[function(require,module,exports){
 const handleConfess = async (e) => {
-  e.preventDefault();
-  // selecting user input
-  const to = document.querySelector("#to").value;
-  const message = document.querySelector("#message").value;
-  const select = document.querySelectorAll(".tag_option");
-  let tags = [];
-  select.forEach((option) => {
-    if (option.selected) tags.push(option.value);
-  });
+  if (e.target.parentElement.checkValidity()) {
+    e.preventDefault();
+    // selecting user input
+    const to = document.querySelector("#to").value;
+    const message = document.querySelector("#message").value;
+    const select = document.querySelectorAll(".tag_option");
+    let tags = [];
+    select.forEach((option) => {
+      if (option.selected) tags.push(option.value);
+    });
 
-  // submitting post request
-  const postRequest = await fetch("http://localhost:3000/messages", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      to: to,
-      body: message,
-      tags: tags,
-    }),
-  });
+    // submitting post request
+    const postRequest = await fetch("http://localhost:3000/messages", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        to: to,
+        body: message,
+        tags: tags,
+      }),
+    });
+  }
 };
 
 module.exports = { handleConfess };
@@ -101,11 +103,11 @@ const { handleConfess } = require("./client_helpers");
 // Create form elements:
 const generateTo = () => {
   const formDiv = document.createElement("div");
-  formDiv.classList.add("form_elem");
+  formDiv.classList.add("form_elem", "to_form");
 
   const toLabel = document.createElement("label");
   toLabel.for = "to";
-  toLabel.innerText = "TO:";
+  toLabel.innerText = "TO: ";
   formDiv.appendChild(toLabel);
 
   const toInput = document.createElement("input");
@@ -114,24 +116,21 @@ const generateTo = () => {
   toInput.name = "to";
   toInput.maxLength = "3";
   toInput.required = true;
+  toInput.placeholder = "initials";
   formDiv.appendChild(toInput);
 
   return formDiv;
 };
 const generateMessage = () => {
   const formDiv = document.createElement("div");
-  formDiv.classList.add("form_elem");
-
-  const messageLabel = document.createElement("label");
-  messageLabel.for = "message";
-  messageLabel.innerText = "Message:";
-  formDiv.appendChild(messageLabel);
+  formDiv.classList.add("form_elem", "message_form");
 
   const messageArea = document.createElement("textarea");
   messageArea.id = "message";
   messageArea.name = "message";
   messageArea.maxLength = "200";
   messageArea.required = true;
+  messageArea.placeholder = "Message:";
   formDiv.appendChild(messageArea);
 
   return formDiv;
@@ -142,6 +141,10 @@ const generateSelect = (options) => {
   select.name = "tags";
   select.id = "tags";
 
+  const selectOption = document.createElement("option");
+  selectOption.selected = true;
+  selectOption.innerText = "add a tag?";
+  select.appendChild(selectOption);
   options.forEach((option) => {
     const optionElem = document.createElement("option");
     optionElem.value = option;
@@ -155,7 +158,7 @@ const generateSelect = (options) => {
 
 const generateTags = () => {
   const formDiv = document.createElement("div");
-  formDiv.classList.add("form_elem");
+  formDiv.classList.add("form_elem", "tags_elem");
 
   const tagsLabel = document.createElement("label");
   tagsLabel.for = "tags";
@@ -178,6 +181,7 @@ const generateForm = () => {
   submit.type = "submit";
   submit.value = "Confess";
   submit.id = "confess_btn";
+  submit.classList.add("btn");
   submit.addEventListener("click", handleConfess);
 
   form.appendChild(generateTo());
