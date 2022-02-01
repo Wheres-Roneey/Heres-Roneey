@@ -15,7 +15,7 @@ body {
   --dark_blue: #457b9d;
   --navy: #1d3557;
   --neutral: #f1faee;
-  --grey: #f5f5f5;
+  --grey: #d9eaff;
   background-color: var(--navy);
   font-family: "Roboto", sans-serif;
 }
@@ -23,11 +23,22 @@ body.light {
   background-color: var(--grey);
 }
 .light .add_div,
-.light .no_tag {
+.light .no_tag,
+.light .titleDiv {
   --neutral: #1d3557;
   --navy: #f1faee;
 }
-
+#light-mode {
+  position: fixed;
+  background: white;
+  border: none;
+  padding: 0.5em;
+  border-radius: 20%;
+  margin: 2em;
+  margin-left: 2em;
+  font-size: 1.25rem;
+  margin-left: 1em;
+}
 /* make the letter to sentence text reaveal */
 .titleWrap {
   min-height: 100vh;
@@ -35,13 +46,16 @@ body.light {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 0 1em;
 }
 .titleDiv {
   max-width: fit-content;
-  font-size: 40px;
+  font-size: clamp(1rem, 5vw, 2.5rem);
+  text-align: center;
   font-family: "Poppins", sans-serif;
   font-weight: bold;
-  color: #f1faee;
+  color: var(--neutral);
+  line-height: 2.5em;
 }
 
 /* design idea - making the button have a hover effect */
