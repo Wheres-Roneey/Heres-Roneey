@@ -43,6 +43,7 @@ const generateSelect = (options) => {
 
   const selectOption = document.createElement("option");
   selectOption.selected = true;
+  selectOption.innerText = "add a tag?";
   select.appendChild(selectOption);
   options.forEach((option) => {
     const optionElem = document.createElement("option");
@@ -80,6 +81,7 @@ const generateForm = () => {
   submit.type = "submit";
   submit.value = "Confess";
   submit.id = "confess_btn";
+  submit.classList.add("btn");
   submit.addEventListener("click", handleConfess);
 
   form.appendChild(generateTo());
