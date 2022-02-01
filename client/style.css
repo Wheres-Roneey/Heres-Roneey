@@ -25,10 +25,10 @@ body {
   grid-template-columns: repeat(var(--column_number), auto);
 }
 .card {
-  margin: 2rem;
-  padding: 2rem;
-  width: 300px;
-  height: 400px;
+  margin: 3rem;
+  padding: 3rem;
+  width: 500px;
+  height: 750px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -61,7 +61,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 16rem;
+  font-size: 30rem;
 }
 .hide {
   display: none;
