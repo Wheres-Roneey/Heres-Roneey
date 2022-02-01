@@ -210,15 +210,18 @@ function switchMode(e) {
   e.target.checked ? lightMode() : darkMode();
 }
 
-function init() {
+function lightDark() {
   const modeCheck = document.getElementById("light-mode");
   modeCheck.addEventListener("click", switchMode);
 }
-init();
+lightDark();
+
+module.exports = { lightDark };
 
 },{}],5:[function(require,module,exports){
 const { addCard, createCard } = require("./cards");
-const lightMode = require("./lightMode");
+const { lightDark } = require("./lightMode");
+
 const loadPage = async () => {
   const response = await fetch("http://localhost:3000/messages");
   const data = await response.json();
