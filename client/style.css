@@ -18,12 +18,13 @@ body {
   margin: 2rem;
   padding: 2rem;
   width: 300px;
-  border: 1px solid black;
+  border: 1px solid rgb(209, 184, 233);
   height: 400px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
+
 .tag_elem {
   display: flex;
   justify-content: space-between;
@@ -57,4 +58,15 @@ h2 {
   .wrapper {
     --column_number: 1;
   }
+}
+
+.light {
+  background-color: #f5f5f5;
+  color: #1d3557;
+}
+
+.dark {
+  background-color: #1d3557;
+  color: #f1faee;
+  border: 1px solid white;
 }
