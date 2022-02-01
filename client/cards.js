@@ -1,3 +1,5 @@
+const { showForm } = require("./form");
+
 const createTo = (to) => {
   // TODO: check that there is no other h2s, if is change this to a h3
   let toElem = document.createElement("h2");
@@ -8,9 +10,18 @@ const createTo = (to) => {
 };
 
 const createMessage = (body) => {
+  const badWords = ["jQuery"];
+
   let message = document.createElement("p");
   message.classList.add("message_elem", "card_child");
-  message.innerText = body;
+  let newBody = body;
+  badWords.forEach((word) => {
+    let stars = "";
+    for (let i = 0; i < word.length; i++) stars += "*";
+    newBody = body.replace(word, stars);
+  });
+
+  message.innerText = newBody;
 
   return message;
 };
@@ -38,16 +49,14 @@ const createCard = (to, body, tag) => {
   wrapper.prepend(card);
 };
 
-const loadPage = async () => {
-  const response = await fetch("http://localhost:3000/messages");
-  const data = await response.json();
-  data.forEach((card) => {
-    let to = card["to"];
-    let message = card["body"];
-    let tags = card["tags"];
+const addCard = () => {
+  let wrapper = document.querySelector(".wrapper");
 
-    createCard(to, message, tags);
-  });
+  let addDiv = document.createElement("div");
+  addDiv.classList.add("add_div", "card");
+  addDiv.innerText = "+";
+  addDiv.addEventListener("click", showForm);
+  wrapper.prepend(addDiv);
 };
 
-loadPage();
+module.exports = { addCard, createCard };
