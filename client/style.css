@@ -38,6 +38,7 @@ body.light {
   margin-left: 2em;
   font-size: 1.25rem;
   margin-left: 1em;
+  color: var(--navy);
 }
 h1 {
   margin: 0;
@@ -67,7 +68,6 @@ h1 {
 >>>>>>> c9d9a91b56727a60a2894e750d2626ab9fb3e154
 .btns {
   display: flex;
-  flex-wrap: wrap;
 }
 .btn {
   font-weight: bold;
