@@ -3,11 +3,11 @@ const { handleConfess } = require("./client_helpers");
 // Create form elements:
 const generateTo = () => {
   const formDiv = document.createElement("div");
-  formDiv.classList.add("form_elem");
+  formDiv.classList.add("form_elem", "to_form");
 
   const toLabel = document.createElement("label");
   toLabel.for = "to";
-  toLabel.innerText = "TO:";
+  toLabel.innerText = "TO: ";
   formDiv.appendChild(toLabel);
 
   const toInput = document.createElement("input");
@@ -22,18 +22,14 @@ const generateTo = () => {
 };
 const generateMessage = () => {
   const formDiv = document.createElement("div");
-  formDiv.classList.add("form_elem");
-
-  const messageLabel = document.createElement("label");
-  messageLabel.for = "message";
-  messageLabel.innerText = "Message:";
-  formDiv.appendChild(messageLabel);
+  formDiv.classList.add("form_elem", "message_form");
 
   const messageArea = document.createElement("textarea");
   messageArea.id = "message";
   messageArea.name = "message";
   messageArea.maxLength = "200";
   messageArea.required = true;
+  messageArea.placeholder = "Message:";
   formDiv.appendChild(messageArea);
 
   return formDiv;
@@ -44,6 +40,10 @@ const generateSelect = (options) => {
   select.name = "tags";
   select.id = "tags";
 
+  const selectOption = document.createElement("option");
+  selectOption.disabled = true;
+  selectOption.selected = true;
+  select.appendChild(selectOption);
   options.forEach((option) => {
     const optionElem = document.createElement("option");
     optionElem.value = option;
@@ -57,7 +57,7 @@ const generateSelect = (options) => {
 
 const generateTags = () => {
   const formDiv = document.createElement("div");
-  formDiv.classList.add("form_elem");
+  formDiv.classList.add("form_elem", "tags_elem");
 
   const tagsLabel = document.createElement("label");
   tagsLabel.for = "tags";
