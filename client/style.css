@@ -29,15 +29,19 @@ body.light {
 }
 
 /* make the letter to sentence text reaveal */
+.titleWrap {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .titleDiv {
-  margin: 0 auto;
-  max-width: 900px;
-  height: 150px;
+  max-width: fit-content;
   font-size: 40px;
   font-family: "Poppins", sans-serif;
   font-weight: bold;
   color: #f1faee;
-  margin-top: 15%;
 }
 
 /* design idea - making the button have a hover effect */
