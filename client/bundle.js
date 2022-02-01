@@ -195,6 +195,29 @@ const showForm = () => {
 module.exports = { generateForm, showForm };
 
 },{"./client_helpers":2}],4:[function(require,module,exports){
+// const { response } = require("express");
+
+// function sendApiRequest(){
+//   let giphyInput = document.getElementById("input").value
+//   console.log(giphyInput)
+
+const form = document.querySelector("form");
+form.addEventListener("click", (e) => {
+  e.preventDefault();
+  giphySearch(e.target.value);
+});
+
+const giphyKey = "UTn30CTrQ5AweWYK7c50BaP6Fd28hUr3";
+
+function giphySearch(keyword) {
+  fetch(`http://api.giphy.com/v1/gifs/search?q=${keyword}&api_key=${giphyKey}`)
+    .then((resp) => resp.json())
+    .then((data) => console.log(data));
+}
+
+module.exports = { giphySearch };
+
+},{}],5:[function(require,module,exports){
 function darkMode() {
   const body = document.querySelector("body");
   body.className = "dark";
@@ -218,9 +241,10 @@ lightDark();
 
 module.exports = { lightDark };
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 const { addCard, createCard } = require("./cards");
 const { lightDark } = require("./lightMode");
+const { giphySearch } = require("./giphyapi");
 
 const loadPage = async () => {
   const response = await fetch("http://localhost:3000/messages");
@@ -237,4 +261,4 @@ const loadPage = async () => {
 
 loadPage();
 
-},{"./cards":1,"./lightMode":4}]},{},[5]);
+},{"./cards":1,"./giphyapi":4,"./lightMode":5}]},{},[6]);
