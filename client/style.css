@@ -61,6 +61,7 @@ h1 {
   color: var(--neutral);
   line-height: 2.5em;
 }
+
 .btns {
   display: flex;
   flex-wrap: wrap;
@@ -212,9 +213,9 @@ h2 {
 }
 
 /* the comment section */
-.comment-section {
+.comment-sect {
   width: 350px;
-  height: 150px;
+  height: 170px;
   margin: 30px auto;
   background: pink;
   border-radius: 8px;
@@ -226,14 +227,14 @@ h2 {
 }
 .commentClicked {
   /* min-height: 0px; */
-  width: 350px;
-  height: 200px;
+  width: 300px;
+  height: 100px;
   border: 1px solid #eee;
   border-radius: 5px;
   padding: 5px 10px;
 }
 
-.comment-section textarea {
+.comment-sect textarea {
   width: 100%;
   border: none;
   background: white;
@@ -262,7 +263,7 @@ h2 {
   border-radius: 5px;
 }
 
-button:hover {
+.sub-comment:hover {
   background: #9201a8;
 }
 

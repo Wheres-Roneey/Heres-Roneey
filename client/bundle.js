@@ -96,6 +96,44 @@ const handleConfess = async (e) => {
   }
 };
 
+document.querySelector(".sub-comment").addEventListener("click", function () {
+  document.querySelector(".comment").classList.add("commentClicked");
+});
+// document
+//   .querySelector(".textarea")
+//   .addEventListener("keyup.enter", function () {
+
+//     document.querySelector(".comment").classList.add("commentClicked");
+//   });
+document.querySelector(".input").addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
+    document.querySelector(".comment").classList.add("commentClicked");
+
+    // code for enter
+  }
+});
+new Vue({
+  el: "#app",
+  data: {
+    title: "Write a comment",
+    newItem: "",
+    item: [],
+  },
+  methods: {
+    addItem() {
+      this.item.push(this.newItem);
+      this.newItem = "";
+    },
+  },
+});
+
+// window.postComment = function () {
+//   var div = document.getElementById("comments");
+
+//   div.innerHTML =
+//     div.innerHTML + "<br>" + document.getElementById("comment").value;
+// };
+
 module.exports = { handleConfess };
 
 },{}],3:[function(require,module,exports){
