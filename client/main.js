@@ -29,5 +29,7 @@ btns.forEach((btn) => {
     );
     const data = await response.json();
     generateConfessions(data);
+    location.hash = "";
+    location.hash = "#wrapper";
   });
 });
