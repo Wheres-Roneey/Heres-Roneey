@@ -141,7 +141,6 @@ const generateSelect = (options) => {
   const select = document.createElement("select");
   select.name = "tags";
   select.id = "tags";
-  select.multiple = true;
 
   options.forEach((option) => {
     const optionElem = document.createElement("option");
@@ -160,7 +159,7 @@ const generateTags = () => {
 
   const tagsLabel = document.createElement("label");
   tagsLabel.for = "tags";
-  tagsLabel.innerText = "Tags:";
+  tagsLabel.innerText = "Tag:";
   formDiv.appendChild(tagsLabel);
 
   const tags = ["motivated", "regrets", "mentalhealth", "vent"];
