@@ -5,10 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tldr;</title>
+    <script
+      src="https://kit.fontawesome.com/6ac9ad1595.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="./style.css" />
   </head>
-  <body>
+  <body class="dark">
+    <button>
+      <label for="light-mode">
+        <i class="fas fa-moon"></i>
+      </label>
+      <input type="checkbox" id="light-mode" />
+    </button>
+
     <div class="wrapper"></div>
     <script defer src="./app.js"></script>
+    <script defer src="./lightMode.js"></script>
   </body>
 </html>
