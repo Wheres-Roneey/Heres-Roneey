@@ -39,11 +39,12 @@ const createTag = (tagArr) => {
   return tagElem;
 };
 
-const createCard = (to, body, tag) => {
+const createCard = (index, to, body, tag) => {
   let wrapper = document.querySelector(".wrapper");
 
   let card = document.createElement("div");
   card.classList.add("card");
+  card.id = index;
   card.append(createTo(to), createMessage(body), createTag(tag));
   if (!card.querySelector(".tag_span")) {
     card.classList.add("no_tag");
@@ -68,30 +69,70 @@ module.exports = { addCard, createCard };
 
 },{"./form":3}],2:[function(require,module,exports){
 const handleConfess = async (e) => {
-  e.preventDefault();
-  // selecting user input
-  const to = document.querySelector("#to").value;
-  const message = document.querySelector("#message").value;
-  const select = document.querySelectorAll(".tag_option");
-  let tags = [];
-  select.forEach((option) => {
-    if (option.selected) tags.push(option.value);
-  });
+  if (e.target.parentElement.checkValidity()) {
+    e.preventDefault();
+    // selecting user input
+    const to = document.querySelector("#to").value;
+    const message = document.querySelector("#message").value;
+    const select = document.querySelectorAll(".tag_option");
+    let tags = [];
+    select.forEach((option) => {
+      if (option.selected) tags.push(option.value);
+    });
 
-  // submitting post request
-  const postRequest = await fetch("http://localhost:3000/messages", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      to: to,
-      body: message,
-      tags: tags,
-    }),
-  });
+    // submitting post request
+    const postRequest = await fetch("http://localhost:3000/messages", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        to: to,
+        body: message,
+        tags: tags,
+      }),
+    });
+  }
 };
+
+document.querySelector(".sub-comment").addEventListener("click", function () {
+  document.querySelector(".comment").classList.add("commentClicked");
+});
+// document
+//   .querySelector(".textarea")
+//   .addEventListener("keyup.enter", function () {
+
+//     document.querySelector(".comment").classList.add("commentClicked");
+//   });
+document.querySelector(".input").addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
+    document.querySelector(".comment").classList.add("commentClicked");
+
+    // code for enter
+  }
+});
+new Vue({
+  el: "#app",
+  data: {
+    title: "Write a comment",
+    newItem: "",
+    item: [],
+  },
+  methods: {
+    addItem() {
+      this.item.push(this.newItem);
+      this.newItem = "";
+    },
+  },
+});
+
+// window.postComment = function () {
+//   var div = document.getElementById("comments");
+
+//   div.innerHTML =
+//     div.innerHTML + "<br>" + document.getElementById("comment").value;
+// };
 
 module.exports = { handleConfess };
 
@@ -101,11 +142,11 @@ const { handleConfess } = require("./client_helpers");
 // Create form elements:
 const generateTo = () => {
   const formDiv = document.createElement("div");
-  formDiv.classList.add("form_elem");
+  formDiv.classList.add("form_elem", "to_form");
 
   const toLabel = document.createElement("label");
   toLabel.for = "to";
-  toLabel.innerText = "TO:";
+  toLabel.innerText = "TO: ";
   formDiv.appendChild(toLabel);
 
   const toInput = document.createElement("input");
@@ -114,24 +155,21 @@ const generateTo = () => {
   toInput.name = "to";
   toInput.maxLength = "3";
   toInput.required = true;
+  toInput.placeholder = "initials";
   formDiv.appendChild(toInput);
 
   return formDiv;
 };
 const generateMessage = () => {
   const formDiv = document.createElement("div");
-  formDiv.classList.add("form_elem");
-
-  const messageLabel = document.createElement("label");
-  messageLabel.for = "message";
-  messageLabel.innerText = "Message:";
-  formDiv.appendChild(messageLabel);
+  formDiv.classList.add("form_elem", "message_form");
 
   const messageArea = document.createElement("textarea");
   messageArea.id = "message";
   messageArea.name = "message";
   messageArea.maxLength = "200";
   messageArea.required = true;
+  messageArea.placeholder = "Message:";
   formDiv.appendChild(messageArea);
 
   return formDiv;
@@ -142,6 +180,10 @@ const generateSelect = (options) => {
   select.name = "tags";
   select.id = "tags";
 
+  const selectOption = document.createElement("option");
+  selectOption.selected = true;
+  selectOption.innerText = "add a tag?";
+  select.appendChild(selectOption);
   options.forEach((option) => {
     const optionElem = document.createElement("option");
     optionElem.value = option;
@@ -155,7 +197,7 @@ const generateSelect = (options) => {
 
 const generateTags = () => {
   const formDiv = document.createElement("div");
-  formDiv.classList.add("form_elem");
+  formDiv.classList.add("form_elem", "tags_elem");
 
   const tagsLabel = document.createElement("label");
   tagsLabel.for = "tags";
@@ -178,6 +220,7 @@ const generateForm = () => {
   submit.type = "submit";
   submit.value = "Confess";
   submit.id = "confess_btn";
+  submit.classList.add("btn");
   submit.addEventListener("click", handleConfess);
 
   form.appendChild(generateTo());
@@ -246,19 +289,22 @@ const { addCard, createCard } = require("./cards");
 const { lightDark } = require("./lightMode");
 const { giphySearch } = require("./giphyapi");
 
-const loadPage = async () => {
-  const response = await fetch("http://localhost:3000/messages");
-  const data = await response.json();
-  data.forEach((card) => {
+const generateConfessions = (data) => {
+  document.querySelector(".wrapper").innerHTML = "";
+  data.forEach((card, index) => {
     let to = card["to"];
     let message = card["body"];
     let tags = card["tags"];
 
-    createCard(to, message, tags);
+    createCard(index, to, message, tags);
   });
   addCard();
+};
+const loadPage = async () => {
+  const response = await fetch("http://localhost:3000/messages");
+  const data = await response.json();
+  generateConfessions(data);
 };
 
 loadPage();
 
-},{"./cards":1,"./giphyapi":4,"./lightMode":5}]},{},[6]);
