@@ -43,7 +43,6 @@ const generateSelect = (options) => {
   const select = document.createElement("select");
   select.name = "tags";
   select.id = "tags";
-  select.multiple = true;
 
   options.forEach((option) => {
     const optionElem = document.createElement("option");
@@ -62,7 +61,7 @@ const generateTags = () => {
 
   const tagsLabel = document.createElement("label");
   tagsLabel.for = "tags";
-  tagsLabel.innerText = "Tags:";
+  tagsLabel.innerText = "Tag:";
   formDiv.appendChild(tagsLabel);
 
   const tags = ["motivated", "regrets", "mentalhealth", "vent"];
@@ -75,7 +74,7 @@ const generateTags = () => {
 const generateForm = () => {
   let wrapper = document.querySelector(".wrapper");
   const form = document.createElement("form");
-  form.classList.add("card");
+  form.classList.add("card", "no_tag");
 
   const submit = document.createElement("input");
   submit.type = "submit";

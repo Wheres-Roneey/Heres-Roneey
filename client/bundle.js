@@ -5,8 +5,7 @@ const createTo = (to) => {
   // TODO: check that there is no other h2s, if is change this to a h3
   let toElem = document.createElement("h2");
   toElem.classList.add("toElem", "card_child");
-  toElem.innerText = `TO: ${to}`;
-
+  toElem.innerText = `TO: ${to.toUpperCase()}`;
   return toElem;
 };
 
@@ -46,7 +45,12 @@ const createCard = (to, body, tag) => {
   let card = document.createElement("div");
   card.classList.add("card");
   card.append(createTo(to), createMessage(body), createTag(tag));
-
+  if (!card.querySelector(".tag_span")) {
+    card.classList.add("no_tag");
+  } else {
+    let tagType = card.querySelector(".tag_span").innerText.slice(1);
+    card.classList.add(`tag_${tagType}`);
+  }
   wrapper.prepend(card);
 };
 
@@ -54,7 +58,7 @@ const addCard = () => {
   let wrapper = document.querySelector(".wrapper");
 
   let addDiv = document.createElement("div");
-  addDiv.classList.add("add_div", "card");
+  addDiv.classList.add("add_div", "card", "no_tag");
   addDiv.innerText = "+";
   addDiv.addEventListener("click", showForm);
   wrapper.prepend(addDiv);
@@ -137,7 +141,6 @@ const generateSelect = (options) => {
   const select = document.createElement("select");
   select.name = "tags";
   select.id = "tags";
-  select.multiple = true;
 
   options.forEach((option) => {
     const optionElem = document.createElement("option");
@@ -156,7 +159,7 @@ const generateTags = () => {
 
   const tagsLabel = document.createElement("label");
   tagsLabel.for = "tags";
-  tagsLabel.innerText = "Tags:";
+  tagsLabel.innerText = "Tag:";
   formDiv.appendChild(tagsLabel);
 
   const tags = ["motivated", "regrets", "mentalhealth", "vent"];
@@ -169,7 +172,7 @@ const generateTags = () => {
 const generateForm = () => {
   let wrapper = document.querySelector(".wrapper");
   const form = document.createElement("form");
-  form.classList.add("card");
+  form.classList.add("card", "no_tag");
 
   const submit = document.createElement("input");
   submit.type = "submit";
