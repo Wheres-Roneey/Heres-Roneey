@@ -28,10 +28,12 @@
     "vueIndentScriptAndStyle": false
   },
   "devDependencies": {
+    "browserify": "^17.0.0",
     "jest": "^27.4.7",
     "nodemon": "^2.0.15",
     "prettier": "2.5.1",
-    "supertest": "^6.2.2"
+    "supertest": "^6.2.2",
+    "watchify": "^4.0.0"
   },
   "dependencies": {
     "cors": "^2.8.5",

@@ -1,3 +1,6 @@
+(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+const { showForm } = require("./form");
+
 const createTo = (to) => {
   // TODO: check that there is no other h2s, if is change this to a h3
   let toElem = document.createElement("h2");
@@ -56,6 +59,40 @@ const addCard = () => {
   addDiv.addEventListener("click", showForm);
   wrapper.prepend(addDiv);
 };
+
+module.exports = { addCard, createCard };
+
+},{"./form":3}],2:[function(require,module,exports){
+const handleConfess = async (e) => {
+  e.preventDefault();
+  // selecting user input
+  const to = document.querySelector("#to").value;
+  const message = document.querySelector("#message").value;
+  const select = document.querySelectorAll(".tag_option");
+  let tags = [];
+  select.forEach((option) => {
+    if (option.selected) tags.push(option.value);
+  });
+
+  // submitting post request
+  const postRequest = await fetch("http://localhost:3000/messages", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      to: to,
+      body: message,
+      tags: tags,
+    }),
+  });
+};
+
+module.exports = { handleConfess };
+
+},{}],3:[function(require,module,exports){
+const { handleConfess } = require("./client_helpers");
 
 // Create form elements:
 const generateTo = () => {
@@ -152,31 +189,10 @@ const showForm = () => {
   document.querySelector(".add_div").classList.add("hide");
 };
 
-const handleConfess = async (e) => {
-  e.preventDefault();
-  // selecting user input
-  const to = document.querySelector("#to").value;
-  const message = document.querySelector("#message").value;
-  const select = document.querySelectorAll(".tag_option");
-  let tags = [];
-  select.forEach((option) => {
-    if (option.selected) tags.push(option.value);
-  });
+module.exports = { generateForm, showForm };
 
-  // submitting post request
-  const postRequest = await fetch("http://localhost:3000/messages", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      to: to,
-      body: message,
-      tags: tags,
-    }),
-  });
-};
+},{"./client_helpers":2}],4:[function(require,module,exports){
+const { addCard, createCard } = require("./cards");
 
 const loadPage = async () => {
   const response = await fetch("http://localhost:3000/messages");
@@ -192,3 +208,5 @@ const loadPage = async () => {
 };
 
 loadPage();
+
+},{"./cards":1}]},{},[4]);
