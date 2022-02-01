@@ -9,8 +9,8 @@ function lightMode() {
 }
 
 function switchMode(e) {
-  console.log("mode");
-  e.target.checked ? lightMode() : darkMode();
+  const body = document.querySelector("body");
+  body.className == "dark" ? lightMode() : darkMode();
 }
 
 function lightDark() {
