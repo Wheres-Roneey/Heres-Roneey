@@ -1,24 +1,19 @@
-<<<<<<< HEAD
 [
+  { "to": "EJW", "body": "Hello", "tags": ["motivated"], "replies": [] },
+  { "to": "EW", "body": "Hoi", "tags": [], "replies": [] },
+  { "to": "EW", "body": "fds", "tags": ["motivated"], "replies": [] },
   {
-    "to": "title",
-    "body": "body",
-    "tags": ["tag1", "tag2", "tag3"],
+    "to": "ew",
+    "body": "This is a test",
+    "tags": ["mentalhealth"],
     "replies": []
   },
+  { "to": "EW", "body": "This is my message", "tags": [], "replies": [] },
   {
-    "to": "ron",
-    "body": "you're cute",
+    "to": "EW",
+    "body": "This is my nemesgThis is my nemesgThis is my nemesgThis is my nemesgThis is my nemesgThis is my nemesgThis is my nemesgThis is my nemesgThis is my nemesgThis is my nemesgThis is my nemesgThis is my ne",
     "tags": ["motivated"],
-    "replies": ["kwl"]
+    "replies": []
   },
-  {
-    "to": "ron",
-    "body": "werwrwerwrwe",
-    "tags": ["motivated"],
-    "replies": ["kwler", "hi hi hi h  ih hi "]
-  }
+  { "to": "ew", "body": "Hello", "tags": ["vent"], "replies": [] }
 ]
-=======
-[{"to":"EJW","body":"Hello","tags":["motivated"]},{"to":"EW","body":"Hoi","tags":[]},{"to":"EW","body":"fds","tags":["motivated"]},{"to":"ew","body":"This is a test","tags":["mentalhealth"]},{"to":"EW","body":"This is my message","tags":[]},{"to":"EW","body":"This is my nemesgThis is my nemesgThis is my nemesgThis is my nemesgThis is my nemesgThis is my nemesgThis is my nemesgThis is my nemesgThis is my nemesgThis is my nemesgThis is my nemesgThis is my ne","tags":["motivated"]},{"to":"ew","body":"Hello","tags":["vent"]}]
->>>>>>> staging
