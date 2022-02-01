@@ -24,12 +24,16 @@ const btns = document.querySelectorAll(".btns");
 btns.forEach((btn) => {
   btn.addEventListener("click", async (e) => {
     const tagTarget = e.target.innerText.slice(1);
-    const response = await fetch(
-      `http://localhost:3000/messages/tags/${tagTarget}`
-    );
-    const data = await response.json();
-    generateConfessions(data);
-    location.hash = "";
+    if (tagTarget.slice(-3) === "all") {
+      loadPage();
+    } else {
+      const response = await fetch(
+        `http://localhost:3000/messages/tags/${tagTarget}`
+      );
+      const data = await response.json();
+      generateConfessions(data);
+      location.hash = "";
+    }
     location.hash = "#wrapper";
   });
 });
