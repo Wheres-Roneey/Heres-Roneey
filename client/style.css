@@ -62,6 +62,7 @@ h1 {
 }
 
 /* design idea - making the button have a hover effect */
+/*  for the tag bar below title */
 .btns {
   display: flex;
   flex-wrap: wrap;
@@ -115,6 +116,7 @@ h1 {
   color: #1d3557;
 }
 
+/*  card section */
 .wrapper {
   width: fit-content;
   margin: 0 auto;
@@ -211,6 +213,7 @@ h2 {
   font-weight: bold;
 }
 
+/* the comment section */
 .comment-section {
   width: 350px;
   height: 150px;
@@ -244,7 +247,7 @@ h2 {
   margin-top: 20px;
 }
 
-button {
+.sub-comment {
   background: #e20e43;
   color: #fff;
   padding: 10px 10px;
@@ -264,9 +267,6 @@ button {
 button:hover {
   background: #9201a8;
 }
-
-
-
 
 @media screen and (max-width: 1500px) {
   .wrapper {
