@@ -60,12 +60,6 @@ h1 {
   color: var(--neutral);
   line-height: 2.5em;
 }
-<<<<<<< HEAD
-
-/* design idea - making the button have a hover effect */
-/*  for the tag bar below title */
-=======
->>>>>>> c9d9a91b56727a60a2894e750d2626ab9fb3e154
 .btns {
   display: flex;
 }
@@ -109,11 +103,6 @@ h1 {
   background: #d62130;
   color: #1d3557;
 }
-<<<<<<< HEAD
-
-/*  card section */
-=======
->>>>>>> c9d9a91b56727a60a2894e750d2626ab9fb3e154
 .wrapper {
   width: fit-content;
   margin: 0 auto;

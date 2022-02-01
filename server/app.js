@@ -16,11 +16,11 @@ app.get("/messages", (req, res) => {
   res.send(messages);
 });
 
-app.get("/messages/:id", (req, res) => {
-  let messageId = req.params.id;
-  let index = parseInt(messageId);
-  res.json(messages[index]);
-});
+// app.get("/messages/:id", (req, res) => {
+//   let messageId = req.params.id;
+//   let index = parseInt(messageId);
+//   res.json(messages[index]);
+// });
 
 app.get("/messages/tags/:tag", (req, res) => {
   const tagName = req.params.tag;
@@ -38,6 +38,27 @@ app.get("/messages/tags/:tag", (req, res) => {
     }
   } catch (error) {
     res.status(404).send(error.message);
+  }
+});
+
+app.post("/messages/reply", (req, res) => {
+  try {
+    const id = parseInt(req.body.id);
+    const reply = req.body.replies;
+    if (reply.length <= 200) {
+      messages[id]["replies"].push(reply);
+      fs.writeFile(fileName, JSON.stringify(messages), (err) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+      });
+      res.status(201).send("Reply added");
+    } else {
+      throw new Error("Reply must be less than 200 characters");
+    }
+  } catch (error) {
+    return res.status(406).send(error.message);
   }
 });
 
