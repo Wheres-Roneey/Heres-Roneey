@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
+
 *,
 *::after,
 *::before {
@@ -6,8 +8,26 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #1d3557;
+
+  --red: #e63946;
+  --pink: #efc7c2;
+  --light_blue: #a8dadc;
+  --dark_blue: #457b9d;
+  --navy: #1d3557;
+  --neutral: #f1faee;
+  --grey: #f5f5f5;
+  background-color: var(--navy);
+  font-family: "Roboto", sans-serif;
 }
+body.light {
+  background-color: var(--grey);
+}
+.light .add_div,
+.light .no_tag {
+  --neutral: #1d3557;
+  --navy: #f1faee;
+}
+
 /* make the letter to sentence text reaveal */
 .titleDiv {
   margin: 0 auto;
@@ -94,18 +114,46 @@ body {
   grid-template-columns: repeat(var(--column_number), auto);
 }
 .card {
-  margin: 2em;
-  padding: 2em;
+  margin: 2rem;
+  padding: 2rem;
   width: 300px;
-  border: 1px solid black;
-  height: 300px;
+  height: 400px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border-radius: 20px;
+  font-size: 1.25rem;
+  color: var(--navy);
+}
+.no_tag {
+  background-color: var(--neutral);
+}
+.tag_vent {
+  background-color: var(--red);
+  color: var(--neutral);
+}
+.tag_regrets {
+  background-color: var(--dark_blue);
+  color: var(--neutral);
+}
+.tag_mentalhealth {
+  background-color: var(--light_blue);
+}
+.tag_motivated {
+  background-color: var(--pink);
 }
 .tag_elem {
   display: flex;
   justify-content: space-between;
+}
+.add_div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16rem;
+}
+.hide {
+  display: none;
 }
 /* ! If change h2 elem, remember to change this */
 h2 {
