@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [
   { "to": "EJW", "body": "Hello", "tags": ["motivated"], "replies": [] },
   { "to": "EW", "body": "Hoi", "tags": [], "replies": [] },
@@ -22,3 +23,6 @@
   },
   { "to": "ew", "body": "Hello", "tags": ["vent"], "replies": [] }
 ]
+=======
+[{"to":"EW","body":"test","tags":["motivated"]},{"to":"dg","body":"sdafsdfa","tags":["regrets"]},{"to":"JA","body":"Hello","tags":["regrets"]},{"to":"EW","body":"sadfds","tags":[]},{"to":"Vee","body":"Hello","tags":["mentalhealth"]}]
+>>>>>>> staging
