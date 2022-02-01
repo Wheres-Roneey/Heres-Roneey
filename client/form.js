@@ -15,7 +15,8 @@ const generateTo = () => {
   toInput.id = "to";
   toInput.name = "to";
   toInput.maxLength = "3";
-  toInput.required = true;
+  toInput.required = "true";
+  toInput.placeholder = "initials";
   formDiv.appendChild(toInput);
 
   return formDiv;
@@ -41,7 +42,6 @@ const generateSelect = (options) => {
   select.id = "tags";
 
   const selectOption = document.createElement("option");
-  selectOption.disabled = true;
   selectOption.selected = true;
   select.appendChild(selectOption);
   options.forEach((option) => {
