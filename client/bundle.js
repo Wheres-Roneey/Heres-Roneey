@@ -39,13 +39,29 @@ const createTag = (tagArr) => {
   return tagElem;
 };
 
+const bottomOfCard = () => {
+  let replyBtn = document.createElement("button");
+  replyBtn.classList.add("btn", "reply_btn");
+
+  let icon = document.createElement("i");
+  icon.classList.add("fas", "fa-reply");
+  replyBtn.appendChild(icon);
+
+  return replyBtn;
+};
+
 const createCard = (index, to, body, tag) => {
   let wrapper = document.querySelector(".wrapper");
 
   let card = document.createElement("div");
   card.classList.add("card");
   card.id = index;
-  card.append(createTo(to), createMessage(body), createTag(tag));
+  card.append(
+    createTo(to),
+    createMessage(body),
+    createTag(tag),
+    bottomOfCard()
+  );
   if (!card.querySelector(".tag_span")) {
     card.classList.add("no_tag");
   } else {
