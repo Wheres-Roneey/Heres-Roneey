@@ -4,8 +4,7 @@ const createTo = (to) => {
   // TODO: check that there is no other h2s, if is change this to a h3
   let toElem = document.createElement("h2");
   toElem.classList.add("toElem", "card_child");
-  toElem.innerText = `TO: ${to}`;
-
+  toElem.innerText = `TO: ${to.toUpperCase()}`;
   return toElem;
 };
 
