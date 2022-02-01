@@ -80,18 +80,39 @@ h1 {
   color: #1d3557;
 }
 
+.btn1:hover {
+  background: #da9086;
+  color: #f1faee;
+}
+
 .btn2 {
   background-color: #457b9d;
   color: #f1faee;
 }
+
+.btn2:hover {
+  background: #34698a;
+  color: #1d3557;
+}
+
 .btn3 {
   background-color: #a8dadc;
   color: #1d3557;
 }
 
+.btn3:hover {
+  background: #7ac3c6;
+  color: #f1faee;
+}
+
 .btn4 {
   background-color: #e63946;
   color: #f1faee;
+}
+
+.btn4:hover {
+  background: #d62130;
+  color: #1d3557;
 }
 
 .wrapper {
@@ -147,6 +168,7 @@ h1 {
 h2 {
   margin: 0;
 }
+
 .form_elem {
   display: flex;
   align-items: baseline;
@@ -158,6 +180,7 @@ h2 {
   font-weight: bolder;
   font-size: 1.5em;
 }
+
 #to,
 #message,
 #tags,
@@ -187,6 +210,64 @@ h2 {
   margin: 0 auto;
   font-weight: bold;
 }
+
+.comment-section {
+  width: 350px;
+  height: 150px;
+  margin: 30px auto;
+  background: pink;
+  border-radius: 8px;
+  padding: 20px;
+}
+.comment {
+  display: block;
+  transition: all 1s;
+}
+.commentClicked {
+  /* min-height: 0px; */
+  width: 350px;
+  height: 200px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.comment-section textarea {
+  width: 100%;
+  border: none;
+  background: white;
+  padding: 5px 10px;
+  height: 50%;
+  border-radius: 5px 5px 0px 0px;
+  border-bottom: 2px solid #a8dadc;
+  transition: all 0.5s;
+  margin-top: 20px;
+}
+
+button {
+  background: #e20e43;
+  color: #fff;
+  padding: 10px 10px;
+  border: none;
+  margin-top: 0px;
+  margin-left: 250px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.25);
+  transition: 1s all;
+  font-size: 10px;
+  border-radius: 5px;
+}
+
+button:hover {
+  background: #9201a8;
+}
+
+
+
+
 @media screen and (max-width: 1500px) {
   .wrapper {
     --column_number: 3;
