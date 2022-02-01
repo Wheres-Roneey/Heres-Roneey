@@ -195,8 +195,30 @@ const showForm = () => {
 module.exports = { generateForm, showForm };
 
 },{"./client_helpers":2}],4:[function(require,module,exports){
-const { addCard, createCard } = require("./cards");
+function darkMode() {
+  const body = document.querySelector("body");
+  body.className = "dark";
+}
 
+function lightMode() {
+  const body = document.querySelector("body");
+  body.className = "light";
+}
+
+function switchMode(e) {
+  console.log("mode");
+  e.target.checked ? lightMode() : darkMode();
+}
+
+function init() {
+  const modeCheck = document.getElementById("light-mode");
+  modeCheck.addEventListener("click", switchMode);
+}
+init();
+
+},{}],5:[function(require,module,exports){
+const { addCard, createCard } = require("./cards");
+const lightMode = require("./lightMode");
 const loadPage = async () => {
   const response = await fetch("http://localhost:3000/messages");
   const data = await response.json();
@@ -212,4 +234,4 @@ const loadPage = async () => {
 
 loadPage();
 
-},{"./cards":1}]},{},[4]);
+},{"./cards":1,"./lightMode":4}]},{},[5]);

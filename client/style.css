@@ -14,8 +14,17 @@ body {
   --dark_blue: #457b9d;
   --navy: #1d3557;
   --neutral: #f1faee;
+  --grey: #f5f5f5;
   background-color: var(--navy);
   font-family: "Roboto", sans-serif;
+}
+body.light {
+  background-color: var(--grey);
+}
+.light .add_div,
+.light .no_tag {
+  --neutral: #1d3557;
+  --navy: #f1faee;
 }
 .wrapper {
   width: fit-content;
@@ -87,14 +96,3 @@ h2 {
     --column_number: 1;
   }
 }
-
-/* .light {
-  background-color: #f5f5f5;
-  color: #1d3557;
-}
-
-.dark {
-  background-color: #1d3557;
-  color: #f1faee;
-  border: 1px solid white;
-} */
