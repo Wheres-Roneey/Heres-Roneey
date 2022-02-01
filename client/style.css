@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&family=Roboto:wght@300;400;500;700;900&display=swap");
 
 *,
 *::after,
@@ -8,7 +8,6 @@
 body {
   margin: 0;
   padding: 0;
-
   --red: #e63946;
   --pink: #efc7c2;
   --light_blue: #a8dadc;
@@ -28,6 +27,7 @@ body.light {
   --neutral: #1d3557;
   --navy: #f1faee;
 }
+/* Positioning the lightmode btn */
 #light-mode {
   position: fixed;
   background: white;
@@ -39,7 +39,6 @@ body.light {
   font-size: 1.25rem;
   margin-left: 1em;
 }
-/* make the letter to sentence text reaveal */
 h1 {
   margin: 0;
 }
@@ -60,8 +59,6 @@ h1 {
   color: var(--neutral);
   line-height: 2.5em;
 }
-
-/* design idea - making the button have a hover effect */
 .btns {
   display: flex;
   flex-wrap: wrap;
@@ -74,47 +71,38 @@ h1 {
   padding: 1rem 2.5rem;
   margin: 1rem;
 }
-
 .btn1 {
   background-color: #efc7c2;
   color: #1d3557;
 }
-
 .btn1:hover {
   background: #da9086;
   color: #f1faee;
 }
-
 .btn2 {
   background-color: #457b9d;
   color: #f1faee;
 }
-
 .btn2:hover {
   background: #34698a;
   color: #1d3557;
 }
-
 .btn3 {
   background-color: #a8dadc;
   color: #1d3557;
 }
-
 .btn3:hover {
   background: #7ac3c6;
   color: #f1faee;
 }
-
 .btn4 {
   background-color: #e63946;
   color: #f1faee;
 }
-
 .btn4:hover {
   background: #d62130;
   color: #1d3557;
 }
-
 .wrapper {
   width: fit-content;
   margin: 0 auto;
@@ -264,9 +252,6 @@ button {
 button:hover {
   background: #9201a8;
 }
-
-
-
 
 @media screen and (max-width: 1500px) {
   .wrapper {
