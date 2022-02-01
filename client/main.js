@@ -1,5 +1,6 @@
 const { addCard, createCard } = require("./cards");
 const { lightDark } = require("./lightMode");
+const { giphySearch } = require("./giphyapi");
 
 const generateConfessions = (data) => {
   document.querySelector(".wrapper").innerHTML = "";
