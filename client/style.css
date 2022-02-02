@@ -226,16 +226,21 @@ h2 {
   z-index: 1;
   padding: inherit;
   border-radius: inherit;
+  overflow: hidden;
+}
+.comment-sect::after {
+  content: "";
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .comments {
   word-break: break-all;
 }
-/* .commentClicked {
-  border: 1px solid #eee;
-  border-radius: 5px;
-  padding: 5px 10px;
-} */
 
 .comment-sect textarea {
   transition: all 0.5s;
@@ -245,6 +250,7 @@ h2 {
   border: none;
   border-radius: 10px;
   padding: 1em;
+  z-index: 5;
 }
 
 .sub-comment {
