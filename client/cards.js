@@ -1,7 +1,6 @@
 const { appendComments } = require("./client_helpers");
 const { handleReply } = require("./client_helpers");
 const { showForm } = require("./form");
-const { gifFrom } = require("./giphyapi");
 
 const createTo = (to) => {
   // TODO: check that there is no other h2s, if is change this to a h3
@@ -95,18 +94,6 @@ const replyBtn = () => {
   return replyBtn;
 };
 
-const giphyLogo = () => {
-  let giphyBtn = document.createElement("button");
-  giphyBtn.classList.add("btn", "giphy_btn");
-
-  let logo = document.createElement("img");
-  logo.src = "./imgs/giphyLogo.svg";
-  giphyBtn.appendChild(logo);
-  giphyBtn.addEventListener("click", gifFrom);
-
-  return giphyBtn;
-};
-
 const loadGif = (gif) => {
   let img = document.createElement("img");
   img.classList.add("gif_img");
@@ -136,7 +123,6 @@ const createCard = (index, to, body, tag, replies, gif) => {
   let commentSection = createCommentSection(replies);
   wrapper.prepend(card);
   card.append(commentSection);
-  card.append(giphyLogo());
 };
 
 const addCard = () => {

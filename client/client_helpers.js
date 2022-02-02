@@ -1,3 +1,6 @@
+const { doc } = require("prettier");
+const { giphySearch } = require("./giphyapi");
+
 const handleConfess = async (e) => {
   if (e.target.parentElement.checkValidity()) {
     e.preventDefault();
@@ -5,6 +8,8 @@ const handleConfess = async (e) => {
     const to = document.querySelector("#to").value;
     const message = document.querySelector("#message").value;
     const select = document.querySelectorAll(".tag_option");
+    const searchTerm = document.querySelector("#search").value;
+    const gifLink = await giphySearch(searchTerm);
     let tags = [];
     select.forEach((option) => {
       if (option.selected) tags.push(option.value);
@@ -20,7 +25,8 @@ const handleConfess = async (e) => {
       body: JSON.stringify({
         to: to,
         body: message,
-        tags: tags
+        tags: tags,
+        gif: gifLink
       })
     });
   }

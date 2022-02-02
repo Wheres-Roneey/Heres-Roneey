@@ -65,7 +65,7 @@ app.post("/messages", (req, res) => {
         body: req.body.body,
         tags: req.body.tags,
         replies: [],
-        gif: [],
+        gif: req.body.gif,
         reacts: []
       };
       messages.push(newMessage);
