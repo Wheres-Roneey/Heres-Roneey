@@ -8,8 +8,10 @@
       src="https://kit.fontawesome.com/6ac9ad1595.js"
       crossorigin="anonymous"
     ></script>
-    <title>Tl;dr</title>
+    <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet" />
+
     <link rel="stylesheet" href="./style.css" />
+    <title>Tl;dr</title>
   </head>
 
   <body class="dark">
@@ -30,11 +32,42 @@
       </div>
     </div>
 
-    <div class="out"></div>
 
-    <div class="out1"></div>
+    <form>
+      <input type="text" id="apiInput" />
+      <button>Giphy</button>
+    </form>
+    <div class="emoji_btns">
+      <button id="emj1" class="emoji" type="emoji1">
+        <i
+          class="em em--1"
+          aria-role="presentation"
+          aria-label="THUMBS DOWN SIGN"
+        ></i>
 
+        <p class="clicks" id="click1">0</p>
+      </button>
+      <button id="emj2" class="emoji" type="button">
+        <i
+          class="em em-astonished"
+          aria-role="presentation"
+          aria-label="ASTONISHED FACE"
+        ></i>
+
+        <p class="clicks" id="click2">0</p>
+      </button>
+      <button id="emj3" class="emoji" type="button">
+        <i
+          class="em em-heart_eyes"
+          aria-role="presentation"
+          aria-label="SMILING FACE WITH HEART-SHAPED EYES"
+        ></i>
+
+        <p class="clicks" id="click3">0</p>
+      </button>
+    </div>
     <div class="wrapper"></div>
+
 
     <script defer src="./bundle.js"></script>
   </body>
