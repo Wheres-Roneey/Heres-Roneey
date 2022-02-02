@@ -269,6 +269,7 @@ h2 {
   border-radius: 10px;
   margin-left: auto;
   margin-top: 1em;
+  z-index: 3;
 }
 
 .sub-comment:hover {
