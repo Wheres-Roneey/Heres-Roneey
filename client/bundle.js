@@ -27,6 +27,8 @@ const createCommentSection = (replies) => {
   commentSection.appendChild(newCommentSection);
   commentSection.appendChild(submitButton);
 
+  commentSection.style.visibility = "hidden";
+
   return commentSection;
 };
 
