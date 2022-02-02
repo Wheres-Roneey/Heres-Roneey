@@ -1,4 +1,5 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+const { appendComments } = require("./client_helpers");
 const { showForm } = require("./form");
 
 const createTo = (to) => {
@@ -14,6 +15,13 @@ const createCommentSection = (replies) => {
   commentSection.classList.add("comment-sect", "hide");
   let comments = document.createElement("div");
   comments.classList.add("comment");
+
+  if (replies.length != 0) {
+    replies.forEach((reply) => {
+      appendComments(reply, comments);
+    });
+  }
+
   let newCommentSection = document.createElement("textarea");
   newCommentSection.classList.add("input");
   newCommentSection.type = "text";
@@ -108,7 +116,7 @@ const addCard = () => {
 
 module.exports = { addCard, createCard };
 
-},{"./form":3}],2:[function(require,module,exports){
+},{"./client_helpers":2,"./form":3}],2:[function(require,module,exports){
 const handleConfess = async (e) => {
   if (e.target.parentElement.checkValidity()) {
     e.preventDefault();

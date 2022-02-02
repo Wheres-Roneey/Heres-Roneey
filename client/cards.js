@@ -1,3 +1,4 @@
+const { appendComments } = require("./client_helpers");
 const { showForm } = require("./form");
 
 const createTo = (to) => {
@@ -13,6 +14,13 @@ const createCommentSection = (replies) => {
   commentSection.classList.add("comment-sect", "hide");
   let comments = document.createElement("div");
   comments.classList.add("comment");
+
+  if (replies.length != 0) {
+    replies.forEach((reply) => {
+      appendComments(reply, comments);
+    });
+  }
+
   let newCommentSection = document.createElement("textarea");
   newCommentSection.classList.add("input");
   newCommentSection.type = "text";
