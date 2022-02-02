@@ -83,6 +83,12 @@ const bottomOfCard = () => {
     const clickedBtn = e.currentTarget;
     const commentSect = clickedBtn.parentElement.querySelector(".comment-sect");
     commentSect.classList.toggle("hide");
+    document.querySelectorAll(".comment-sect").forEach((comment) => {
+      if (comment !== commentSect) {
+        comment.classList.remove("hide");
+        comment.classList.add("hide");
+      }
+    });
   });
 
   return replyBtn;
