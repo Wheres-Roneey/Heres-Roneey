@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const fs = require("fs");
+const req = require("express/lib/request");
 const fileName = "../server/messages.json";
 const messages = require(fileName);
 
@@ -64,6 +65,7 @@ app.post("/messages", (req, res) => {
         body: req.body.body,
         tags: req.body.tags,
         replies: [],
+        gif: [],
         reacts: []
       };
       messages.push(newMessage);
@@ -97,7 +99,22 @@ app.post("/messages/react", (req, res) => {
         return;
       }
     });
+    res.status(201).send("react added");
   } catch (error) {}
+});
+
+app.post("/messages/gif", (req, res) => {
+  const id = parseInt(req.body.id);
+  const gif = req.body.gif;
+
+  messages[id]["gif"] = gif;
+  fs.writeFile(fileName, JSON.stringify(messages), (err) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+  });
+  res.status(201).send("gif added");
 });
 
 module.exports = app;
