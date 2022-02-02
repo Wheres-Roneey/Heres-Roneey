@@ -62,13 +62,18 @@ const createTag = (tagArr) => {
   return tagElem;
 };
 
-const createCard = (index, to, body, tag, replies) => {
+
   let wrapper = document.querySelector(".wrapper");
   let section = document.createElement("section");
   let card = document.createElement("div");
   card.classList.add("card");
   card.id = index;
-  card.append(createTo(to), createMessage(body), createTag(tag));
+  card.append(
+    createTo(to),
+    createMessage(body),
+    createTag(tag),
+    bottomOfCard()
+  );
   if (!card.querySelector(".tag_span")) {
     card.classList.add("no_tag");
   } else {

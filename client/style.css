@@ -272,6 +272,16 @@ h2 {
   background: #9201a8;
 }
 
+.reply_btn {
+  margin-left: auto;
+  background-color: var(--navy);
+  color: var(--neutral);
+  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
+  margin-right: -0.5em;
+  margin-bottom: -0.5em;
+}
+
 @media screen and (max-width: 1500px) {
   .wrapper {
     --column_number: 3;
