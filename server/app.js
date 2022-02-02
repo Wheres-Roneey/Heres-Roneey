@@ -63,6 +63,7 @@ app.post("/messages", (req, res) => {
         to: req.body.to,
         body: req.body.body,
         tags: req.body.tags,
+        replies: [],
       };
       messages.push(newMessage);
       fs.writeFile(fileName, JSON.stringify(messages), (err) => {

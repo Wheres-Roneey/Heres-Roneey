@@ -1,4 +1,5 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+const { handleReply } = require("./client_helpers");
 const { showForm } = require("./form");
 
 const createTo = (to) => {
@@ -18,11 +19,17 @@ const createCommentSection = (replies) => {
   newCommentSection.classList.add("input");
   newCommentSection.type = "text";
   newCommentSection.placeholder = "Write a comment";
+  newCommentSection.maxLength = "200";
+  newCommentSection.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+      handleReply(e);
+    }
+  });
   let submitButton = document.createElement("button");
   submitButton.classList.add("sub-comment");
   submitButton.type = "submit";
   submitButton.innerText = "Respond";
-
+  submitButton.addEventListener("click", handleReply);
   commentSection.appendChild(comments);
   commentSection.appendChild(newCommentSection);
   commentSection.appendChild(submitButton);
@@ -108,7 +115,7 @@ const addCard = () => {
 
 module.exports = { addCard, createCard };
 
-},{"./form":3}],2:[function(require,module,exports){
+},{"./client_helpers":2,"./form":3}],2:[function(require,module,exports){
 const { comment } = require("postcss");
 
 const handleConfess = async (e) => {
@@ -139,6 +146,23 @@ const handleConfess = async (e) => {
   }
 };
 
+const handleReply = async (e) => {
+  const card = e.target.parentElement.parentElement;
+  const comment = e.target.parentElement.querySelector(".input").value;
+  const cardId = card.id;
+  const postRequest = await fetch("http://localhost:3000/messages/reply", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id: cardId,
+      replies: comment,
+    }),
+  });
+};
+
 const appendComments = (comment, container) => {
   const anotherOne = document.createElement("p");
   anotherOne.classList.add("comments");
@@ -146,7 +170,7 @@ const appendComments = (comment, container) => {
   container.appendChild(anotherOne);
 };
 
-module.exports = { handleConfess, appendComments };
+module.exports = { handleConfess, appendComments, handleReply };
 
 },{"postcss":29}],3:[function(require,module,exports){
 const { handleConfess } = require("./client_helpers");
