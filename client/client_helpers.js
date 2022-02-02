@@ -26,15 +26,11 @@ const handleConfess = async (e) => {
   }
 };
 
-document.querySelector(".sub-comment").addEventListener("click", () => {
-  let commentBox = document.querySelector(".comment");
-  commentBox.classList.add("commentClicked");
-  const textbox = document.querySelector(".input");
+const appendComments = (comment, container) => {
   const anotherOne = document.createElement("p");
   anotherOne.classList.add("comments");
-  anotherOne.innerText = textbox.value;
-  commentBox.appendChild(anotherOne);
-  textbox.value = "";
-});
+  anotherOne.innerText = comment;
+  container.appendChild(anotherOne);
+};
 
-module.exports = { handleConfess };
+module.exports = { handleConfess, appendComments };

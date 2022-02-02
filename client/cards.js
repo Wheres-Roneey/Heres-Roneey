@@ -8,6 +8,29 @@ const createTo = (to) => {
   return toElem;
 };
 
+const createCommentSection = (replies) => {
+  let commentSection = document.createElement("div");
+  commentSection.classList.add("comment-sect");
+  let comments = document.createElement("div");
+  comments.classList.add("comment");
+  let newCommentSection = document.createElement("textarea");
+  newCommentSection.classList.add("input");
+  newCommentSection.type = "text";
+  newCommentSection.placeholder = "Write a comment";
+  let submitButton = document.createElement("button");
+  submitButton.classList.add("sub-comment");
+  submitButton.type = "submit";
+  submitButton.innerText = "Respond";
+
+  commentSection.appendChild(comments);
+  commentSection.appendChild(newCommentSection);
+  commentSection.appendChild(submitButton);
+
+  commentSection.style.visibility = "hidden";
+
+  return commentSection;
+};
+
 const createMessage = (body) => {
   const badWords = ["jQuery"];
 
@@ -37,7 +60,6 @@ const createTag = (tagArr) => {
 
   return tagElem;
 };
-
 const bottomOfCard = () => {
   let replyBtn = document.createElement("button");
   replyBtn.classList.add("btn", "reply_btn");
@@ -49,9 +71,9 @@ const bottomOfCard = () => {
   return replyBtn;
 };
 
-const createCard = (index, to, body, tag) => {
+const createCard = (index, to, body, tag, replies) => {
   let wrapper = document.querySelector(".wrapper");
-
+  let section = document.createElement("section");
   let card = document.createElement("div");
   card.classList.add("card");
   card.id = index;
@@ -67,7 +89,10 @@ const createCard = (index, to, body, tag) => {
     let tagType = card.querySelector(".tag_span").innerText.slice(1);
     card.classList.add(`tag_${tagType}`);
   }
-  wrapper.prepend(card);
+  let commentSection = createCommentSection(replies);
+  section.append(card);
+  section.append(commentSection);
+  wrapper.prepend(section);
 };
 
 const addCard = () => {

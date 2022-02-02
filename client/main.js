@@ -1,6 +1,7 @@
 const { addCard, createCard } = require("./cards");
 const { lightDark } = require("./lightMode");
 const { giphySearch } = require("./giphyapi");
+const { appendComments } = require("./client_helpers");
 
 const generateConfessions = (data) => {
   document.querySelector(".wrapper").innerHTML = "";
@@ -8,8 +9,9 @@ const generateConfessions = (data) => {
     let to = card["to"];
     let message = card["body"];
     let tags = card["tags"];
+    let replies = card["replies"];
 
-    createCard(index, to, message, tags);
+    createCard(index, to, message, tags, replies);
   });
   addCard();
 };
@@ -22,6 +24,7 @@ const loadPage = async () => {
 loadPage();
 
 const btns = document.querySelectorAll(".btns");
+
 btns.forEach((btn) => {
   btn.addEventListener("click", async (e) => {
     const tagTarget = e.target.innerText.slice(1);
@@ -38,3 +41,11 @@ btns.forEach((btn) => {
     location.hash = "#wrapper";
   });
 });
+
+// document.querySelector(".sub-comment").addEventListener("click", () => {
+//   let commentBox = document.querySelector(".comment");
+//   const textbox = document.querySelector(".input");
+//   commentBox.classList.add("commentClicked");
+//   appendComments(textbox.value, commentBox);
+//   textbox.value = "";
+// });

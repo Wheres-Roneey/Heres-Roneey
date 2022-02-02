@@ -9,6 +9,29 @@ const createTo = (to) => {
   return toElem;
 };
 
+const createCommentSection = (replies) => {
+  let commentSection = document.createElement("div");
+  commentSection.classList.add("comment-sect");
+  let comments = document.createElement("div");
+  comments.classList.add("comment");
+  let newCommentSection = document.createElement("textarea");
+  newCommentSection.classList.add("input");
+  newCommentSection.type = "text";
+  newCommentSection.placeholder = "Write a comment";
+  let submitButton = document.createElement("button");
+  submitButton.classList.add("sub-comment");
+  submitButton.type = "submit";
+  submitButton.innerText = "Respond";
+
+  commentSection.appendChild(comments);
+  commentSection.appendChild(newCommentSection);
+  commentSection.appendChild(submitButton);
+
+  commentSection.style.visibility = "hidden";
+
+  return commentSection;
+};
+
 const createMessage = (body) => {
   const badWords = ["jQuery"];
 
@@ -39,20 +62,9 @@ const createTag = (tagArr) => {
   return tagElem;
 };
 
-const bottomOfCard = () => {
-  let replyBtn = document.createElement("button");
-  replyBtn.classList.add("btn", "reply_btn");
 
-  let icon = document.createElement("i");
-  icon.classList.add("fas", "fa-reply");
-  replyBtn.appendChild(icon);
-
-  return replyBtn;
-};
-
-const createCard = (index, to, body, tag) => {
   let wrapper = document.querySelector(".wrapper");
-
+  let section = document.createElement("section");
   let card = document.createElement("div");
   card.classList.add("card");
   card.id = index;
@@ -68,7 +80,10 @@ const createCard = (index, to, body, tag) => {
     let tagType = card.querySelector(".tag_span").innerText.slice(1);
     card.classList.add(`tag_${tagType}`);
   }
-  wrapper.prepend(card);
+  let commentSection = createCommentSection(replies);
+  section.append(card);
+  section.append(commentSection);
+  wrapper.prepend(section);
 };
 
 const addCard = () => {
@@ -112,18 +127,14 @@ const handleConfess = async (e) => {
   }
 };
 
-document.querySelector(".sub-comment").addEventListener("click", () => {
-  let commentBox = document.querySelector(".comment");
-  commentBox.classList.add("commentClicked");
-  const textbox = document.querySelector(".input");
+const appendComments = (comment, container) => {
   const anotherOne = document.createElement("p");
   anotherOne.classList.add("comments");
-  anotherOne.innerText = textbox.value;
-  commentBox.appendChild(anotherOne);
-  textbox.value = "";
-});
+  anotherOne.innerText = comment;
+  container.appendChild(anotherOne);
+};
 
-module.exports = { handleConfess };
+module.exports = { handleConfess, appendComments };
 
 },{}],3:[function(require,module,exports){
 const { handleConfess } = require("./client_helpers");
@@ -277,6 +288,7 @@ module.exports = { lightDark };
 const { addCard, createCard } = require("./cards");
 const { lightDark } = require("./lightMode");
 const { giphySearch } = require("./giphyapi");
+const { appendComments } = require("./client_helpers");
 
 const generateConfessions = (data) => {
   document.querySelector(".wrapper").innerHTML = "";
@@ -284,8 +296,9 @@ const generateConfessions = (data) => {
     let to = card["to"];
     let message = card["body"];
     let tags = card["tags"];
+    let replies = card["replies"];
 
-    createCard(index, to, message, tags);
+    createCard(index, to, message, tags, replies);
   });
   addCard();
 };
@@ -298,6 +311,7 @@ const loadPage = async () => {
 loadPage();
 
 const btns = document.querySelectorAll(".btns");
+
 btns.forEach((btn) => {
   btn.addEventListener("click", async (e) => {
     const tagTarget = e.target.innerText.slice(1);
@@ -315,4 +329,12 @@ btns.forEach((btn) => {
   });
 });
 
-},{"./cards":1,"./giphyapi":4,"./lightMode":5}]},{},[6]);
+// document.querySelector(".sub-comment").addEventListener("click", () => {
+//   let commentBox = document.querySelector(".comment");
+//   const textbox = document.querySelector(".input");
+//   commentBox.classList.add("commentClicked");
+//   appendComments(textbox.value, commentBox);
+//   textbox.value = "";
+// });
+
+},{"./cards":1,"./client_helpers":2,"./giphyapi":4,"./lightMode":5}]},{},[6]);
