@@ -10,8 +10,9 @@ const generateConfessions = (data) => {
     let message = card["body"];
     let tags = card["tags"];
     let replies = card["replies"];
-
-    createCard(index, to, message, tags, replies);
+    let gif = card["gif"];
+    if (!gif) gif = "";
+    createCard(index, to, message, tags, replies, gif);
   });
   addCard();
 };

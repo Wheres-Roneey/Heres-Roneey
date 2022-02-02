@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const fs = require("fs");
+const req = require("express/lib/request");
 const fileName = "../server/messages.json";
 const messages = require(fileName);
 
@@ -63,6 +64,9 @@ app.post("/messages", (req, res) => {
         to: req.body.to,
         body: req.body.body,
         tags: req.body.tags,
+        replies: [],
+        gif: [],
+        reacts: []
       };
       messages.push(newMessage);
       fs.writeFile(fileName, JSON.stringify(messages), (err) => {
@@ -78,6 +82,39 @@ app.post("/messages", (req, res) => {
   } catch (error) {
     return res.status(406).send(error.message);
   }
+});
+
+app.post("/messages/react", (req, res) => {
+  try {
+    const id = parseInt(req.body.id);
+    const reactMessages = [];
+    reactMessages.push(req.params.astonish);
+    reactMessages.push(req.params.heartEye);
+    reactMessages.push(req.params.thumbsDown);
+
+    messages[id]["reacts"].push(reply);
+    fs.writeFile(fileName, JSON.stringify(messages), (err) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+    });
+    res.status(201).send("react added");
+  } catch (error) {}
+});
+
+app.post("/messages/gif", (req, res) => {
+  const id = parseInt(req.body.id);
+  const gif = req.body.gif;
+
+  messages[id]["gif"] = gif;
+  fs.writeFile(fileName, JSON.stringify(messages), (err) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+  });
+  res.status(201).send("gif added");
 });
 
 module.exports = app;
