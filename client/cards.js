@@ -1,3 +1,4 @@
+const { handleReply } = require("./client_helpers");
 const { showForm } = require("./form");
 
 const createTo = (to) => {
@@ -21,6 +22,7 @@ const createCommentSection = (replies) => {
   submitButton.classList.add("sub-comment");
   submitButton.type = "submit";
   submitButton.innerText = "Respond";
+  submitButton.addEventListener("click", handleReply);
 
   commentSection.appendChild(comments);
   commentSection.appendChild(newCommentSection);
