@@ -11,13 +11,11 @@ async function giphySearch(keyword) {
     `http://api.giphy.com/v1/gifs/search?q=${keyword}&api_key=${giphyKey}`
   );
   const jsonData = await resp.json();
-  console.log(jsonData);
-  console.log("META", jsonData.meta);
   let img = document.createElement("img");
   img.src = jsonData.data[0].images.downsized.url;
   let out = document.querySelector(".out");
   out.insertAdjacentElement("afterbegin", img);
-  document.querySelector("#search").value = " ";
+  document.querySelector("#search").value = "";
 }
 
 module.exports = { giphySearch };
