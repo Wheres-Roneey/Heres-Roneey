@@ -16,7 +16,6 @@
       "bye",
       "bye ljkdshflkjadsh flkja f asd ",
       "How are you?",
-      "",
       "to RB"
     ]
   },
@@ -24,6 +23,6 @@
     "to": "ee",
     "body": "tasdfa ",
     "tags": ["regrets"],
-    "replies": ["to EE", "", "I hit e", "I hit enter"]
+    "replies": ["to EE", "I hit e", "I hit enter"]
   }
 ]

@@ -237,9 +237,16 @@ h2 {
   bottom: 0px;
   background-color: rgba(0, 0, 0, 0.1);
 }
-
+.comment {
+  z-index: 3;
+}
 .comments {
   word-break: break-all;
+  background-color: var(--neutral);
+  color: var(--navy);
+  border-radius: 10px;
+  padding: 0.2em 1em;
+  margin: 0.2em 0;
 }
 
 .comment-sect textarea {
