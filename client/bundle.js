@@ -1,6 +1,8 @@
-
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+const { appendComments } = require("./client_helpers");
+const { handleReply } = require("./client_helpers");
 const { showForm } = require("./form");
+const { gifFrom } = require("./giphyapi");
 
 const createTo = (to) => {
   // TODO: check that there is no other h2s, if is change this to a h3
@@ -12,23 +14,34 @@ const createTo = (to) => {
 
 const createCommentSection = (replies) => {
   let commentSection = document.createElement("div");
-  commentSection.classList.add("comment-sect");
+  commentSection.classList.add("comment-sect", "hide");
   let comments = document.createElement("div");
   comments.classList.add("comment");
+
+  if (replies.length != 0) {
+    replies.forEach((reply) => {
+      appendComments(reply, comments);
+    });
+  }
+
   let newCommentSection = document.createElement("textarea");
   newCommentSection.classList.add("input");
   newCommentSection.type = "text";
   newCommentSection.placeholder = "Write a comment";
+  newCommentSection.maxLength = "200";
+  newCommentSection.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+      handleReply(e);
+    }
+  });
   let submitButton = document.createElement("button");
   submitButton.classList.add("sub-comment");
   submitButton.type = "submit";
   submitButton.innerText = "Respond";
-
+  submitButton.addEventListener("click", handleReply);
   commentSection.appendChild(comments);
   commentSection.appendChild(newCommentSection);
   commentSection.appendChild(submitButton);
-
-  commentSection.style.visibility = "hidden";
 
   return commentSection;
 };
@@ -62,28 +75,58 @@ const createTag = (tagArr) => {
 
   return tagElem;
 };
-const bottomOfCard = () => {
+const replyBtn = () => {
   let replyBtn = document.createElement("button");
   replyBtn.classList.add("btn", "reply_btn");
-
   let icon = document.createElement("i");
   icon.classList.add("fas", "fa-reply");
   replyBtn.appendChild(icon);
+  replyBtn.addEventListener("click", (e) => {
+    const clickedBtn = e.currentTarget;
+    const commentSect = clickedBtn.parentElement.querySelector(".comment-sect");
+    commentSect.classList.toggle("hide");
+    document.querySelectorAll(".comment-sect").forEach((comment) => {
+      if (comment !== commentSect) {
+        comment.classList.remove("hide");
+        comment.classList.add("hide");
+      }
+    });
+  });
 
   return replyBtn;
 };
 
-const createCard = (index, to, body, tag, replies) => {
+const giphyLogo = () => {
+  let giphyBtn = document.createElement("button");
+  giphyBtn.classList.add("btn", "giphy_btn");
+
+  let logo = document.createElement("img");
+  logo.src = "./imgs/giphyLogo.svg";
+  giphyBtn.appendChild(logo);
+  giphyBtn.addEventListener("click", gifFrom);
+
+  return giphyBtn;
+};
+
+const loadGif = (gif) => {
+  let img = document.createElement("img");
+  img.classList.add("gif_img");
+  img.src = gif;
+
+  return img;
+};
+
+const createCard = (index, to, body, tag, replies, gif) => {
   let wrapper = document.querySelector(".wrapper");
-  let section = document.createElement("section");
   let card = document.createElement("div");
   card.classList.add("card");
   card.id = index;
   card.append(
     createTo(to),
     createMessage(body),
+    loadGif(gif),
     createTag(tag),
-    bottomOfCard()
+    replyBtn()
   );
   if (!card.querySelector(".tag_span")) {
     card.classList.add("no_tag");
@@ -92,9 +135,9 @@ const createCard = (index, to, body, tag, replies) => {
     card.classList.add(`tag_${tagType}`);
   }
   let commentSection = createCommentSection(replies);
-  section.append(card);
-  section.append(commentSection);
-  wrapper.prepend(section);
+  wrapper.prepend(card);
+  card.append(commentSection);
+  card.append(giphyLogo());
 };
 
 const addCard = () => {
@@ -109,7 +152,7 @@ const addCard = () => {
 
 module.exports = { addCard, createCard };
 
-},{"./form":3}],2:[function(require,module,exports){
+},{"./client_helpers":2,"./form":3,"./giphyapi":4}],2:[function(require,module,exports){
 const handleConfess = async (e) => {
   if (e.target.parentElement.checkValidity()) {
     e.preventDefault();
@@ -138,12 +181,30 @@ const handleConfess = async (e) => {
   }
 };
 
+const handleReply = async (e) => {
+  const card = e.target.parentElement.parentElement;
+  const comment = e.target.parentElement.querySelector(".input").value;
+  const cardId = card.id;
+  const postRequest = await fetch("http://localhost:3000/messages/reply", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id: cardId,
+      replies: comment,
+    }),
+  });
+};
+
 const appendComments = (comment, container) => {
   const anotherOne = document.createElement("p");
   anotherOne.classList.add("comments");
   anotherOne.innerText = comment;
   container.appendChild(anotherOne);
 };
+
 
 const clicktag = document.querySelector("#click1");
 
@@ -169,7 +230,8 @@ clicksE3.addEventListener("click", () => {
   clicktag3.innerText = click3;
 });
 
-module.exports = { handleConfess, appendComments };
+module.exports = { handleConfess, appendComments, handleReply };
+
 
 },{}],3:[function(require,module,exports){
 const { handleConfess } = require("./client_helpers");
@@ -273,27 +335,60 @@ const showForm = () => {
 module.exports = { generateForm, showForm };
 
 },{"./client_helpers":2}],4:[function(require,module,exports){
-// const { response } = require("express");
-
-// function sendApiRequest(){
-//   let giphyInput = document.getElementById("input").value
-//   console.log(giphyInput)
-
-const form = document.querySelector("form");
-form.addEventListener("click", (e) => {
-  e.preventDefault();
-  giphySearch(e.target.value);
-});
-
 const giphyKey = "UTn30CTrQ5AweWYK7c50BaP6Fd28hUr3";
 
-function giphySearch(keyword) {
-  fetch(`http://api.giphy.com/v1/gifs/search?q=${keyword}&api_key=${giphyKey}`)
-    .then((resp) => resp.json())
-    .then((data) => console.log(data));
+async function giphySearch(keyword) {
+  try {
+      const resp = await fetch(
+    `http://api.giphy.com/v1/gifs/search?q=${keyword}&api_key=${giphyKey}`
+  );
+  const jsonData = await resp.json();
+  let img = document.createElement("img");
+  const gifLink = jsonData.data[0].images.downsized.url;
+  img.src = gifLink;
+  } catch (err) {
+    nf = "not found";
+    console.log(err.message);
+    const resp1 = await fetch(
+      `http://api.giphy.com/v1/gifs/search?q=${nf}&api_key=${giphyKey}`
+    );
+    const jsonData1 = await resp1.json();
+    // console.log(jsonData1);
+    // console.log("META", jsonData1.meta);
+    let img = document.createElement("img");
+    img.src = jsonData1.data[0].images.downsized.url;
+    let out = document.querySelector(".out");
+    out.insertAdjacentElement("afterbegin", img);
+    document.querySelector("#search").value = " ";
+  }
 }
 
-module.exports = { giphySearch };
+const gifFrom = (e) => {
+  const form = document.createElement("form");
+  form.classList.add("gif_form");
+
+  const input = document.createElement("input");
+  input.id = "search";
+  input.type = "search";
+  input.placeholder = "Post Gif";
+  form.append(input);
+
+  const btn = document.createElement("button");
+  btn.id = "btnSearch";
+  btn.innerText = "Giphy!";
+  form.appendChild(btn);
+
+  const card = e.currentTarget.parentElement;
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    giphySearch(e.target.querySelector("#search").value);
+    const form = e.target.querySelector("#search").parentElement;
+    card.removeChild(form);
+  });
+  card.appendChild(form);
+};
+
+module.exports = { giphySearch, gifFrom };
 
 },{}],5:[function(require,module,exports){
 function darkMode() {
@@ -332,8 +427,9 @@ const generateConfessions = (data) => {
     let message = card["body"];
     let tags = card["tags"];
     let replies = card["replies"];
-
-    createCard(index, to, message, tags, replies);
+    let gif = card["gif"];
+    if (!gif) gif = "";
+    createCard(index, to, message, tags, replies, gif);
   });
   addCard();
 };
@@ -373,4 +469,3 @@ btns.forEach((btn) => {
 // });
 
 },{"./cards":1,"./client_helpers":2,"./giphyapi":4,"./lightMode":5}]},{},[6]);
-
