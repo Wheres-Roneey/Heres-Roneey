@@ -8,8 +8,18 @@ const handleConfess = async (e) => {
     const to = document.querySelector("#to").value;
     const message = document.querySelector("#message").value;
     const select = document.querySelectorAll(".tag_option");
-    const searchTerm = document.querySelector("#search").value;
-    const gifLink = await giphySearch(searchTerm);
+
+    const searchElem = document.querySelector("#search");
+    let gifLink;
+    let searchTerm;
+    if (!searchElem) {
+      console.log("not gif");
+      gifLink = "";
+    } else {
+      console.log("here");
+      searchTerm = searchElem.value;
+      gifLink = await giphySearch(searchTerm);
+    }
     let tags = [];
     select.forEach((option) => {
       if (option.selected) tags.push(option.value);
