@@ -1,8 +1,12 @@
 [
   {
-    "to": "EW",
-    "body": "You are a massive manipulator... a DOM manipulator",
+    "to": "rb",
+    "body": "youre cool",
     "tags": ["motivated"],
+    "replies": ["i agree"],
+    "gif": [],
+    "reacts": []
+  }
     "replies": ["to EW"]
   },
   {
@@ -29,4 +33,5 @@
   },
   { "to": "e", "body": "sdfa", "tags": ["regrets"], "replies": [] },
   { "to": "te", "body": "test", "tags": ["vent"], "replies": ["dsaf"] }
+
 ]
