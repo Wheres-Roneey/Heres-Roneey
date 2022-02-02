@@ -15,13 +15,13 @@ const handleConfess = async (e) => {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         to: to,
         body: message,
-        tags: tags,
-      }),
+        tags: tags
+      })
     });
   }
 };
@@ -34,12 +34,12 @@ const handleReply = async (e) => {
     method: "POST",
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({
       id: cardId,
-      replies: comment,
-    }),
+      replies: comment
+    })
   });
 };
 
