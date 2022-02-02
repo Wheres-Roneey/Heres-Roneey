@@ -19,6 +19,9 @@ async function giphySearch(keyword) {
 
 const gifFrom = (e) => {
   e.preventDefault();
+  const card = e.currentTarget.parentElement;
+  let oldForm = document.querySelector(".gif_form");
+  if (oldForm) card.removeChild(oldForm);
   const form = document.createElement("form");
   form.classList.add("gif_form");
 
@@ -29,7 +32,6 @@ const gifFrom = (e) => {
   input.placeholder = "Post Gif";
   form.append(input);
 
-  const card = e.currentTarget.parentElement;
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     giphySearch(e.target.querySelector("#search").value, card);
