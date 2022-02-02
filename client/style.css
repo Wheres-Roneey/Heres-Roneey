@@ -135,6 +135,7 @@ h1 {
   border-radius: 20px;
   font-size: 1.25rem;
   color: var(--navy);
+  position: relative;
 }
 .no_tag {
   background-color: var(--neutral);
@@ -164,7 +165,7 @@ h1 {
   font-size: 16rem;
 }
 .hide {
-  display: none;
+  display: none !important;
 }
 /* ! If change h2 elem, remember to change this */
 h2 {
@@ -215,43 +216,39 @@ h2 {
 
 /* the comment section */
 .comment-sect {
-  min-height: 10vh;
-  width: 300px;
-  margin: 30px auto;
-  margin-top: 0px;
-  background: pink;
-  border-radius: 20px;
-  padding: 20px 20px 10px 20px;
+  width: 100%;
+  position: absolute;
+  top: 385px;
+  left: 20px;
+  background-color: inherit;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  padding: inherit;
+  border-radius: inherit;
 }
-.comment {
-  display: block;
-  transition: all 1s;
-  min-height: fit-content;
-  max-width: 300px;
-}
+
 .comments {
   word-break: break-all;
 }
-.commentClicked {
+/* .commentClicked {
   border: 1px solid #eee;
   border-radius: 5px;
   padding: 5px 10px;
-}
+} */
 
 .comment-sect textarea {
-  width: 100%;
-  border: white;
-  background: white;
-  padding: 5px 10px;
-  height: 50%;
-  border-radius: 5px 5px 0px 0px;
-  border-bottom: 2px solid #a8dadc;
   transition: all 0.5s;
-  margin-top: 20px;
+  font-family: inherit;
+  background-color: var(--neutral);
+  color: var(--navy);
+  border: none;
+  border-radius: 10px;
+  padding: 1em;
 }
 
 .sub-comment {
-  background: #e20e43;
+  background: var(--red);
   color: #fff;
   padding: 10px 10px;
   border: none;
