@@ -9,7 +9,7 @@
     "formatOnSave": true
   },
   "prettier": {
-    "trailingComma": "es5",
+    "trailingComma": "none",
     "tabWidth": 2,
     "arrowParens": "always",
     "bracketSameLine": false,
