@@ -1,3 +1,6 @@
+const { doc } = require("prettier");
+const { giphySearch } = require("./giphyapi");
+
 const handleConfess = async (e) => {
   if (e.target.parentElement.checkValidity()) {
     e.preventDefault();
@@ -5,6 +8,18 @@ const handleConfess = async (e) => {
     const to = document.querySelector("#to").value;
     const message = document.querySelector("#message").value;
     const select = document.querySelectorAll(".tag_option");
+
+    const searchElem = document.querySelector("#search");
+    let gifLink;
+    let searchTerm;
+    if (!searchElem) {
+      console.log("not gif");
+      gifLink = "";
+    } else {
+      console.log("here");
+      searchTerm = searchElem.value;
+      gifLink = await giphySearch(searchTerm);
+    }
     let tags = [];
     select.forEach((option) => {
       if (option.selected) tags.push(option.value);
@@ -15,13 +30,14 @@ const handleConfess = async (e) => {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         to: to,
         body: message,
         tags: tags,
-      }),
+        gif: gifLink
+      })
     });
   }
 };
@@ -34,12 +50,12 @@ const handleReply = async (e) => {
     method: "POST",
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({
       id: cardId,
-      replies: comment,
-    }),
+      replies: comment
+    })
   });
 };
 
@@ -49,7 +65,6 @@ const appendComments = (comment, container) => {
   anotherOne.innerText = comment;
   container.appendChild(anotherOne);
 };
-
 
 const clicktag = document.querySelector("#click1");
 
@@ -76,4 +91,3 @@ clicksE3.addEventListener("click", () => {
 });
 
 module.exports = { handleConfess, appendComments, handleReply };
-
