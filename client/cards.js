@@ -1,4 +1,5 @@
 const { appendComments } = require("./client_helpers");
+const { handleReply } = require("./client_helpers");
 const { showForm } = require("./form");
 
 const createTo = (to) => {
@@ -25,11 +26,17 @@ const createCommentSection = (replies) => {
   newCommentSection.classList.add("input");
   newCommentSection.type = "text";
   newCommentSection.placeholder = "Write a comment";
+  newCommentSection.maxLength = "200";
+  newCommentSection.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+      handleReply(e);
+    }
+  });
   let submitButton = document.createElement("button");
   submitButton.classList.add("sub-comment");
   submitButton.type = "submit";
   submitButton.innerText = "Respond";
-
+  submitButton.addEventListener("click", handleReply);
   commentSection.appendChild(comments);
   commentSection.appendChild(newCommentSection);
   commentSection.appendChild(submitButton);
