@@ -284,13 +284,36 @@ h2 {
 }
 
 .reply_btn {
-  margin-left: auto;
   background-color: var(--navy);
   color: var(--neutral);
   font-size: 1.5rem;
   padding: 0.5rem 1rem;
-  margin-right: -0.5em;
-  margin-bottom: -0.5em;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.giphy_btn {
+  background-color: var(--navy);
+  padding: 0.5em;
+  position: absolute;
+  bottom: 0;
+  right: 60px;
+  width: 42px;
+  border-radius: 15px;
+}
+.giphy_btn > img {
+  width: 100%;
+}
+.gif_form {
+  background: inherit;
+  width: 50%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 1rem;
+}
+#search {
+  width: 100%;
 }
 
 @media screen and (max-width: 1500px) {
