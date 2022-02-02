@@ -63,7 +63,8 @@ app.post("/messages", (req, res) => {
         to: req.body.to,
         body: req.body.body,
         tags: req.body.tags,
-        replies: []
+        replies: [],
+        reacts: []
       };
       messages.push(newMessage);
       fs.writeFile(fileName, JSON.stringify(messages), (err) => {
@@ -79,6 +80,24 @@ app.post("/messages", (req, res) => {
   } catch (error) {
     return res.status(406).send(error.message);
   }
+});
+
+app.post("/messages/react", (req, res) => {
+  try {
+    const id = parseInt(req.body.id);
+    const reactMessages = [];
+    reactMessages.push(req.params.astonish);
+    reactMessages.push(req.params.heartEye);
+    reactMessages.push(req.params.thumbsDown);
+
+    messages[id]["reacts"].push(reply);
+    fs.writeFile(fileName, JSON.stringify(messages), (err) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+    });
+  } catch (error) {}
 });
 
 module.exports = app;
