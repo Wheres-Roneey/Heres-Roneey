@@ -65,22 +65,23 @@ const createMessage = (body) => {
 const createReacts = (emojis) => {
   const emojiBar = document.createElement("div");
   emojiBar.classList.add("emoji_btns");
-
-  emojis.forEach((emoji, index) => {
-    const emojiBtn = document.createElement("button");
-    emojiBtn.classList.add("emoji");
-    emojiBtn.id = "emoji";
-    const emojiLogo = document.createElement("i");
-    let classArray = emoji.split(" ");
-    emojiLogo.classList.add(classArray[0]);
-    emojiLogo.classList.add(classArray[1]);
-    const clickCount = document.createElement("p");
-    clickCount.classList.add("clicks");
-    clickCount.id = `click${index}`;
-    emojiBtn.appendChild(emojiLogo);
-    emojiBtn.appendChild(clickCount);
-    emojiBar.appendChild(emojiBtn);
-  });
+  for (let i = 0; i < emojis.length; i++) {
+    emojis.forEach((emoji, index) => {
+      const emojiBtn = document.createElement("button");
+      emojiBtn.classList.add("emoji");
+      emojiBtn.id = "emoji";
+      const emojiLogo = document.createElement("i");
+      let classArray = emoji.split(" ");
+      emojiLogo.classList.add(classArray[0]);
+      emojiLogo.classList.add(classArray[1]);
+      const clickCount = document.createElement("p");
+      clickCount.classList.add("clicks");
+      clickCount.id = `click${index}`;
+      emojiBtn.appendChild(emojiLogo);
+      emojiBtn.appendChild(clickCount);
+      emojiBar.appendChild(emojiBtn);
+    });
+  }
 
   return emojiBar;
 };
@@ -126,7 +127,7 @@ const loadGif = (gif) => {
   return img;
 };
 
-const createCard = (index, to, body, tag, replies, gif) => {
+const createCard = (index, to, body, tag, replies, gif, reacts) => {
   let wrapper = document.querySelector(".wrapper");
   let card = document.createElement("div");
   card.classList.add("card");
@@ -144,8 +145,15 @@ const createCard = (index, to, body, tag, replies, gif) => {
     let tagType = card.querySelector(".tag_span").innerText.slice(1);
     card.classList.add(`tag_${tagType}`);
   }
+  let countDown = react[0];
+  let countAstonished = react[1];
+  let countHeartEyes = react[2];
   let commentSection = createCommentSection(replies);
-  let emojis = ["em em--1", "em em-astonished", "em em-heart_eyes"];
+  let emojis = [
+    ["em em--1", countDown],
+    ["em em-astonished", countAstonished],
+    ["em em-heart_eyes", countHeartEyes]
+  ];
   let emojiBar = createReacts(emojis);
   wrapper.prepend(card);
   card.append(commentSection);
