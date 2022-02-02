@@ -212,6 +212,32 @@ h2 {
   margin: 0 auto;
   font-weight: bold;
 }
+.emoji_btns {
+  /* background-color: red; */
+  position: relative;
+  width: 180px;
+  height: 50%;
+  left: 53%;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  top: 420px;
+}
+.emoji {
+  width: 50px;
+  height: 35px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.clicks {
+  position: absolute;
+  margin-left: 25px;
+  margin-top: -25px;
+  color: rgb(236, 65, 65);
+  font-weight: bold;
+}
 
 /* the comment section */
 .comment-sect {
