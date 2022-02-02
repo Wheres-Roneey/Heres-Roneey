@@ -61,6 +61,29 @@ const createMessage = (body) => {
   return message;
 };
 
+const createReacts = (emojis) => {
+  const emojiBar = document.createElement("div");
+  emojiBar.classList.add("emoji_btns");
+
+  emojis.forEach((emoji, index) => {
+    const emojiBtn = document.createElement("button");
+    emojiBtn.classList.add("emoji");
+    emojiBtn.id = "emoji";
+    const emojiLogo = document.createElement("i");
+    let classArray = emoji.split(" ");
+    emojiLogo.classList.add(classArray[0]);
+    emojiLogo.classList.add(classArray[1]);
+    const clickCount = document.createElement("p");
+    clickCount.classList.add("clicks");
+    clickCount.id = `click${index}`;
+    emojiBtn.appendChild(emojiLogo);
+    emojiBtn.appendChild(clickCount);
+    emojiBar.appendChild(emojiBtn);
+  });
+
+  return emojiBar;
+};
+
 const createTag = (tagArr) => {
   let tagElem = document.createElement("div");
   tagElem.classList.add("tag_elem", "card_child");
@@ -121,8 +144,11 @@ const createCard = (index, to, body, tag, replies, gif) => {
     card.classList.add(`tag_${tagType}`);
   }
   let commentSection = createCommentSection(replies);
+  let emojis = ["em em--1", "em em-astonished", "em em-heart_eyes"];
+  let emojiBar = createReacts(emojis);
   wrapper.prepend(card);
   card.append(commentSection);
+  card.appendChild(emojiBar);
 };
 
 const addCard = () => {
