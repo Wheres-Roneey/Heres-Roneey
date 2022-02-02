@@ -2,6 +2,7 @@
 const { appendComments } = require("./client_helpers");
 const { handleReply } = require("./client_helpers");
 const { showForm } = require("./form");
+const { gifFrom } = require("./giphyapi");
 
 const createTo = (to) => {
   // TODO: check that there is no other h2s, if is change this to a h3
@@ -74,7 +75,7 @@ const createTag = (tagArr) => {
 
   return tagElem;
 };
-const bottomOfCard = () => {
+const replyBtn = () => {
   let replyBtn = document.createElement("button");
   replyBtn.classList.add("btn", "reply_btn");
   let icon = document.createElement("i");
@@ -95,17 +96,24 @@ const bottomOfCard = () => {
   return replyBtn;
 };
 
+const giphyLogo = () => {
+  let giphyBtn = document.createElement("button");
+  giphyBtn.classList.add("btn", "giphy_btn");
+
+  let logo = document.createElement("img");
+  logo.src = "./imgs/giphyLogo.svg";
+  giphyBtn.appendChild(logo);
+  giphyBtn.addEventListener("click", gifFrom);
+
+  return giphyBtn;
+};
+
 const createCard = (index, to, body, tag, replies) => {
   let wrapper = document.querySelector(".wrapper");
   let card = document.createElement("div");
   card.classList.add("card");
   card.id = index;
-  card.append(
-    createTo(to),
-    createMessage(body),
-    createTag(tag),
-    bottomOfCard()
-  );
+  card.append(createTo(to), createMessage(body), createTag(tag), replyBtn());
   if (!card.querySelector(".tag_span")) {
     card.classList.add("no_tag");
   } else {
@@ -115,6 +123,7 @@ const createCard = (index, to, body, tag, replies) => {
   let commentSection = createCommentSection(replies);
   wrapper.prepend(card);
   card.append(commentSection);
+  card.append(giphyLogo());
 };
 
 const addCard = () => {
@@ -129,7 +138,7 @@ const addCard = () => {
 
 module.exports = { addCard, createCard };
 
-},{"./client_helpers":2,"./form":3}],2:[function(require,module,exports){
+},{"./client_helpers":2,"./form":3,"./giphyapi":4}],2:[function(require,module,exports){
 const handleConfess = async (e) => {
   if (e.target.parentElement.checkValidity()) {
     e.preventDefault();
@@ -286,12 +295,6 @@ const showForm = () => {
 module.exports = { generateForm, showForm };
 
 },{"./client_helpers":2}],4:[function(require,module,exports){
-const form = document.querySelector("form");
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  giphySearch(e.target.querySelector("#search").value);
-});
-
 const giphyKey = "UTn30CTrQ5AweWYK7c50BaP6Fd28hUr3";
 
 async function giphySearch(keyword) {
@@ -299,16 +302,39 @@ async function giphySearch(keyword) {
     `http://api.giphy.com/v1/gifs/search?q=${keyword}&api_key=${giphyKey}`
   );
   const jsonData = await resp.json();
-  console.log(jsonData);
-  console.log("META", jsonData.meta);
   let img = document.createElement("img");
-  img.src = jsonData.data[0].images.downsized.url;
+  const gifLink = jsonData.data[0].images.downsized.url;
+  img.src = gifLink;
   let out = document.querySelector(".out");
   out.insertAdjacentElement("afterbegin", img);
-  document.querySelector("#search").value = " ";
 }
 
-module.exports = { giphySearch };
+const gifFrom = (e) => {
+  const form = document.createElement("form");
+  form.classList.add("gif_form");
+
+  const input = document.createElement("input");
+  input.id = "search";
+  input.type = "search";
+  input.placeholder = "Post Gif";
+  form.append(input);
+
+  const btn = document.createElement("button");
+  btn.id = "btnSearch";
+  btn.innerText = "Giphy!";
+  form.appendChild(btn);
+
+  const card = e.currentTarget.parentElement;
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    giphySearch(e.target.querySelector("#search").value);
+    const form = e.target.querySelector("#search").parentElement;
+    card.removeChild(form);
+  });
+  card.appendChild(form);
+};
+
+module.exports = { giphySearch, gifFrom };
 
 },{}],5:[function(require,module,exports){
 function darkMode() {

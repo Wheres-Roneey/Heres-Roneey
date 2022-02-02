@@ -292,6 +292,29 @@ h2 {
   bottom: 0;
   right: 0;
 }
+.giphy_btn {
+  background-color: var(--navy);
+  padding: 0.5em;
+  position: absolute;
+  bottom: 0;
+  right: 60px;
+  width: 42px;
+  border-radius: 15px;
+}
+.giphy_btn > img {
+  width: 100%;
+}
+.gif_form {
+  background: inherit;
+  width: 50%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 1rem;
+}
+#search {
+  width: 100%;
+}
 
 @media screen and (max-width: 1500px) {
   .wrapper {

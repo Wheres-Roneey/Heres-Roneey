@@ -1,9 +1,3 @@
-const form = document.querySelector("form");
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  giphySearch(e.target.querySelector("#search").value);
-});
-
 const giphyKey = "UTn30CTrQ5AweWYK7c50BaP6Fd28hUr3";
 
 async function giphySearch(keyword) {
@@ -12,10 +6,35 @@ async function giphySearch(keyword) {
   );
   const jsonData = await resp.json();
   let img = document.createElement("img");
-  img.src = jsonData.data[0].images.downsized.url;
+  const gifLink = jsonData.data[0].images.downsized.url;
+  img.src = gifLink;
   let out = document.querySelector(".out");
   out.insertAdjacentElement("afterbegin", img);
-  document.querySelector("#search").value = "";
 }
 
-module.exports = { giphySearch };
+const gifFrom = (e) => {
+  const form = document.createElement("form");
+  form.classList.add("gif_form");
+
+  const input = document.createElement("input");
+  input.id = "search";
+  input.type = "search";
+  input.placeholder = "Post Gif";
+  form.append(input);
+
+  const btn = document.createElement("button");
+  btn.id = "btnSearch";
+  btn.innerText = "Giphy!";
+  form.appendChild(btn);
+
+  const card = e.currentTarget.parentElement;
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    giphySearch(e.target.querySelector("#search").value);
+    const form = e.target.querySelector("#search").parentElement;
+    card.removeChild(form);
+  });
+  card.appendChild(form);
+};
+
+module.exports = { giphySearch, gifFrom };
