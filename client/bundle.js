@@ -66,21 +66,21 @@ const createReacts = (emojis) => {
   const emojiBar = document.createElement("div");
   emojiBar.classList.add("emoji_btns");
   for (let i = 0; i < emojis.length; i++) {
-    emojis.forEach((emoji, index) => {
-      const emojiBtn = document.createElement("button");
-      emojiBtn.classList.add("emoji");
-      emojiBtn.id = "emoji";
-      const emojiLogo = document.createElement("i");
-      let classArray = emoji.split(" ");
-      emojiLogo.classList.add(classArray[0]);
-      emojiLogo.classList.add(classArray[1]);
-      const clickCount = document.createElement("p");
-      clickCount.classList.add("clicks");
-      clickCount.id = `click${index}`;
-      emojiBtn.appendChild(emojiLogo);
-      emojiBtn.appendChild(clickCount);
-      emojiBar.appendChild(emojiBtn);
-    });
+    console.log(emojis[i]);
+    const emojiBtn = document.createElement("button");
+    emojiBtn.classList.add("emoji");
+    emojiBtn.id = "emoji";
+    const emojiLogo = document.createElement("i");
+    let classArray = emojis[i][0].split(" ");
+    emojiLogo.classList.add(classArray[0]);
+    emojiLogo.classList.add(classArray[1]);
+    const clickCount = document.createElement("p");
+    clickCount.classList.add("clicks");
+    clickCount.id = `click${i}`;
+    clickCount.innerText = emojis[i][1];
+    emojiBtn.appendChild(emojiLogo);
+    emojiBtn.appendChild(clickCount);
+    emojiBar.appendChild(emojiBtn);
   }
 
   return emojiBar;
@@ -145,9 +145,9 @@ const createCard = (index, to, body, tag, replies, gif, reacts) => {
     let tagType = card.querySelector(".tag_span").innerText.slice(1);
     card.classList.add(`tag_${tagType}`);
   }
-  let countDown = react[0];
-  let countAstonished = react[1];
-  let countHeartEyes = react[2];
+  let countDown = reacts[0];
+  let countAstonished = reacts[1];
+  let countHeartEyes = reacts[2];
   let commentSection = createCommentSection(replies);
   let emojis = [
     ["em em--1", countDown],
@@ -464,8 +464,9 @@ const generateConfessions = (data) => {
     let tags = card["tags"];
     let replies = card["replies"];
     let gif = card["gif"];
+    let reacts = card["reacts"];
     if (!gif) gif = "";
-    createCard(index, to, message, tags, replies, gif);
+    createCard(index, to, message, tags, replies, gif, reacts);
   });
   addCard();
 };
