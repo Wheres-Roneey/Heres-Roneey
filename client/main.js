@@ -17,7 +17,9 @@ const generateConfessions = (data) => {
   addCard();
 };
 const loadPage = async () => {
-  const response = await fetch("http://localhost:3000/messages");
+  const response = await fetch(
+    "https://powerful-peak-34201.herokuapp.com/messages"
+  );
   const data = await response.json();
   generateConfessions(data);
 };
@@ -33,7 +35,7 @@ btns.forEach((btn) => {
       loadPage();
     } else {
       const response = await fetch(
-        `http://localhost:3000/messages/tags/${tagTarget}`
+        `https://powerful-peak-34201.herokuapp.com/messages/tags/${tagTarget}`
       );
       const data = await response.json();
       generateConfessions(data);
@@ -42,11 +44,3 @@ btns.forEach((btn) => {
     location.hash = "#wrapper";
   });
 });
-
-// document.querySelector(".sub-comment").addEventListener("click", () => {
-//   let commentBox = document.querySelector(".comment");
-//   const textbox = document.querySelector(".input");
-//   commentBox.classList.add("commentClicked");
-//   appendComments(textbox.value, commentBox);
-//   textbox.value = "";
-// });
