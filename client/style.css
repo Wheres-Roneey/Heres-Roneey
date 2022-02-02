@@ -213,16 +213,20 @@ h2 {
   margin: 0 auto;
   font-weight: bold;
 }
+/* .div.emoji_btns {
+  
+} */
 .emoji_btns {
-  /* background-color: red; */
+  /* background-color: blue; */
   position: relative;
-  width: 180px;
+  width: 50px;
   height: 50%;
-  left: 53%;
-  padding-left: 10px;
+  left: 58%;
+  /* padding-left: 10px; */
   padding-top: 10px;
   padding-bottom: 10px;
-  top: 420px;
+  top: 350px;
+  z-index: 1;
 }
 .emoji {
   width: 50px;
@@ -230,13 +234,15 @@ h2 {
   background: none;
   border: none;
   cursor: pointer;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .clicks {
   position: absolute;
   margin-left: 25px;
   margin-top: -25px;
-  color: rgb(236, 65, 65);
+  color: whitesmoke;
   font-weight: bold;
 }
 
