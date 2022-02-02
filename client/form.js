@@ -1,4 +1,5 @@
 const { handleConfess } = require("./client_helpers");
+const { gifFrom } = require("./giphyapi");
 
 // Create form elements:
 const generateTo = () => {
@@ -72,6 +73,18 @@ const generateTags = () => {
   return formDiv;
 };
 
+const giphyLogo = () => {
+  let giphyBtn = document.createElement("button");
+  giphyBtn.classList.add("btn", "giphy_btn");
+
+  let logo = document.createElement("img");
+  logo.src = "./imgs/giphyLogo.svg";
+  giphyBtn.appendChild(logo);
+  giphyBtn.addEventListener("click", gifFrom);
+
+  return giphyBtn;
+};
+
 const generateForm = () => {
   let wrapper = document.querySelector(".wrapper");
   const form = document.createElement("form");
@@ -88,6 +101,7 @@ const generateForm = () => {
   form.appendChild(generateMessage());
   form.appendChild(generateTags());
   form.appendChild(submit);
+  form.appendChild(giphyLogo());
 
   wrapper.prepend(form);
 };
