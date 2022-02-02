@@ -16,12 +16,6 @@ app.get("/messages", (req, res) => {
   res.send(messages);
 });
 
-// app.get("/messages/:id", (req, res) => {
-//   let messageId = req.params.id;
-//   let index = parseInt(messageId);
-//   res.json(messages[index]);
-// });
-
 app.get("/messages/tags/:tag", (req, res) => {
   const tagName = req.params.tag;
   const matchingMessages = [];
