@@ -7,4 +7,31 @@
     "gif": [],
     "reacts": []
   }
+    "replies": ["to EW"]
+  },
+  {
+    "to": "RB",
+    "body": "Where are you?",
+    "tags": ["vent"],
+    "gif": "https://media1.giphy.com/media/3ov9jWu7BuHufyLs7m/giphy-downsized.gif?cid=70c8e1ebt4fqmcp3tyjekfbtmq3zqp2hymcqp4a7fy2uymqf&amp;rid=giphy-downsized.gif&amp;ct=g",
+    "replies": [
+      ["hello"],
+      ["hello"],
+      "hello",
+      "bye",
+      "bye ljkdshflkjadsh flkja f asd ",
+      "How are you?",
+      "to RB",
+      "bsta"
+    ]
+  },
+  {
+    "to": "ee",
+    "body": "tasdfa ",
+    "tags": ["regrets"],
+    "replies": ["to EE", "I hit e", "I hit enter"]
+  },
+  { "to": "e", "body": "sdfa", "tags": ["regrets"], "replies": [] },
+  { "to": "te", "body": "test", "tags": ["vent"], "replies": ["dsaf"] }
+
 ]
