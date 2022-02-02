@@ -108,12 +108,26 @@ const giphyLogo = () => {
   return giphyBtn;
 };
 
-const createCard = (index, to, body, tag, replies) => {
+const loadGif = (gif) => {
+  let img = document.createElement("img");
+  img.classList.add("gif_img");
+  img.src = gif;
+
+  return img;
+};
+
+const createCard = (index, to, body, tag, replies, gif) => {
   let wrapper = document.querySelector(".wrapper");
   let card = document.createElement("div");
   card.classList.add("card");
   card.id = index;
-  card.append(createTo(to), createMessage(body), createTag(tag), replyBtn());
+  card.append(
+    createTo(to),
+    createMessage(body),
+    loadGif(gif),
+    createTag(tag),
+    replyBtn()
+  );
   if (!card.querySelector(".tag_span")) {
     card.classList.add("no_tag");
   } else {
@@ -373,8 +387,9 @@ const generateConfessions = (data) => {
     let message = card["body"];
     let tags = card["tags"];
     let replies = card["replies"];
-
-    createCard(index, to, message, tags, replies);
+    let gif = card["gif"];
+    if (!gif) gif = "";
+    createCard(index, to, message, tags, replies, gif);
   });
   addCard();
 };
