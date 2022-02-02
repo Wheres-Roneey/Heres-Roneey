@@ -212,6 +212,7 @@ h2 {
   border-radius: 20px;
   margin: 0 auto;
   font-weight: bold;
+  order: 1;
 }
 .emoji_btns {
   /* background-color: red; */
@@ -323,7 +324,7 @@ h2 {
   padding: 0.5em;
   position: absolute;
   bottom: 0;
-  right: 60px;
+  right: 0;
   width: 42px;
   border-radius: 15px;
 }
@@ -331,15 +332,15 @@ h2 {
   width: 100%;
 }
 .gif_form {
-  background: inherit;
-  width: 50%;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  margin: 1rem;
+  margin-top: 1rem;
 }
 #search {
   width: 100%;
+  background-color: var(--navy);
+  color: var(--neutral);
+  border: none;
+  border-radius: 10px;
+  padding: 1em;
 }
 
 @media screen and (max-width: 1500px) {
