@@ -1,11 +1,9 @@
 [
   {
-    "to": "rb",
-    "body": "youre cool",
+    "to": "EW",
+    "body": "You are a massive manipulator... a DOM manipulator",
     "tags": ["motivated"],
-    "replies": ["i agree"],
-    "gif": [],
-    "reacts": []
+    "replies": ["to EW"]
   },
   {
     "to": "RB",
@@ -20,8 +18,6 @@
       "How are you?",
       "to RB",
       "bsta"
-    ],
-    "gif": "https://media1.giphy.com/media/3ov9jWu7BuHufyLs7m/giphy-downsized.gif?cid=70c8e1ebt4fqmcp3tyjekfbtmq3zqp2hymcqp4a7fy2uymqf&amp;rid=giphy-downsized.gif&amp;ct=g",
-    "reacts": []
+    ]
   }
 ]

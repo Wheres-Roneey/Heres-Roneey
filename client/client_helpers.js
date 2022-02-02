@@ -50,7 +50,6 @@ const appendComments = (comment, container) => {
   container.appendChild(anotherOne);
 };
 
-
 const clicktag = document.querySelector("#click1");
 
 let click1 = parseInt(clicktag.innerText);
@@ -76,4 +75,3 @@ clicksE3.addEventListener("click", () => {
 });
 
 module.exports = { handleConfess, appendComments, handleReply };
-
