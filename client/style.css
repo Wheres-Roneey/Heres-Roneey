@@ -23,7 +23,8 @@ body.light {
 }
 .light .add_div,
 .light .no_tag,
-.light .titleDiv {
+.light .titleDiv,
+.light .btn5 {
   --neutral: #1d3557;
   --navy: #f1faee;
 }
@@ -60,8 +61,10 @@ h1 {
   color: var(--neutral);
   line-height: 2.5em;
 }
+
 .btns {
   display: flex;
+  flex-wrap: wrap;
 }
 .btn {
   font-weight: bold;
@@ -103,6 +106,16 @@ h1 {
   background: #d62130;
   color: #1d3557;
 }
+.btn5 {
+  background-color: var(--neutral);
+  color: var(--navy);
+  opacity: 0.7;
+}
+.btn5:hover {
+  background-color: var(--neutral);
+  color: var(--navy);
+  opacity: 0.9;
+}
 .wrapper {
   width: fit-content;
   margin: 0 auto;
@@ -112,6 +125,7 @@ h1 {
 }
 .card {
   margin: 2rem;
+  margin-bottom: 5px;
   padding: 2rem;
   width: 300px;
   height: 400px;
@@ -121,6 +135,7 @@ h1 {
   border-radius: 20px;
   font-size: 1.25rem;
   color: var(--navy);
+  position: relative;
 }
 .no_tag {
   background-color: var(--neutral);
@@ -150,7 +165,7 @@ h1 {
   font-size: 16rem;
 }
 .hide {
-  display: none;
+  display: none !important;
 }
 /* ! If change h2 elem, remember to change this */
 h2 {
@@ -200,58 +215,105 @@ h2 {
 }
 
 /* the comment section */
-.comment-section {
-  width: 350px;
-  height: 150px;
-  margin: 30px auto;
-  background: pink;
-  border-radius: 8px;
-  padding: 20px;
+.comment-sect {
+  width: 100%;
+  position: absolute;
+  top: 385px;
+  left: 20px;
+  background-color: inherit;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  padding: inherit;
+  border-radius: inherit;
+  overflow: hidden;
+}
+.comment-sect::after {
+  content: "";
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 .comment {
-  display: block;
-  transition: all 1s;
+  z-index: 3;
 }
-.commentClicked {
-  /* min-height: 0px; */
-  width: 350px;
-  height: 200px;
-  border: 1px solid #eee;
-  border-radius: 5px;
-  padding: 5px 10px;
+.comments {
+  word-break: break-all;
+  background-color: var(--neutral);
+  color: var(--navy);
+  border-radius: 10px;
+  padding: 0.2em 1em;
+  margin: 0.2em 0;
 }
 
-.comment-section textarea {
-  width: 100%;
-  border: none;
-  background: white;
-  padding: 5px 10px;
-  height: 50%;
-  border-radius: 5px 5px 0px 0px;
-  border-bottom: 2px solid #a8dadc;
+.comment-sect textarea {
   transition: all 0.5s;
-  margin-top: 20px;
+  font-family: inherit;
+  background-color: var(--neutral);
+  color: var(--navy);
+  border: none;
+  border-radius: 10px;
+  padding: 1em;
+  z-index: 5;
+  max-height: fit-content;
 }
 
 .sub-comment {
-  background: #e20e43;
+  background: var(--red);
   color: #fff;
-  padding: 10px 10px;
+  padding: 1em;
   border: none;
-  margin-top: 0px;
-  margin-left: 250px;
   cursor: pointer;
   text-transform: uppercase;
   letter-spacing: 2px;
   font-weight: bold;
   box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.25);
   transition: 1s all;
-  font-size: 10px;
-  border-radius: 5px;
+  font-size: 0.625rem;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-top: 1em;
+  z-index: 3;
 }
 
-button:hover {
+.sub-comment:hover {
   background: #9201a8;
+}
+
+.reply_btn {
+  background-color: var(--navy);
+  color: var(--neutral);
+  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.giphy_btn {
+  background-color: var(--navy);
+  padding: 0.5em;
+  position: absolute;
+  bottom: 0;
+  right: 60px;
+  width: 42px;
+  border-radius: 15px;
+}
+.giphy_btn > img {
+  width: 100%;
+}
+.gif_form {
+  background: inherit;
+  width: 50%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 1rem;
+}
+#search {
+  width: 100%;
 }
 
 @media screen and (max-width: 1500px) {
@@ -265,14 +327,17 @@ button:hover {
     --column_number: 2;
   }
 }
-@media screen and (max-width: 750px) {
-  .wrapper {
-    --column_number: 1;
-  }
+@media screen and (max-width: 920px) {
   .btns {
     flex-direction: column;
   }
   .btns > .btn {
     margin: 0.5em;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .wrapper {
+    --column_number: 1;
   }
 }

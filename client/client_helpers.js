@@ -26,4 +26,28 @@ const handleConfess = async (e) => {
   }
 };
 
-module.exports = { handleConfess };
+const handleReply = async (e) => {
+  const card = e.target.parentElement.parentElement;
+  const comment = e.target.parentElement.querySelector(".input").value;
+  const cardId = card.id;
+  const postRequest = await fetch("http://localhost:3000/messages/reply", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id: cardId,
+      replies: comment,
+    }),
+  });
+};
+
+const appendComments = (comment, container) => {
+  const anotherOne = document.createElement("p");
+  anotherOne.classList.add("comments");
+  anotherOne.innerText = comment;
+  container.appendChild(anotherOne);
+};
+
+module.exports = { handleConfess, appendComments, handleReply };

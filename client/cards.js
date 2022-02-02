@@ -1,4 +1,7 @@
+const { appendComments } = require("./client_helpers");
+const { handleReply } = require("./client_helpers");
 const { showForm } = require("./form");
+const { gifFrom } = require("./giphyapi");
 
 const createTo = (to) => {
   // TODO: check that there is no other h2s, if is change this to a h3
@@ -6,6 +9,40 @@ const createTo = (to) => {
   toElem.classList.add("toElem", "card_child");
   toElem.innerText = `TO: ${to.toUpperCase()}`;
   return toElem;
+};
+
+const createCommentSection = (replies) => {
+  let commentSection = document.createElement("div");
+  commentSection.classList.add("comment-sect", "hide");
+  let comments = document.createElement("div");
+  comments.classList.add("comment");
+
+  if (replies.length != 0) {
+    replies.forEach((reply) => {
+      appendComments(reply, comments);
+    });
+  }
+
+  let newCommentSection = document.createElement("textarea");
+  newCommentSection.classList.add("input");
+  newCommentSection.type = "text";
+  newCommentSection.placeholder = "Write a comment";
+  newCommentSection.maxLength = "200";
+  newCommentSection.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+      handleReply(e);
+    }
+  });
+  let submitButton = document.createElement("button");
+  submitButton.classList.add("sub-comment");
+  submitButton.type = "submit";
+  submitButton.innerText = "Respond";
+  submitButton.addEventListener("click", handleReply);
+  commentSection.appendChild(comments);
+  commentSection.appendChild(newCommentSection);
+  commentSection.appendChild(submitButton);
+
+  return commentSection;
 };
 
 const createMessage = (body) => {
@@ -37,21 +74,69 @@ const createTag = (tagArr) => {
 
   return tagElem;
 };
+const replyBtn = () => {
+  let replyBtn = document.createElement("button");
+  replyBtn.classList.add("btn", "reply_btn");
+  let icon = document.createElement("i");
+  icon.classList.add("fas", "fa-reply");
+  replyBtn.appendChild(icon);
+  replyBtn.addEventListener("click", (e) => {
+    const clickedBtn = e.currentTarget;
+    const commentSect = clickedBtn.parentElement.querySelector(".comment-sect");
+    commentSect.classList.toggle("hide");
+    document.querySelectorAll(".comment-sect").forEach((comment) => {
+      if (comment !== commentSect) {
+        comment.classList.remove("hide");
+        comment.classList.add("hide");
+      }
+    });
+  });
 
-const createCard = (index, to, body, tag) => {
+  return replyBtn;
+};
+
+const giphyLogo = () => {
+  let giphyBtn = document.createElement("button");
+  giphyBtn.classList.add("btn", "giphy_btn");
+
+  let logo = document.createElement("img");
+  logo.src = "./imgs/giphyLogo.svg";
+  giphyBtn.appendChild(logo);
+  giphyBtn.addEventListener("click", gifFrom);
+
+  return giphyBtn;
+};
+
+const loadGif = (gif) => {
+  let img = document.createElement("img");
+  img.classList.add("gif_img");
+  img.src = gif;
+
+  return img;
+};
+
+const createCard = (index, to, body, tag, replies, gif) => {
   let wrapper = document.querySelector(".wrapper");
-
   let card = document.createElement("div");
   card.classList.add("card");
   card.id = index;
-  card.append(createTo(to), createMessage(body), createTag(tag));
+  card.append(
+    createTo(to),
+    createMessage(body),
+    loadGif(gif),
+    createTag(tag),
+    replyBtn()
+  );
   if (!card.querySelector(".tag_span")) {
     card.classList.add("no_tag");
   } else {
     let tagType = card.querySelector(".tag_span").innerText.slice(1);
     card.classList.add(`tag_${tagType}`);
   }
+  let commentSection = createCommentSection(replies);
   wrapper.prepend(card);
+  card.append(commentSection);
+  card.append(giphyLogo());
 };
 
 const addCard = () => {
