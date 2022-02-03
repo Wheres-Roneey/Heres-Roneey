@@ -10,7 +10,6 @@ async function giphySearch(keyword) {
     return gifLink;
   } catch (err) {
     nf = "not found";
-    console.log(err.message);
     const resp1 = await fetch(
       `http://api.giphy.com/v1/gifs/search?q=${nf}&api_key=${giphyKey}`
     );
