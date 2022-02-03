@@ -101,7 +101,7 @@ const createReacts = (emojis) => {
     clickCount.id = `click${i}`;
     clickCount.innerText = emojis[i][1];
 
-    emojiBtn.addEventListener("click", (e) => handleRating(e));
+    emojiBtn.addEventListener("click", (e) => handleRating(e), { once: true });
     emojiBtn.appendChild(emojiLogo);
     emojiBtn.appendChild(clickCount);
     emojiBar.appendChild(emojiBtn);
