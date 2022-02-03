@@ -27,7 +27,7 @@ const createCommentSection = (replies) => {
   newCommentSection.classList.add("input");
   newCommentSection.type = "text";
   newCommentSection.placeholder = "Write a comment";
-  newCommentSection.maxLength = "200";
+  newCommentSection.maxLength = "100";
   newCommentSection.addEventListener("keypress", function (e) {
     if (e.key === "Enter") {
       handleReply(e);
@@ -251,8 +251,6 @@ const handleRating = async (e) => {
     thumbsDownCount++;
   }
 
-  console.log(astonishCount, heartEyeCount, thumbsDownCount);
-
   const postRequest = await fetch("http://localhost:3000/messages/react", {
     method: "POST",
     headers: {
@@ -309,7 +307,7 @@ const generateMessage = () => {
   const messageArea = document.createElement("textarea");
   messageArea.id = "message";
   messageArea.name = "message";
-  messageArea.maxLength = "200";
+  messageArea.maxLength = "100";
   messageArea.required = true;
   messageArea.placeholder = "Message:";
   formDiv.appendChild(messageArea);

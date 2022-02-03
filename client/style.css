@@ -127,8 +127,9 @@ h1 {
   margin: 2rem;
   margin-bottom: 5px;
   padding: 2rem;
+  padding-bottom: 4rem;
   width: 300px;
-  height: 400px;
+  height: 450px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -219,10 +220,10 @@ h2 {
 } */
 .emoji_btns {
   /* background-color: blue; */
-  position: relative;
+  position: absolute;
   width: 50px;
   height: 50%;
-  left: 95%;
+  left: 85%;
   bottom: 150px;
   z-index: 1;
 }
@@ -336,6 +337,9 @@ h2 {
 }
 .gif_form {
   margin-top: 1rem;
+}
+.gif_img {
+  max-height: 150px;
 }
 #search {
   width: 100%;
