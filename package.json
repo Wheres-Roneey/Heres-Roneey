@@ -1,7 +1,6 @@
 {
   "scripts": {
-    "test": "jest",
-    "coverage": "jest --coverage",
+    "test": "jest --coverage --watchAll",
     "build": "browserify ./client/main.js -o ./client/bundle.js",
     "start": "node server/index.js"
   },

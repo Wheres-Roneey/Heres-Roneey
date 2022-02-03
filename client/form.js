@@ -117,4 +117,4 @@ const showForm = () => {
   document.querySelector(".add_div").classList.add("hide");
 };
 
-module.exports = { generateForm, showForm };
+module.exports = { generateForm, showForm, generateTo };
