@@ -76,8 +76,6 @@ const handleRating = async (e) => {
     thumbsDownCount++;
   }
 
-  console.log(astonishCount, heartEyeCount, thumbsDownCount);
-
   const postRequest = await fetch("http://localhost:3000/messages/react", {
     method: "POST",
     headers: {
