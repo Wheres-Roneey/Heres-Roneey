@@ -27,7 +27,7 @@ app.get("/messages/tags/:tag", (req, res) => {
       }
     });
     if (matchingMessages.length > 0) {
-      res.send(matchingMessages);
+      res.status(200).send(matchingMessages);
     } else {
       throw new Error("Could not find any confessions with that tag");
     }
