@@ -224,6 +224,7 @@ const handleReply = async (e) => {
   const card = e.target.parentElement.parentElement;
   const comment = e.target.parentElement.querySelector(".input").value;
   const cardId = card.id;
+  const commentSection = card.querySelector(".comment-sect");
   const postRequest = await fetch(
     "https://safe-wave-84228.herokuapp.com/messages/reply",
     {
@@ -238,6 +239,9 @@ const handleReply = async (e) => {
       })
     }
   );
+  appendComments(comment, commentSection.querySelector(".comment"));
+  commentSection.querySelector(".input").value = "";
+  console.log(commentSection.querySelector(".input"));
 };
 
 const handleRating = async (e) => {
