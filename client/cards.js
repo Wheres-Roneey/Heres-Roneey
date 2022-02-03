@@ -1,5 +1,5 @@
 const { appendComments } = require("./client_helpers");
-const { handleReply } = require("./client_helpers");
+const { handleReply, handleRating } = require("./client_helpers");
 const { showForm } = require("./form");
 
 const createTo = (to) => {
@@ -65,21 +65,21 @@ const createReacts = (emojis) => {
   const emojiBar = document.createElement("div");
   emojiBar.classList.add("emoji_btns");
   for (let i = 0; i < emojis.length; i++) {
-    emojis.forEach((emoji, index) => {
-      const emojiBtn = document.createElement("button");
-      emojiBtn.classList.add("emoji");
-      emojiBtn.id = "emoji";
-      const emojiLogo = document.createElement("i");
-      let classArray = emoji.split(" ");
-      emojiLogo.classList.add(classArray[0]);
-      emojiLogo.classList.add(classArray[1]);
-      const clickCount = document.createElement("p");
-      clickCount.classList.add("clicks");
-      clickCount.id = `click${index}`;
-      emojiBtn.appendChild(emojiLogo);
-      emojiBtn.appendChild(clickCount);
-      emojiBar.appendChild(emojiBtn);
-    });
+    const emojiBtn = document.createElement("button");
+    emojiBtn.classList.add("emoji");
+    emojiBtn.id = "emoji";
+    const emojiLogo = document.createElement("i");
+    let classArray = emojis[i][0].split(" ");
+    emojiLogo.classList.add(classArray[0]);
+    emojiLogo.classList.add(classArray[1]);
+    const clickCount = document.createElement("p");
+    clickCount.classList.add("clicks");
+    clickCount.id = `click${i}`;
+    clickCount.innerText = emojis[i][1];
+    emojiBtn.addEventListener("click", (e) => handleRating(e));
+    emojiBtn.appendChild(emojiLogo);
+    emojiBtn.appendChild(clickCount);
+    emojiBar.appendChild(emojiBtn);
   }
 
   return emojiBar;
@@ -144,9 +144,9 @@ const createCard = (index, to, body, tag, replies, gif, reacts) => {
     let tagType = card.querySelector(".tag_span").innerText.slice(1);
     card.classList.add(`tag_${tagType}`);
   }
-  let countDown = react[0];
-  let countAstonished = react[1];
-  let countHeartEyes = react[2];
+  let countDown = reacts[0];
+  let countAstonished = reacts[1];
+  let countHeartEyes = reacts[2];
   let commentSection = createCommentSection(replies);
   let emojis = [
     ["em em--1", countDown],
