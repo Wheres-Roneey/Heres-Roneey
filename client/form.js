@@ -29,7 +29,7 @@ const generateMessage = () => {
   const messageArea = document.createElement("textarea");
   messageArea.id = "message";
   messageArea.name = "message";
-  messageArea.maxLength = "200";
+  messageArea.maxLength = "100";
   messageArea.required = true;
   messageArea.placeholder = "Message:";
   formDiv.appendChild(messageArea);
