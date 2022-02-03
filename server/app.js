@@ -66,7 +66,7 @@ app.post("/messages", (req, res) => {
         tags: req.body.tags,
         replies: [],
         gif: req.body.gif,
-        reacts: []
+        reacts: [0, 0, 0]
       };
       messages.push(newMessage);
       fs.writeFile(fileName, JSON.stringify(messages), (err) => {
@@ -88,11 +88,13 @@ app.post("/messages/react", (req, res) => {
   try {
     const id = parseInt(req.body.id);
     const reactMessages = [];
-    reactMessages.push(req.params.astonish);
-    reactMessages.push(req.params.heartEye);
-    reactMessages.push(req.params.thumbsDown);
+    reactMessages.push(req.body.astonish);
+    reactMessages.push(req.body.heartEye);
+    reactMessages.push(req.body.thumbsDown);
 
-    messages[id]["reacts"].push(reply);
+    console.log(reactMessages);
+
+    messages[id]["reacts"] = reactMessages;
     fs.writeFile(fileName, JSON.stringify(messages), (err) => {
       if (err) {
         console.error(err);

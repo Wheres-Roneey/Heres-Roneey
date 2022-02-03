@@ -1,5 +1,5 @@
 const { appendComments } = require("./client_helpers");
-const { handleReply } = require("./client_helpers");
+const { handleReply, handleRating } = require("./client_helpers");
 const { showForm } = require("./form");
 
 const createTo = (to) => {
@@ -65,7 +65,6 @@ const createReacts = (emojis) => {
   const emojiBar = document.createElement("div");
   emojiBar.classList.add("emoji_btns");
   for (let i = 0; i < emojis.length; i++) {
-    console.log(emojis[i]);
     const emojiBtn = document.createElement("button");
     emojiBtn.classList.add("emoji");
     emojiBtn.id = "emoji";
@@ -77,6 +76,7 @@ const createReacts = (emojis) => {
     clickCount.classList.add("clicks");
     clickCount.id = `click${i}`;
     clickCount.innerText = emojis[i][1];
+    emojiBtn.addEventListener("click", (e) => handleRating(e));
     emojiBtn.appendChild(emojiLogo);
     emojiBtn.appendChild(clickCount);
     emojiBar.appendChild(emojiBtn);

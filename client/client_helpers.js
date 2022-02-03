@@ -59,6 +59,40 @@ const handleReply = async (e) => {
   });
 };
 
+const handleRating = async (e) => {
+  const card = e.target.parentElement.parentElement.parentElement;
+  const cardId = card.id;
+  const buttonBar = e.target.parentElement.parentElement;
+  const clickID = e.target.parentElement.querySelector(".clicks").id;
+  let astonishCount = parseInt(buttonBar.querySelector("#click0").innerText);
+  let heartEyeCount = parseInt(buttonBar.querySelector("#click1").innerText);
+  let thumbsDownCount = parseInt(buttonBar.querySelector("#click2").innerText);
+
+  if (clickID == "click0") {
+    astonishCount++;
+  } else if (clickID == "click1") {
+    heartEyeCount++;
+  } else {
+    thumbsDownCount++;
+  }
+
+  console.log(astonishCount, heartEyeCount, thumbsDownCount);
+
+  const postRequest = await fetch("http://localhost:3000/messages/react", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      id: cardId,
+      astonish: astonishCount,
+      heartEye: heartEyeCount,
+      thumbsDown: thumbsDownCount
+    })
+  });
+};
+
 const appendComments = (comment, container) => {
   const anotherOne = document.createElement("p");
   anotherOne.classList.add("comments");
@@ -90,4 +124,4 @@ const appendComments = (comment, container) => {
 //   clicktag3.innerText = click3;
 // });
 
-module.exports = { handleConfess, appendComments, handleReply };
+module.exports = { handleConfess, appendComments, handleReply, handleRating };

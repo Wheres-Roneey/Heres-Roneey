@@ -1,6 +1,6 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 const { appendComments } = require("./client_helpers");
-const { handleReply } = require("./client_helpers");
+const { handleReply, handleRating } = require("./client_helpers");
 const { showForm } = require("./form");
 
 const createTo = (to) => {
@@ -66,7 +66,6 @@ const createReacts = (emojis) => {
   const emojiBar = document.createElement("div");
   emojiBar.classList.add("emoji_btns");
   for (let i = 0; i < emojis.length; i++) {
-    console.log(emojis[i]);
     const emojiBtn = document.createElement("button");
     emojiBtn.classList.add("emoji");
     emojiBtn.id = "emoji";
@@ -78,6 +77,7 @@ const createReacts = (emojis) => {
     clickCount.classList.add("clicks");
     clickCount.id = `click${i}`;
     clickCount.innerText = emojis[i][1];
+    emojiBtn.addEventListener("click", (e) => handleRating(e));
     emojiBtn.appendChild(emojiLogo);
     emojiBtn.appendChild(clickCount);
     emojiBar.appendChild(emojiBtn);
@@ -234,6 +234,40 @@ const handleReply = async (e) => {
   });
 };
 
+const handleRating = async (e) => {
+  const card = e.target.parentElement.parentElement.parentElement;
+  const cardId = card.id;
+  const buttonBar = e.target.parentElement.parentElement;
+  const clickID = e.target.parentElement.querySelector(".clicks").id;
+  let astonishCount = parseInt(buttonBar.querySelector("#click0").innerText);
+  let heartEyeCount = parseInt(buttonBar.querySelector("#click1").innerText);
+  let thumbsDownCount = parseInt(buttonBar.querySelector("#click2").innerText);
+
+  if (clickID == "click0") {
+    astonishCount++;
+  } else if (clickID == "click1") {
+    heartEyeCount++;
+  } else {
+    thumbsDownCount++;
+  }
+
+  console.log(astonishCount, heartEyeCount, thumbsDownCount);
+
+  const postRequest = await fetch("http://localhost:3000/messages/react", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      id: cardId,
+      astonish: astonishCount,
+      heartEye: heartEyeCount,
+      thumbsDown: thumbsDownCount
+    })
+  });
+};
+
 const appendComments = (comment, container) => {
   const anotherOne = document.createElement("p");
   anotherOne.classList.add("comments");
@@ -265,7 +299,7 @@ const appendComments = (comment, container) => {
 //   clicktag3.innerText = click3;
 // });
 
-module.exports = { handleConfess, appendComments, handleReply };
+module.exports = { handleConfess, appendComments, handleReply, handleRating };
 
 },{"./giphyapi":4,"prettier":7}],3:[function(require,module,exports){
 const { handleConfess } = require("./client_helpers");
