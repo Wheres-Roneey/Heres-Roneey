@@ -263,7 +263,7 @@ const handleRating = async (e) => {
   } else {
     thumbsDownCount++;
   }
-  buttonBar.querySelector("#click0").innerText = astonishCount;
+
   const postRequest = await fetch(
     "https://safe-wave-84228.herokuapp.com/messages/react",
     {
