@@ -3,7 +3,7 @@ const app = express();
 const cors = require("cors");
 const fs = require("fs");
 const req = require("express/lib/request");
-const fileName = "../server/messages.json";
+const fileName = "./messages.json";
 const messages = require(fileName);
 
 app.use(express.json());
