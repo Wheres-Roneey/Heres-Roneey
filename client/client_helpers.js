@@ -1,4 +1,4 @@
-const { doc } = require("prettier");
+const { createCard } = require("./cards");
 const { giphySearch } = require("./giphyapi");
 
 const handleConfess = async (e) => {
@@ -13,7 +13,6 @@ const handleConfess = async (e) => {
     let gifLink;
     let searchTerm;
     if (!searchElem) {
-      console.log("not gif");
       gifLink = "";
     } else {
       console.log("here");
@@ -26,19 +25,27 @@ const handleConfess = async (e) => {
     });
 
     // submitting post request
-    const postRequest = await fetch("http://localhost:3000/messages", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        to: to,
-        body: message,
-        tags: tags,
-        gif: gifLink
-      })
-    });
+    const postRequest = await fetch(
+      "https://safe-wave-84228.herokuapp.com/messages",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          to: to,
+          body: message,
+          tags: tags,
+          gif: gifLink
+        })
+      }
+    );
+    window.location.hash = "";
+    window.location.hash = "#wrapper";
+    window.location.reload();
+    window.location.hash = "";
+    window.location.hash = "#wrapper";
   }
 };
 
@@ -46,17 +53,23 @@ const handleReply = async (e) => {
   const card = e.target.parentElement.parentElement;
   const comment = e.target.parentElement.querySelector(".input").value;
   const cardId = card.id;
-  const postRequest = await fetch("http://localhost:3000/messages/reply", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      id: cardId,
-      replies: comment
-    })
-  });
+  const commentSection = card.querySelector(".comment-sect");
+  const postRequest = await fetch(
+    "https://safe-wave-84228.herokuapp.com/messages/reply",
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        id: cardId,
+        replies: comment
+      })
+    }
+  );
+  appendComments(comment, commentSection.querySelector(".comment"));
+  commentSection.querySelector(".input").value = "";
 };
 
 const handleRating = async (e) => {
@@ -76,21 +89,25 @@ const handleRating = async (e) => {
     thumbsDownCount++;
   }
 
-  console.log(astonishCount, heartEyeCount, thumbsDownCount);
-
-  const postRequest = await fetch("http://localhost:3000/messages/react", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      id: cardId,
-      astonish: astonishCount,
-      heartEye: heartEyeCount,
-      thumbsDown: thumbsDownCount
-    })
-  });
+  const postRequest = await fetch(
+    "https://safe-wave-84228.herokuapp.com/messages/react",
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        id: cardId,
+        astonish: astonishCount,
+        heartEye: heartEyeCount,
+        thumbsDown: thumbsDownCount
+      })
+    }
+  );
+  buttonBar.querySelector("#click0").innerText = astonishCount;
+  buttonBar.querySelector("#click1").innerText = heartEyeCount;
+  buttonBar.querySelector("#click2").innerText = thumbsDownCount;
 };
 
 const appendComments = (comment, container) => {

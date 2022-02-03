@@ -26,7 +26,7 @@ const createCommentSection = (replies) => {
   newCommentSection.classList.add("input");
   newCommentSection.type = "text";
   newCommentSection.placeholder = "Write a comment";
-  newCommentSection.maxLength = "200";
+  newCommentSection.maxLength = "100";
   newCommentSection.addEventListener("keypress", function (e) {
     if (e.key === "Enter") {
       handleReply(e);

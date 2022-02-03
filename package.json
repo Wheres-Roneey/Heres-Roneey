@@ -1,10 +1,11 @@
 {
   "scripts": {
-    
+
     "test": "jest",
     "coverage": "jest --coverage",
-    "build": "npx watchify ./client/main.js -o ./client/bundle.js -v &",
-    "start": "nodemon ./server/index.js"
+    "build": "browserify ./client/main.js -o ./client/bundle.js",
+    "start": "node server/index.js"
+
   },
   "editor": {
     "formatOnPaste": true,
