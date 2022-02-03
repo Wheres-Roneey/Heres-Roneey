@@ -27,7 +27,7 @@ const handleConfess = async (e) => {
 
     // submitting post request
     const postRequest = await fetch(
-      "https://powerful-peak-34201.herokuapp.com/messages",
+      "https://safe-wave-84228.herokuapp.com/messages",
       {
         method: "POST",
         headers: {
@@ -50,7 +50,7 @@ const handleReply = async (e) => {
   const comment = e.target.parentElement.querySelector(".input").value;
   const cardId = card.id;
   const postRequest = await fetch(
-    "https://powerful-peak-34201.herokuapp.com/messages/reply",
+    "https://safe-wave-84228.herokuapp.com/messages/reply",
     {
       method: "POST",
       headers: {
@@ -83,7 +83,7 @@ const handleRating = async (e) => {
   }
 
   const postRequest = await fetch(
-    "https://powerful-peak-34201.herokuapp.com/messages/react",
+    "https://safe-wave-84228.herokuapp.com/messages/react",
     {
       method: "POST",
       headers: {
