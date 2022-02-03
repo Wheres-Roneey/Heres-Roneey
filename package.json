@@ -1,7 +1,8 @@
 {
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "browserify ./client/main.js -o ./client/bundle.js"
+    "build": "browserify ./client/main.js -o ./client/bundle.js",
+    "start": "node server/index.js"
   },
   "editor": {
     "formatOnPaste": true,
