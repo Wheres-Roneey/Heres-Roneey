@@ -1,4 +1,3 @@
-const { doc } = require("prettier");
 const { giphySearch } = require("./giphyapi");
 
 const handleConfess = async (e) => {
@@ -43,6 +42,7 @@ const handleConfess = async (e) => {
       }
     );
   }
+  window.location.reload();
 };
 
 const handleReply = async (e) => {
