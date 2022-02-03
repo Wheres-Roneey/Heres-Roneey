@@ -241,7 +241,6 @@ const handleReply = async (e) => {
   );
   appendComments(comment, commentSection.querySelector(".comment"));
   commentSection.querySelector(".input").value = "";
-  console.log(commentSection.querySelector(".input"));
 };
 
 const handleRating = async (e) => {
@@ -260,7 +259,7 @@ const handleRating = async (e) => {
   } else {
     thumbsDownCount++;
   }
-
+  buttonBar.querySelector("#click0").innerText = astonishCount;
   const postRequest = await fetch(
     "https://safe-wave-84228.herokuapp.com/messages/react",
     {
@@ -277,6 +276,9 @@ const handleRating = async (e) => {
       })
     }
   );
+  buttonBar.querySelector("#click0").innerText = astonishCount;
+  buttonBar.querySelector("#click1").innerText = heartEyeCount;
+  buttonBar.querySelector("#click2").innerText = thumbsDownCount;
 };
 
 const appendComments = (comment, container) => {
