@@ -1,16 +1,9 @@
 {
   "scripts": {
-<<<<<<< HEAD
-    
     "test": "jest",
     "coverage": "jest --coverage",
-    "build": "npx watchify ./client/main.js -o ./client/bundle.js -v &",
-    "start": "nodemon ./server/index.js"
-=======
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "browserify ./client/main.js -o ./client/bundle.js",
     "start": "node server/index.js"
->>>>>>> 467e2fb121319cfba6198fa216b198b913fca215
   },
   "editor": {
     "formatOnPaste": true,
