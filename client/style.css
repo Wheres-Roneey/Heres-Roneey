@@ -57,12 +57,13 @@ h1 {
 }
 .titleDiv {
   max-width: fit-content;
-  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  font-size: clamp(1.5rem, 5vw, 2.75rem);
   text-align: center;
   font-family: "Poppins", sans-serif;
   font-weight: bold;
   color: var(--neutral);
   line-height: 2.5em;
+  margin-bottom: 0.25em;
 }
 
 .btns {
