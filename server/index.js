@@ -1,5 +1,7 @@
 const app = require("./app.js");
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log(`Express now departing`);
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+  console.log("App is running on port " + port);
 });
