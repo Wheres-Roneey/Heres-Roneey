@@ -40,7 +40,7 @@ app.post("/messages/reply", (req, res) => {
   try {
     const id = parseInt(req.body.id);
     const reply = req.body.replies;
-    if (reply.length <= 200) {
+    if (reply.length <= 100) {
       messages[id]["replies"].push(reply);
       fs.writeFile(fileName, JSON.stringify(messages), (err) => {
         if (err) {
@@ -59,7 +59,7 @@ app.post("/messages/reply", (req, res) => {
 
 app.post("/messages", (req, res) => {
   try {
-    if (req.body.body.length <= 200) {
+    if (req.body.body.length <= 100) {
       let newMessage = {
         to: req.body.to,
         body: req.body.body,
