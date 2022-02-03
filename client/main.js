@@ -45,11 +45,3 @@ btns.forEach((btn) => {
     location.hash = "#wrapper";
   });
 });
-
-// document.querySelector(".sub-comment").addEventListener("click", () => {
-//   let commentBox = document.querySelector(".comment");
-//   const textbox = document.querySelector(".input");
-//   commentBox.classList.add("commentClicked");
-//   appendComments(textbox.value, commentBox);
-//   textbox.value = "";
-// });
