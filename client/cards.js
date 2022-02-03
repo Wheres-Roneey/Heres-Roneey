@@ -1,5 +1,5 @@
 const { appendComments } = require("./client_helpers");
-const { handleReply, handleRating } = require("./client_helpers");
+const { handleReply } = require("./client_helpers");
 const { showForm } = require("./form");
 
 const createTo = (to) => {
@@ -10,23 +10,28 @@ const createTo = (to) => {
   return toElem;
 };
 
+// the to header of card
+
 const createCommentSection = (replies) => {
   let commentSection = document.createElement("div");
   commentSection.classList.add("comment-sect", "hide");
   let comments = document.createElement("div");
   comments.classList.add("comment");
 
+  // creates comment section
+
   if (replies.length != 0) {
     replies.forEach((reply) => {
       appendComments(reply, comments);
     });
   }
+  // checks if reply exists
 
   let newCommentSection = document.createElement("textarea");
   newCommentSection.classList.add("input");
   newCommentSection.type = "text";
   newCommentSection.placeholder = "Write a comment";
-  newCommentSection.maxLength = "100";
+  newCommentSection.maxLength = "200";
   newCommentSection.addEventListener("keypress", function (e) {
     if (e.key === "Enter") {
       handleReply(e);
@@ -42,6 +47,8 @@ const createCommentSection = (replies) => {
   commentSection.appendChild(submitButton);
 
   return commentSection;
+
+  // submit section for the comment  - above it , is the existing comments
 };
 
 const createMessage = (body) => {
@@ -60,30 +67,7 @@ const createMessage = (body) => {
 
   return message;
 };
-
-const createReacts = (emojis) => {
-  const emojiBar = document.createElement("div");
-  emojiBar.classList.add("emoji_btns");
-  for (let i = 0; i < emojis.length; i++) {
-    const emojiBtn = document.createElement("button");
-    emojiBtn.classList.add("emoji");
-    emojiBtn.id = "emoji";
-    const emojiLogo = document.createElement("i");
-    let classArray = emojis[i][0].split(" ");
-    emojiLogo.classList.add(classArray[0]);
-    emojiLogo.classList.add(classArray[1]);
-    const clickCount = document.createElement("p");
-    clickCount.classList.add("clicks");
-    clickCount.id = `click${i}`;
-    clickCount.innerText = emojis[i][1];
-    emojiBtn.addEventListener("click", (e) => handleRating(e));
-    emojiBtn.appendChild(emojiLogo);
-    emojiBtn.appendChild(clickCount);
-    emojiBar.appendChild(emojiBtn);
-  }
-
-  return emojiBar;
-};
+// creating a new card
 
 const createTag = (tagArr) => {
   let tagElem = document.createElement("div");
@@ -126,7 +110,7 @@ const loadGif = (gif) => {
   return img;
 };
 
-const createCard = (index, to, body, tag, replies, gif, reacts) => {
+const createCard = (index, to, body, tag, replies, gif) => {
   let wrapper = document.querySelector(".wrapper");
   let card = document.createElement("div");
   card.classList.add("card");
@@ -144,19 +128,9 @@ const createCard = (index, to, body, tag, replies, gif, reacts) => {
     let tagType = card.querySelector(".tag_span").innerText.slice(1);
     card.classList.add(`tag_${tagType}`);
   }
-  let countDown = reacts[0];
-  let countAstonished = reacts[1];
-  let countHeartEyes = reacts[2];
   let commentSection = createCommentSection(replies);
-  let emojis = [
-    ["em em--1", countDown],
-    ["em em-astonished", countAstonished],
-    ["em em-heart_eyes", countHeartEyes]
-  ];
-  let emojiBar = createReacts(emojis);
   wrapper.prepend(card);
   card.append(commentSection);
-  card.appendChild(emojiBar);
 };
 
 const addCard = () => {
