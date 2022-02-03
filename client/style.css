@@ -5,6 +5,9 @@
 *::before {
   box-sizing: border-box;
 }
+html {
+  scroll-behavior: smooth;
+}
 body {
   margin: 0;
   padding: 0;
@@ -54,12 +57,13 @@ h1 {
 }
 .titleDiv {
   max-width: fit-content;
-  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  font-size: clamp(1.5rem, 5vw, 2.75rem);
   text-align: center;
   font-family: "Poppins", sans-serif;
   font-weight: bold;
   color: var(--neutral);
   line-height: 2.5em;
+  margin-bottom: 0.25em;
 }
 
 .btns {
@@ -71,7 +75,7 @@ h1 {
   cursor: pointer;
   border-radius: 20px;
   border: none;
-  padding: 1rem 2.5rem;
+  padding: 1rem 1.5rem;
   margin: 1rem;
 }
 .btn1 {
@@ -123,6 +127,7 @@ h1 {
   --column_number: 4;
   grid-template-columns: repeat(var(--column_number), auto);
   margin-bottom: 4rem;
+  min-height: 100vh;
 }
 .card {
   margin: 2rem;
@@ -222,20 +227,17 @@ h2 {
 .emoji_btns {
   /* background-color: blue; */
   position: absolute;
-  width: 50px;
-  height: 50%;
-  left: 85%;
-  bottom: 150px;
   z-index: 1;
+  display: flex;
+  bottom: 0;
+  left: 0;
+  margin: 1rem;
 }
 .emoji {
-  width: 50px;
-  height: 35px;
   background: none;
   border: none;
   cursor: pointer;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: 0.5rem 1rem;
 }
 
 .clicks {

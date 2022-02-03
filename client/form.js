@@ -22,6 +22,8 @@ const generateTo = () => {
 
   return formDiv;
 };
+
+// generate the confession body
 const generateMessage = () => {
   const formDiv = document.createElement("div");
   formDiv.classList.add("form_elem", "message_form");
@@ -37,6 +39,7 @@ const generateMessage = () => {
   return formDiv;
 };
 
+// generate the select box and options for the tags
 const generateSelect = (options) => {
   const select = document.createElement("select");
   select.name = "tags";
@@ -73,6 +76,7 @@ const generateTags = () => {
   return formDiv;
 };
 
+// Adds the giphy logo to the cards for selecting
 const giphyLogo = () => {
   let giphyBtn = document.createElement("button");
   giphyBtn.classList.add("btn", "giphy_btn");
@@ -85,6 +89,7 @@ const giphyLogo = () => {
   return giphyBtn;
 };
 
+// Generates the form for the user
 const generateForm = () => {
   let wrapper = document.querySelector(".wrapper");
   const form = document.createElement("form");
@@ -105,6 +110,8 @@ const generateForm = () => {
 
   wrapper.prepend(form);
 };
+
+// this creates the form when the big plus is clicked on
 const showForm = () => {
   generateForm();
   document.querySelector(".add_div").classList.add("hide");
