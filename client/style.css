@@ -123,6 +123,7 @@ h1 {
   --column_number: 4;
   grid-template-columns: repeat(var(--column_number), auto);
   margin-bottom: 4rem;
+  min-height: 100vh;
 }
 .card {
   margin: 2rem;
