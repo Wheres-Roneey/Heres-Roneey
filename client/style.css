@@ -122,6 +122,7 @@ h1 {
   display: grid;
   --column_number: 4;
   grid-template-columns: repeat(var(--column_number), auto);
+  margin-bottom: 4rem;
 }
 .card {
   margin: 2rem;
@@ -249,12 +250,12 @@ h2 {
 .comment-sect {
   width: 100%;
   position: absolute;
-  top: 385px;
+  top: 440px;
   left: 20px;
   background-color: inherit;
   display: flex;
   flex-direction: column;
-  z-index: 1;
+  z-index: 10;
   padding: inherit;
   border-radius: inherit;
   overflow: hidden;

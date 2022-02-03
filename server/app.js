@@ -3,14 +3,14 @@ const app = express();
 const cors = require("cors");
 const fs = require("fs");
 const req = require("express/lib/request");
-const fileName = "../server/messages.json";
+const fileName = "./messages.json";
 const messages = require(fileName);
 
 app.use(express.json());
 app.use(cors());
 
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.status(200).send("Hello World");
 });
 
 app.get("/messages", (req, res) => {
