@@ -1,4 +1,4 @@
-const { doc } = require("prettier");
+const { createCard } = require("./cards");
 const { giphySearch } = require("./giphyapi");
 
 const handleConfess = async (e) => {
@@ -13,7 +13,6 @@ const handleConfess = async (e) => {
     let gifLink;
     let searchTerm;
     if (!searchElem) {
-      console.log("not gif");
       gifLink = "";
     } else {
       console.log("here");
@@ -42,6 +41,9 @@ const handleConfess = async (e) => {
         })
       }
     );
+    window.location.reload();
+    window.location.hash = "";
+    window.location.hash = "#wrapper";
   }
 };
 
@@ -49,6 +51,7 @@ const handleReply = async (e) => {
   const card = e.target.parentElement.parentElement;
   const comment = e.target.parentElement.querySelector(".input").value;
   const cardId = card.id;
+  const commentSection = card.querySelector(".comment-sect");
   const postRequest = await fetch(
     "https://safe-wave-84228.herokuapp.com/messages/reply",
     {
@@ -63,6 +66,8 @@ const handleReply = async (e) => {
       })
     }
   );
+  appendComments(comment, commentSection.querySelector(".comment"));
+  commentSection.querySelector(".input").value = "";
 };
 
 const handleRating = async (e) => {
@@ -81,7 +86,7 @@ const handleRating = async (e) => {
   } else {
     thumbsDownCount++;
   }
-
+  buttonBar.querySelector("#click0").innerText = astonishCount;
   const postRequest = await fetch(
     "https://safe-wave-84228.herokuapp.com/messages/react",
     {
@@ -98,6 +103,9 @@ const handleRating = async (e) => {
       })
     }
   );
+  buttonBar.querySelector("#click0").innerText = astonishCount;
+  buttonBar.querySelector("#click1").innerText = heartEyeCount;
+  buttonBar.querySelector("#click2").innerText = thumbsDownCount;
 };
 
 const appendComments = (comment, container) => {
