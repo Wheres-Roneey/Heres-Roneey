@@ -3,14 +3,14 @@ const app = express();
 const cors = require("cors");
 const fs = require("fs");
 const req = require("express/lib/request");
-const fileName = "../server/messages.json";
+const fileName = "./messages.json";
 const messages = require(fileName);
 
 app.use(express.json());
 app.use(cors());
 
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.status(200).send("Hello World");
 });
 
 app.get("/messages", (req, res) => {
@@ -40,7 +40,7 @@ app.post("/messages/reply", (req, res) => {
   try {
     const id = parseInt(req.body.id);
     const reply = req.body.replies;
-    if (reply.length <= 200) {
+    if (reply.length <= 100) {
       messages[id]["replies"].push(reply);
       fs.writeFile(fileName, JSON.stringify(messages), (err) => {
         if (err) {
@@ -59,7 +59,7 @@ app.post("/messages/reply", (req, res) => {
 
 app.post("/messages", (req, res) => {
   try {
-    if (req.body.body.length <= 200) {
+    if (req.body.body.length <= 100) {
       let newMessage = {
         to: req.body.to,
         body: req.body.body,

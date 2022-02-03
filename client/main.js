@@ -18,7 +18,9 @@ const generateConfessions = (data) => {
   addCard();
 };
 const loadPage = async () => {
-  const response = await fetch("http://localhost:3000/messages");
+  const response = await fetch(
+    "https://safe-wave-84228.herokuapp.com/messages"
+  );
   const data = await response.json();
   generateConfessions(data);
 };
@@ -34,20 +36,12 @@ btns.forEach((btn) => {
       loadPage();
     } else {
       const response = await fetch(
-        `http://localhost:3000/messages/tags/${tagTarget}`
+        `https://safe-wave-84228.herokuapp.com/messages/tags/${tagTarget}`
       );
       const data = await response.json();
       generateConfessions(data);
-      location.hash = "";
     }
-    location.hash = "#wrapper";
+    window.location.hash = "";
+    window.location.hash = "#wrapper";
   });
 });
-
-// document.querySelector(".sub-comment").addEventListener("click", () => {
-//   let commentBox = document.querySelector(".comment");
-//   const textbox = document.querySelector(".input");
-//   commentBox.classList.add("commentClicked");
-//   appendComments(textbox.value, commentBox);
-//   textbox.value = "";
-// });
