@@ -173,6 +173,7 @@ const addCard = () => {
 module.exports = { addCard, createCard };
 
 },{"./client_helpers":2,"./form":3}],2:[function(require,module,exports){
+const { createCard } = require("./cards");
 const { giphySearch } = require("./giphyapi");
 
 const handleConfess = async (e) => {
@@ -187,7 +188,6 @@ const handleConfess = async (e) => {
     let gifLink;
     let searchTerm;
     if (!searchElem) {
-      console.log("not gif");
       gifLink = "";
     } else {
       console.log("here");
@@ -216,8 +216,10 @@ const handleConfess = async (e) => {
         })
       }
     );
+    window.location.reload();
+    window.location.hash = "";
+    window.location.hash = "#wrapper";
   }
-  window.location.reload();
 };
 
 const handleReply = async (e) => {
@@ -290,7 +292,7 @@ const appendComments = (comment, container) => {
 
 module.exports = { handleConfess, appendComments, handleReply, handleRating };
 
-},{"./giphyapi":4}],3:[function(require,module,exports){
+},{"./cards":1,"./giphyapi":4}],3:[function(require,module,exports){
 const { handleConfess } = require("./client_helpers");
 const { gifFrom } = require("./giphyapi");
 
@@ -516,9 +518,9 @@ btns.forEach((btn) => {
       );
       const data = await response.json();
       generateConfessions(data);
-      location.hash = "";
     }
-    location.hash = "#wrapper";
+    window.location.hash = "";
+    window.location.hash = "#wrapper";
   });
 });
 

@@ -40,8 +40,8 @@ btns.forEach((btn) => {
       );
       const data = await response.json();
       generateConfessions(data);
-      location.hash = "";
     }
-    location.hash = "#wrapper";
+    window.location.hash = "";
+    window.location.hash = "#wrapper";
   });
 });

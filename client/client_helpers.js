@@ -1,3 +1,4 @@
+const { createCard } = require("./cards");
 const { giphySearch } = require("./giphyapi");
 
 const handleConfess = async (e) => {
@@ -12,7 +13,6 @@ const handleConfess = async (e) => {
     let gifLink;
     let searchTerm;
     if (!searchElem) {
-      console.log("not gif");
       gifLink = "";
     } else {
       console.log("here");
@@ -41,8 +41,10 @@ const handleConfess = async (e) => {
         })
       }
     );
+    window.location.reload();
+    window.location.hash = "";
+    window.location.hash = "#wrapper";
   }
-  window.location.reload();
 };
 
 const handleReply = async (e) => {
