@@ -41,6 +41,8 @@ const handleConfess = async (e) => {
         })
       }
     );
+    window.location.hash = "";
+    window.location.hash = "#wrapper";
     window.location.reload();
     window.location.hash = "";
     window.location.hash = "#wrapper";
