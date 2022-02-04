@@ -30,16 +30,15 @@ const createMessage = (body) => {
   return message;
 };
 // Creates the tag section of the confessions
-const createTag = (tagArr) => {
+const createTag = (tagStr) => {
   let tagElem = document.createElement("div");
   tagElem.classList.add("tag_elem", "card_child");
 
-  tagArr.forEach((tag) => {
-    let span = document.createElement("span");
-    span.classList.add("tag_span");
-    span.innerText = `#${tag}`;
-    tagElem.appendChild(span);
-  });
+  if (!tagStr) tagStr = "";
+  let span = document.createElement("span");
+  span.classList.add("tag_span");
+  span.innerText = `#${tagStr}`;
+  tagElem.appendChild(span);
 
   return tagElem;
 };
@@ -157,7 +156,7 @@ const createCard = (index, to, body, tag, replies, gif, reacts) => {
     replyBtn()
   );
   // giving the card a card based on it's tag to colour it
-  if (!card.querySelector(".tag_span")) {
+  if (card.querySelector(".tag_span").innerText === "#") {
     card.classList.add("no_tag");
   } else {
     let tagType = card.querySelector(".tag_span").innerText.slice(1);
