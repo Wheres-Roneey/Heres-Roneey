@@ -3,17 +3,51 @@ const { appendComments } = require("./client_helpers");
 const { handleReply, handleRating } = require("./client_helpers");
 const { showForm } = require("./form");
 
+// Creates the 'TO:' section on confessions
 const createTo = (to) => {
-  // TODO: check that there is no other h2s, if is change this to a h3
   let toElem = document.createElement("h2");
   toElem.classList.add("toElem", "card_child");
   toElem.innerText = `TO: ${to.toUpperCase()}`;
+
   return toElem;
 };
 
+// Creates the message part on confessions
+const createMessage = (body) => {
+  // Declare words to censor
+  const badWords = ["jQuery"];
+
+  let message = document.createElement("p");
+  message.classList.add("message_elem", "card_child");
+
+  let newBody = body;
+  badWords.forEach((word) => {
+    let stars = "";
+    for (let i = 0; i < word.length; i++) stars += "*";
+    newBody = body.replace(word, stars);
+  });
+  message.innerText = newBody;
+
+  return message;
+};
+// Creates the tag section of the confessions
+const createTag = (tagStr) => {
+  let tagElem = document.createElement("div");
+  tagElem.classList.add("tag_elem", "card_child");
+
+  let span = document.createElement("span");
+  span.classList.add("tag_span");
+  span.innerText = `#${tagStr}`;
+  if (!tagStr) span.innerText = "";
+  tagElem.appendChild(span);
+
+  return tagElem;
+};
+// Creates the comment section on confessions
 const createCommentSection = (replies) => {
   let commentSection = document.createElement("div");
   commentSection.classList.add("comment-sect", "hide");
+
   let comments = document.createElement("div");
   comments.classList.add("comment");
 
@@ -33,11 +67,13 @@ const createCommentSection = (replies) => {
       handleReply(e);
     }
   });
+
   let submitButton = document.createElement("button");
   submitButton.classList.add("sub-comment");
   submitButton.type = "submit";
   submitButton.innerText = "Respond";
   submitButton.addEventListener("click", handleReply);
+
   commentSection.appendChild(comments);
   commentSection.appendChild(newCommentSection);
   commentSection.appendChild(submitButton);
@@ -45,39 +81,27 @@ const createCommentSection = (replies) => {
   return commentSection;
 };
 
-const createMessage = (body) => {
-  const badWords = ["jQuery"];
-
-  let message = document.createElement("p");
-  message.classList.add("message_elem", "card_child");
-  let newBody = body;
-  badWords.forEach((word) => {
-    let stars = "";
-    for (let i = 0; i < word.length; i++) stars += "*";
-    newBody = body.replace(word, stars);
-  });
-
-  message.innerText = newBody;
-
-  return message;
-};
-
+// Creates the emoji react options. The parameter should be an array.
 const createReacts = (emojis) => {
   const emojiBar = document.createElement("div");
   emojiBar.classList.add("emoji_btns");
+
   for (let i = 0; i < emojis.length; i++) {
     const emojiBtn = document.createElement("button");
     emojiBtn.classList.add("emoji");
     emojiBtn.id = "emoji";
+
     const emojiLogo = document.createElement("i");
     let classArray = emojis[i][0].split(" ");
     emojiLogo.classList.add(classArray[0]);
     emojiLogo.classList.add(classArray[1]);
+
     const clickCount = document.createElement("p");
     clickCount.classList.add("clicks");
     clickCount.id = `click${i}`;
     clickCount.innerText = emojis[i][1];
-    emojiBtn.addEventListener("click", (e) => handleRating(e));
+
+    emojiBtn.addEventListener("click", (e) => handleRating(e), { once: true });
     emojiBtn.appendChild(emojiLogo);
     emojiBtn.appendChild(clickCount);
     emojiBar.appendChild(emojiBtn);
@@ -86,24 +110,15 @@ const createReacts = (emojis) => {
   return emojiBar;
 };
 
-const createTag = (tagArr) => {
-  let tagElem = document.createElement("div");
-  tagElem.classList.add("tag_elem", "card_child");
-  tagArr.forEach((tag) => {
-    let span = document.createElement("span");
-    span.classList.add("tag_span");
-    span.innerText = `#${tag}`;
-    tagElem.appendChild(span);
-  });
-
-  return tagElem;
-};
+// Create the reply btn for the cards
 const replyBtn = () => {
   let replyBtn = document.createElement("button");
   replyBtn.classList.add("btn", "reply_btn");
+
   let icon = document.createElement("i");
   icon.classList.add("fas", "fa-reply");
   replyBtn.appendChild(icon);
+
   replyBtn.addEventListener("click", (e) => {
     const clickedBtn = e.currentTarget;
     const commentSect = clickedBtn.parentElement.querySelector(".comment-sect");
@@ -119,6 +134,7 @@ const replyBtn = () => {
   return replyBtn;
 };
 
+// add the gif to an img container. The parameter should be a link
 const loadGif = (gif) => {
   let img = document.createElement("img");
   img.classList.add("gif_img");
@@ -127,6 +143,7 @@ const loadGif = (gif) => {
   return img;
 };
 
+// Creates the card an prepends it to the existing wrapper
 const createCard = (index, to, body, tag, replies, gif, reacts) => {
   let wrapper = document.querySelector(".wrapper");
   let card = document.createElement("div");
@@ -139,12 +156,14 @@ const createCard = (index, to, body, tag, replies, gif, reacts) => {
     createTag(tag),
     replyBtn()
   );
-  if (!card.querySelector(".tag_span")) {
+  // giving the card a card based on it's tag to colour it
+  if (card.querySelector(".tag_span").innerText === "") {
     card.classList.add("no_tag");
   } else {
     let tagType = card.querySelector(".tag_span").innerText.slice(1);
     card.classList.add(`tag_${tagType}`);
   }
+  // emoji stuff
   let countDown = reacts[0];
   let countAstonished = reacts[1];
   let countHeartEyes = reacts[2];
@@ -160,6 +179,7 @@ const createCard = (index, to, body, tag, replies, gif, reacts) => {
   card.appendChild(emojiBar);
 };
 
+// Creates a card that lets you create a confession
 const addCard = () => {
   let wrapper = document.querySelector(".wrapper");
 
@@ -167,6 +187,7 @@ const addCard = () => {
   addDiv.classList.add("add_div", "card", "no_tag");
   addDiv.innerText = "+";
   addDiv.addEventListener("click", showForm);
+
   wrapper.prepend(addDiv);
 };
 
@@ -176,6 +197,7 @@ module.exports = { addCard, createCard };
 const { createCard } = require("./cards");
 const { giphySearch } = require("./giphyapi");
 
+// Function to handle the form for new confessions
 const handleConfess = async (e) => {
   if (e.target.parentElement.checkValidity()) {
     e.preventDefault();
@@ -183,17 +205,18 @@ const handleConfess = async (e) => {
     const to = document.querySelector("#to").value;
     const message = document.querySelector("#message").value;
     const select = document.querySelectorAll(".tag_option");
-
     const searchElem = document.querySelector("#search");
+
+    // handling cases where no gif was chosen
     let gifLink;
     let searchTerm;
     if (!searchElem) {
       gifLink = "";
     } else {
-      console.log("here");
       searchTerm = searchElem.value;
       gifLink = await giphySearch(searchTerm);
     }
+    // creating an array of tags
     let tags = [];
     select.forEach((option) => {
       if (option.selected) tags.push(option.value);
@@ -216,6 +239,7 @@ const handleConfess = async (e) => {
         })
       }
     );
+    // This is to force the window to scroll back to the cards on reload
     window.location.hash = "";
     window.location.hash = "#wrapper";
     window.location.reload();
@@ -224,11 +248,13 @@ const handleConfess = async (e) => {
   }
 };
 
+// A function to handle the replies to a message
 const handleReply = async (e) => {
   const card = e.target.parentElement.parentElement;
   const comment = e.target.parentElement.querySelector(".input").value;
   const cardId = card.id;
   const commentSection = card.querySelector(".comment-sect");
+  // Sends the comments to be added to the messages.json
   const postRequest = await fetch(
     "https://safe-wave-84228.herokuapp.com/messages/reply",
     {
@@ -243,15 +269,18 @@ const handleReply = async (e) => {
       })
     }
   );
+  // also adds comment to the current load so you can see what you send
   appendComments(comment, commentSection.querySelector(".comment"));
   commentSection.querySelector(".input").value = "";
 };
 
+// a function to handle what happens when you click on the emoji
 const handleRating = async (e) => {
   const card = e.target.parentElement.parentElement.parentElement;
   const cardId = card.id;
   const buttonBar = e.target.parentElement.parentElement;
   const clickID = e.target.parentElement.querySelector(".clicks").id;
+  // getting the emoji count and making it an integer
   let astonishCount = parseInt(buttonBar.querySelector("#click0").innerText);
   let heartEyeCount = parseInt(buttonBar.querySelector("#click1").innerText);
   let thumbsDownCount = parseInt(buttonBar.querySelector("#click2").innerText);
@@ -263,7 +292,7 @@ const handleRating = async (e) => {
   } else {
     thumbsDownCount++;
   }
-
+  // posting the increase to the server
   const postRequest = await fetch(
     "https://safe-wave-84228.herokuapp.com/messages/react",
     {
@@ -280,11 +309,13 @@ const handleRating = async (e) => {
       })
     }
   );
+  // also updating client side so that they don't need page reload
   buttonBar.querySelector("#click0").innerText = astonishCount;
   buttonBar.querySelector("#click1").innerText = heartEyeCount;
   buttonBar.querySelector("#click2").innerText = thumbsDownCount;
 };
 
+// A function to add the comments to the confessions
 const appendComments = (comment, container) => {
   const anotherOne = document.createElement("p");
   anotherOne.classList.add("comments");
@@ -319,6 +350,8 @@ const generateTo = () => {
 
   return formDiv;
 };
+
+// generate the confession body
 const generateMessage = () => {
   const formDiv = document.createElement("div");
   formDiv.classList.add("form_elem", "message_form");
@@ -334,6 +367,7 @@ const generateMessage = () => {
   return formDiv;
 };
 
+// generate the select box and options for the tags
 const generateSelect = (options) => {
   const select = document.createElement("select");
   select.name = "tags";
@@ -370,6 +404,7 @@ const generateTags = () => {
   return formDiv;
 };
 
+// Adds the giphy logo to the cards for selecting
 const giphyLogo = () => {
   let giphyBtn = document.createElement("button");
   giphyBtn.classList.add("btn", "giphy_btn");
@@ -382,6 +417,7 @@ const giphyLogo = () => {
   return giphyBtn;
 };
 
+// Generates the form for the user
 const generateForm = () => {
   let wrapper = document.querySelector(".wrapper");
   const form = document.createElement("form");
@@ -402,12 +438,21 @@ const generateForm = () => {
 
   wrapper.prepend(form);
 };
+
+// this creates the form when the big plus is clicked on
 const showForm = () => {
   generateForm();
   document.querySelector(".add_div").classList.add("hide");
 };
 
-module.exports = { generateForm, showForm };
+module.exports = {
+  generateForm,
+  showForm,
+  generateTo,
+  generateMessage,
+  generateTags,
+  generateForm
+};
 
 },{"./client_helpers":2,"./giphyapi":4}],4:[function(require,module,exports){
 const giphyKey = "UTn30CTrQ5AweWYK7c50BaP6Fd28hUr3";
@@ -415,22 +460,23 @@ const giphyKey = "UTn30CTrQ5AweWYK7c50BaP6Fd28hUr3";
 async function giphySearch(keyword) {
   try {
     const resp = await fetch(
-      `http://api.giphy.com/v1/gifs/search?q=${keyword}&api_key=${giphyKey}`
+      `https://api.giphy.com/v1/gifs/search?q=${keyword}&api_key=${giphyKey}`
     );
     const jsonData = await resp.json();
     const gifLink = jsonData.data[0].images.downsized.url;
     return gifLink;
   } catch (err) {
     nf = "not found";
-    console.log(err.message);
     const resp1 = await fetch(
-      `http://api.giphy.com/v1/gifs/search?q=${nf}&api_key=${giphyKey}`
+      `https://api.giphy.com/v1/gifs/search?q=${nf}&api_key=${giphyKey}`
     );
   }
 }
 
 const gifFrom = (e) => {
   e.preventDefault();
+  const existingForm = document.querySelector(".gif_form");
+  if (existingForm) existingForm.parentNode.removeChild(existingForm);
   const form = document.createElement("form");
   form.classList.add("gif_form");
 
@@ -442,7 +488,7 @@ const gifFrom = (e) => {
   form.append(input);
 
   const card = e.currentTarget.parentElement;
-  form.addEventListener("submit", async (e) => {
+  card.addEventListener("submit", async (e) => {
     e.preventDefault();
     giphySearch(e.target.querySelector("#search").value, card);
     const form = e.target.querySelector("#search").parentElement;
@@ -457,14 +503,20 @@ module.exports = { giphySearch, gifFrom };
 function darkMode() {
   const body = document.querySelector("body");
   body.className = "dark";
+  const icon = document.querySelector(".toggle_icon");
+  icon.classList.add("fa-sun");
+  icon.classList.remove("fa-moon");
 }
 
 function lightMode() {
   const body = document.querySelector("body");
   body.className = "light";
+  const icon = document.querySelector(".toggle_icon");
+  icon.classList.remove("fa-sun");
+  icon.classList.add("fa-moon");
 }
 
-function switchMode(e) {
+function switchMode() {
   const body = document.querySelector("body");
   body.className == "dark" ? lightMode() : darkMode();
 }
@@ -489,11 +541,12 @@ const generateConfessions = (data) => {
     let to = card["to"];
     let message = card["body"];
     let tags = card["tags"];
+    let tag = tags[0];
     let replies = card["replies"];
     let gif = card["gif"];
     let reacts = card["reacts"];
     if (!gif) gif = "";
-    createCard(index, to, message, tags, replies, gif, reacts);
+    createCard(index, to, message, tag, replies, gif, reacts);
   });
   addCard();
 };

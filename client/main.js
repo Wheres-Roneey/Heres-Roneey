@@ -9,11 +9,12 @@ const generateConfessions = (data) => {
     let to = card["to"];
     let message = card["body"];
     let tags = card["tags"];
+    let tag = tags[0];
     let replies = card["replies"];
     let gif = card["gif"];
     let reacts = card["reacts"];
     if (!gif) gif = "";
-    createCard(index, to, message, tags, replies, gif, reacts);
+    createCard(index, to, message, tag, replies, gif, reacts);
   });
   addCard();
 };

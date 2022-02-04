@@ -27,7 +27,7 @@ app.get("/messages/tags/:tag", (req, res) => {
       }
     });
     if (matchingMessages.length > 0) {
-      res.send(matchingMessages);
+      res.status(200).send(matchingMessages);
     } else {
       throw new Error("Could not find any confessions with that tag");
     }
@@ -77,7 +77,7 @@ app.post("/messages", (req, res) => {
       });
       res.status(201).send("message added");
     } else {
-      throw new Error("Confession must be less than 200 characters");
+      throw new Error("Confession must be less than 100 characters");
     }
   } catch (error) {
     return res.status(406).send(error.message);
