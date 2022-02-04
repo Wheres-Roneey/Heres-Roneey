@@ -31,16 +31,15 @@ const createMessage = (body) => {
   return message;
 };
 // Creates the tag section of the confessions
-const createTag = (tagArr) => {
+const createTag = (tagStr) => {
   let tagElem = document.createElement("div");
   tagElem.classList.add("tag_elem", "card_child");
 
-  tagArr.forEach((tag) => {
-    let span = document.createElement("span");
-    span.classList.add("tag_span");
-    span.innerText = `#${tag}`;
-    tagElem.appendChild(span);
-  });
+  if (!tagStr) tagStr = "";
+  let span = document.createElement("span");
+  span.classList.add("tag_span");
+  span.innerText = `#${tagStr}`;
+  tagElem.appendChild(span);
 
   return tagElem;
 };
@@ -158,7 +157,7 @@ const createCard = (index, to, body, tag, replies, gif, reacts) => {
     replyBtn()
   );
   // giving the card a card based on it's tag to colour it
-  if (!card.querySelector(".tag_span")) {
+  if (card.querySelector(".tag_span").innerText === "#") {
     card.classList.add("no_tag");
   } else {
     let tagType = card.querySelector(".tag_span").innerText.slice(1);
@@ -446,8 +445,14 @@ const showForm = () => {
   document.querySelector(".add_div").classList.add("hide");
 };
 
-module.exports = { generateForm, showForm, generateTo };
-
+module.exports = {
+  generateForm,
+  showForm,
+  generateTo,
+  generateMessage,
+  generateTags,
+  generateForm
+};
 
 },{"./client_helpers":2,"./giphyapi":4}],4:[function(require,module,exports){
 const giphyKey = "UTn30CTrQ5AweWYK7c50BaP6Fd28hUr3";
@@ -536,11 +541,12 @@ const generateConfessions = (data) => {
     let to = card["to"];
     let message = card["body"];
     let tags = card["tags"];
+    let tag = tags[0];
     let replies = card["replies"];
     let gif = card["gif"];
     let reacts = card["reacts"];
     if (!gif) gif = "";
-    createCard(index, to, message, tags, replies, gif, reacts);
+    createCard(index, to, message, tag, replies, gif, reacts);
   });
   addCard();
 };
