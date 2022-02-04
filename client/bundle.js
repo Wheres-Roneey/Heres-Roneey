@@ -35,10 +35,10 @@ const createTag = (tagStr) => {
   let tagElem = document.createElement("div");
   tagElem.classList.add("tag_elem", "card_child");
 
-  if (!tagStr) tagStr = "";
   let span = document.createElement("span");
   span.classList.add("tag_span");
   span.innerText = `#${tagStr}`;
+  if (!tagStr) span.innerText = "";
   tagElem.appendChild(span);
 
   return tagElem;
@@ -157,7 +157,7 @@ const createCard = (index, to, body, tag, replies, gif, reacts) => {
     replyBtn()
   );
   // giving the card a card based on it's tag to colour it
-  if (card.querySelector(".tag_span").innerText === "#") {
+  if (card.querySelector(".tag_span").innerText === "") {
     card.classList.add("no_tag");
   } else {
     let tagType = card.querySelector(".tag_span").innerText.slice(1);
