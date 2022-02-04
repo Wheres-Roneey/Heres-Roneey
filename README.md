@@ -32,7 +32,7 @@ Welcome to our anonymous message posting blog. Have fun choosing a category to v
   - Decided on a confession page for young adults with 100 character max limit.
 - Designed website layout using Figma and chose to use vanilla CSS for the design.
 - Created server to get and post messages, and client side to fetch messages and post them on the website.
-- Added functions one by one.
+- Added functions one by one:
   - Add new confession (new card).
   - Reply function.
   - Light/Dark mode.
