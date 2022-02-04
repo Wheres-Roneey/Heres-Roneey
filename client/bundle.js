@@ -446,7 +446,8 @@ const showForm = () => {
   document.querySelector(".add_div").classList.add("hide");
 };
 
-module.exports = { generateForm, showForm };
+module.exports = { generateForm, showForm, generateTo };
+
 
 },{"./client_helpers":2,"./giphyapi":4}],4:[function(require,module,exports){
 const giphyKey = "UTn30CTrQ5AweWYK7c50BaP6Fd28hUr3";
