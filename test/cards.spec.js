@@ -1,92 +1,122 @@
 /**
  * @jest-environment jsdom
  */
-
-const fs = require("fs");
-const path = require("path");
-const html = fs.readFileSync(
-  path.resolve(__dirname, "../client/index.html"),
-  "utf8"
-);
 const cards = require("../client/cards");
-const lightMode = require("../client/lightMode");
-
-// describe("who the card is for  "), () => {
-//   it("dedicates who the card for"), () => {
-//     let
-//   }
-// }
-
-// describe('card dedicated to'), ()=> {
-//   expect(createElement.add("toElem", "card_child")).toBe("h2")
-// }
-
-// if you require here, the file will not have access to `document`
-
-describe("index.html", () => {
-  beforeEach(() => {
-    document.documentElement.innerHTML = html.toString();
-  });
-
-  test("it has a header title", () => {
-    let header = document.querySelector("header");
-    expect(header.textContent).toContain("h1");
-  });
-});
-
-describe("creates a new card", () => {
-  describe("able to confess when creating", () => {
+describe("the cards", () => {
+  describe("create TO space in the card", () => {
+    let thetoDiv;
     beforeEach(() => {
-      document.documentElement.innerHTML =
-        '<div class="btns"><button class="btn1 btn">healthcare</button>';
-      global.btns = document.querySelector(".btns");
+      document.body.innerHTML = "";
+      document.body.appendChild(cards.createTo("ew"));
+      thetoDiv = document.querySelector("h2");
+    });
+    it("has a class of to elem", () => {
+      let toElem = document.querySelector(".toElem");
+      expect(toElem).not.toBe(null);
     });
 
-    test("createCard returns a new card element with passed index, to, body, tag, replies and gif ", () => {
-      const newCard = cards.newCard("card");
-      expect(newCard.querySelector("wrapper").className).toBe(".wrapper");
-      expect(newCard.createElement("card").className).toBe("div");
-      expect(newCard.textContent).toContain("index");
+    it("has card_child", () => {
+      let card_child = document.querySelector(".card_child");
+      expect(card_child).not.toBe(null);
     });
 
-    test("addItem adds new features to the DOM", () => {
-      helpers.addItem();
-      expect(btns.querySelector("to")).toBe(createTo);
-      expect(btns.querySelector("body")).toBe(createMessage);
-      expect(btns.querySelector("gif")).toBe(loadGif);
-      expect(btns.querySelector("tag")).toBe(createTag);
-      expect(btns.querySelector(" ")).toBe(replyBtn);
+    it("has message element", () => {
+      let message_elem = document.querySelector(".message_elem");
+      expect(message_elem).not.toBe(null);
+    });
+
+    it("has tag_elem", () => {
+      let tag_elem = document.querySelector(".tag_elem");
+      expect(tag_elem).not.toBe(null);
+    });
+
+    it("has tag_span", () => {
+      let tag_span = document.querySelector(".tag_span");
+      expect(tag_span).not.toBe(null);
+    });
+
+    it("has tag_span", () => {
+      let tag_span = document.querySelector(".tag_span");
+      expect(tag_span).not.toBe(null);
     });
   });
-
-  // describe("dark mode helpers", () => {
-  //   let body, lightMode, dark;
-  //   beforeEach(() => {
-  //     document.documentElement.innerHTML =
-  //       '<body class="dark"><button type="button" id="light-mode"><i class="fas fa-moon"></i></button>';
-  //     body = document.querySelector("dark");
-  //     lightMode = document.querySelector("#light-mode");
-  //   });
-
-  //   test("switchMode returns a boolean value", () => {
-  //     dark = true;
-  //     expect(darkMode.lightMode(dark)).toEqual(false);
-  //     dark = false;
-  //     expect(darkMode.lightMode(dark)).toEqual(true);
-  //   });
-
-  //   test("darkMode updates text color and button text", () => {
-  //     helpers.darkMode();
-  //     expect(body.style.color).toBe("dark");
-  //     expect(body.style.backgroundColor).not.toBe("white");
-  //     expect(lightMode.textContent).toBe("Switch to Light Mode");
-  //   });
-
-  //   test("lightMode updates text color and button text", () => {
-  //     helpers.lightMode();
-  //     expect(body.style.color).not.toBe("white");
-  //     expect(main.style.backgroundColor).toBe("white");
-  //     expect(lightMode.textContent).toBe("Switch to Dark Mode");
-  //   });
-  // });
 });
+
+// describe("generate message for bad words function", () => {
+//   let messagesDiv;
+//   beforeEach(() => {
+//     document.body.innerHTML = "";
+//     document.body.appendChild(cards.createMessage());
+//     messagesDiv = document.querySelector("p");
+//   });
+
+//   it("message  for bad words", () => {
+//     let message_elem = document.querySelector(".message_elem");
+//     expect(message_elem).not.toBe(null);
+//   });
+
+//   // it("has a filter for bad words", () => {
+//   //   let badWords = document.querySelector(".badWords");
+//   //   expect(badWords).toBe(null);
+//   // });
+
+// describe("generates tag section", () => {
+//   let tagSect;
+//   beforeEach(() => {
+//     document.body.innerHTML = "";
+//     document.body.appendChild(cards.createTag());
+//     tagSect = document.querySelector("div");
+//   });
+
+//   it("creates tag section ", () => {
+//     let tag_elem = document.querySelector(".tag_elem");
+//     expect(tag_elem).not.toBe(null);
+//   });
+// });
+
+// describe("generates tag area", () => {
+//   let tagSection;
+//   beforeEach(() => {
+//     document.body.innerHTML = "";
+//     document.body.appendChild(cards.createTag());
+//     tagSection = document.querySelector("span");
+//   });
+
+//   it("creates tag section - span area ", () => {
+//     let tag_span = document.querySelector(".tag_span");
+//     expect(tag_span).not.toBe(null);
+//   });
+// });
+
+// describe("generates comment section on confessions", () => {
+//   let commentSect;
+//   beforeEach(() => {
+//     document.body.innerHTML = "";
+//     document.body.appendChild(cards.createCommentSection());
+//     commentSect = document.querySelector("div");
+//   });
+
+//   it(" actual comment ", () => {
+//     let commentSection = document.querySelector(". commentSection");
+//     expect(commentSection).not.toBe(null);
+//   });
+// });
+
+// // describe("cards.js", () => {
+// //   beforeEach(() => {
+// //     document.documentElement.innerHTML = html.toString();
+// //   });
+// //   test("who the card is for ", () => {
+// //     const wrapper = document.getElementsByClassName("wrapper");
+// //     document.getElement("h2");
+
+// //     var character = "TO:";
+// //     if (character == character.toUpperCase()) {
+// //       alert("upper case true");
+// //     }
+// //     if (character == character.toLowerCase()) {
+// //       alert("lower case detected");
+// //     }
+// //     expect(wrapper.innerHTML).toBe(".wrapper");
+// //   });
+// // });

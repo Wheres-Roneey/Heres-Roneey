@@ -1,5 +1,5 @@
 const { appendComments } = require("./client_helpers");
-const { handleReply } = require("./client_helpers");
+const { handleReply, handleRating } = require("./client_helpers");
 const { showForm } = require("./form");
 
 // Creates the 'TO:' section on confessions
@@ -11,10 +11,6 @@ const createTo = (to) => {
   return toElem;
 };
 
-<<<<<<< HEAD
-// the to header of card
-
-=======
 // Creates the message part on confessions
 const createMessage = (body) => {
   // Declare words to censor
@@ -47,7 +43,6 @@ const createTag = (tagStr) => {
   return tagElem;
 };
 // Creates the comment section on confessions
->>>>>>> 2b89a4200b4c9caa9cddbb2b80eee34350804b99
 const createCommentSection = (replies) => {
   let commentSection = document.createElement("div");
   commentSection.classList.add("comment-sect", "hide");
@@ -55,20 +50,17 @@ const createCommentSection = (replies) => {
   let comments = document.createElement("div");
   comments.classList.add("comment");
 
-  // creates comment section
-
   if (replies.length != 0) {
     replies.forEach((reply) => {
       appendComments(reply, comments);
     });
   }
-  // checks if reply exists
 
   let newCommentSection = document.createElement("textarea");
   newCommentSection.classList.add("input");
   newCommentSection.type = "text";
   newCommentSection.placeholder = "Write a comment";
-  newCommentSection.maxLength = "200";
+  newCommentSection.maxLength = "100";
   newCommentSection.addEventListener("keypress", function (e) {
     if (e.key === "Enter") {
       handleReply(e);
@@ -86,29 +78,8 @@ const createCommentSection = (replies) => {
   commentSection.appendChild(submitButton);
 
   return commentSection;
-
-  // submit section for the comment  - above it , is the existing comments
 };
 
-<<<<<<< HEAD
-const createMessage = (body) => {
-  const badWords = ["jQuery"];
-
-  let message = document.createElement("p");
-  message.classList.add("message_elem", "card_child");
-  let newBody = body;
-  badWords.forEach((word) => {
-    let stars = "";
-    for (let i = 0; i < word.length; i++) stars += "*";
-    newBody = body.replace(word, stars);
-  });
-
-  message.innerText = newBody;
-
-  return message;
-};
-// creating a new card
-=======
 // Creates the emoji react options. The parameter should be an array.
 const createReacts = (emojis) => {
   const emojiBar = document.createElement("div");
@@ -137,7 +108,6 @@ const createReacts = (emojis) => {
 
   return emojiBar;
 };
->>>>>>> 2b89a4200b4c9caa9cddbb2b80eee34350804b99
 
 // Create the reply btn for the cards
 const replyBtn = () => {
@@ -172,12 +142,8 @@ const loadGif = (gif) => {
   return img;
 };
 
-<<<<<<< HEAD
-const createCard = (index, to, body, tag, replies, gif) => {
-=======
 // Creates the card an prepends it to the existing wrapper
 const createCard = (index, to, body, tag, replies, gif, reacts) => {
->>>>>>> 2b89a4200b4c9caa9cddbb2b80eee34350804b99
   let wrapper = document.querySelector(".wrapper");
   let card = document.createElement("div");
   card.classList.add("card");
@@ -196,16 +162,20 @@ const createCard = (index, to, body, tag, replies, gif, reacts) => {
     let tagType = card.querySelector(".tag_span").innerText.slice(1);
     card.classList.add(`tag_${tagType}`);
   }
-<<<<<<< HEAD
-=======
   // emoji stuff
   let countDown = reacts[0];
   let countAstonished = reacts[1];
   let countHeartEyes = reacts[2];
->>>>>>> 2b89a4200b4c9caa9cddbb2b80eee34350804b99
   let commentSection = createCommentSection(replies);
+  let emojis = [
+    ["em em--1", countDown],
+    ["em em-astonished", countAstonished],
+    ["em em-heart_eyes", countHeartEyes]
+  ];
+  let emojiBar = createReacts(emojis);
   wrapper.prepend(card);
   card.append(commentSection);
+  card.appendChild(emojiBar);
 };
 
 // Creates a card that lets you create a confession
