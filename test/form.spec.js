@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-const { doc } = require("prettier");
 const forms = require("../client/form");
 describe("THE FORMS", () => {
   describe("generateTo function", () => {
@@ -76,7 +75,6 @@ describe("THE FORMS", () => {
   });
   describe("generateForm function", () => {
     let form;
-    let mockWrapper;
     beforeEach(() => {
       document.body.innerHTML = `<div class="wrapper" id="wrapper"></div>`;
       forms.generateForm();
