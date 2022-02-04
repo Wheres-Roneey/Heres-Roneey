@@ -57,13 +57,13 @@ Welcome to our anonymous message posting blog. Have fun choosing a category to v
 
 ## Wins and Challenges
 
-# Wins
+### Wins
 
 - Adding new cards with all the features on.
 - Having fun with giphy.
 - Styling grid collapsing using CSS variables.
 
-# Challenges
+### Challenges
 
 - Getting to 60-80% test coverage.
 - Getting Heroku to work.
