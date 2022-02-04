@@ -19,7 +19,15 @@ describe("api server", () => {
   // testing get requests
   let testData = {
     to: "EW",
-    body: " a message under two hundred characters",
+    body: "A message under 100 characters",
+    tags: "motivated",
+    replies: ["hello", "I agree"],
+    gif: "https://media0.giphy.com/media/y9uEf41y1rmBMbNVr8/giphy.gif?cid=70c8e1eblr2sep5pq5j0yzqlm81wxi97x2xf15hmsrmun25y&rid=giphy.gif&ct=g"
+  };
+
+  let incorrectTestData = {
+    to: "EW",
+    body: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum.",
     tags: "motivated",
     replies: ["hello", "I agree"],
     gif: "https://media0.giphy.com/media/y9uEf41y1rmBMbNVr8/giphy.gif?cid=70c8e1eblr2sep5pq5j0yzqlm81wxi97x2xf15hmsrmun25y&rid=giphy.gif&ct=g"
@@ -52,6 +60,17 @@ describe("api server", () => {
 
   it("GET /messages responds with status code 200", (done) => {
     request(app).get("/messages").expect(200, done);
+  });
+
+  it("get /messages/tags/:tag with json and status code 200", (done) => {
+    request(app)
+      .get("/messages/tags/motivated")
+      .expect("Content-Type", "application/json; charset=utf-8")
+      .expect(200, done);
+  });
+
+  it("get /messages/tags/:tag with status code 404", (done) => {
+    request(app).get("/messages/tags/abcdefj").expect(404, done);
   });
 
   it("POST /message/gif responds with a status code 201", (done) => {
@@ -88,5 +107,13 @@ describe("api server", () => {
       .send(testData)
       .expect("message added")
       .expect(201, done);
+  });
+
+  it("POST /messages with status code 406 with incorrect params", (done) => {
+    request(app)
+      .post("/messages/")
+      .send(incorrectTestData)
+      .expect("Confession must be less than 100 characters")
+      .expect(406, done);
   });
 });

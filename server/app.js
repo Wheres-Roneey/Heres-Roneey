@@ -77,7 +77,7 @@ app.post("/messages", (req, res) => {
       });
       res.status(201).send("message added");
     } else {
-      throw new Error("Confession must be less than 200 characters");
+      throw new Error("Confession must be less than 100 characters");
     }
   } catch (error) {
     return res.status(406).send(error.message);
