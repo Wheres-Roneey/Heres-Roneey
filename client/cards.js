@@ -190,4 +190,14 @@ const addCard = () => {
   wrapper.prepend(addDiv);
 };
 
-module.exports = { addCard, createCard };
+module.exports = {
+  addCard,
+  createCard,
+  createTo,
+  createMessage,
+  createTag,
+  createCommentSection,
+  createReacts,
+  replyBtn,
+  loadGif
+};
