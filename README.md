@@ -5,19 +5,19 @@ Welcome to our anonymous message posting blog. Have fun choosing a category to v
 ## Installation
 
 1. Clone the repo
-   `sh git clone https://github.com/Wheres-Roneey/Heres-Roneey.git `
+   `git clone https://github.com/Wheres-Roneey/Heres-Roneey.git `
 2. Install NPM packages
-   `sh npm install`
+   `npm install`
 
 ## Usage
 
 - Open our website using the link (https://tldr-blog.netlify.app/)
   ![](./tldrImages/titlePage.png)
-- Light mode feature
+- Light mode feature (Change by icon button in top left)
   ![](./tldrImages/lightMode.png)
 - Card Layout
   ![](./tldrImages/cardLayout.png)
-- New Card
+- New Card (Added by plus on card)
   ![](./tldrImages/newCard.png)
 
 ## Technologies
